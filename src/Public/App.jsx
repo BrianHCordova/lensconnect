@@ -1,4 +1,4 @@
-import './style.css'
+import './index.css'
 import React, { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
@@ -26,7 +26,7 @@ export default function App() {
     <motion.div 
     className='absolute inset-0 z-0'
     style={{
-      backgroundImage: 'url("/layer1F.jpg")',
+      backgroundImage: 'url("/layermain.jpg")',
       backgroundPosition: 'bottom',
       backgroundSize: 'cover',
       y: backgroundY,
@@ -63,3 +63,4 @@ export default function App() {
   </div>
   )
 }
+
