@@ -4,7 +4,7 @@ section {
     justify-content: center;
     width: 40rem;
     height: fit-content;
-    border: 5px solid black;
+    border: 1.5px solid white;
     border-radius: 15px;
     margin-top: 1rem;
 }
@@ -40,7 +40,7 @@ section {
     margin: 1rem;
     button {
         text-align: center;
-        border: 5px solid black;
+        border: 2px solid white;
         border-radius: 15px;
         width: 6rem;
         height: 2rem
