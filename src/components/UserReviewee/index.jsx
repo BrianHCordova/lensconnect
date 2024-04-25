@@ -1,4 +1,5 @@
 function UserReviewee(props) {
+    console.log(props)
     // HTML
     return (
 
@@ -8,9 +9,9 @@ function UserReviewee(props) {
                 {/* {props.reviews?.map((rev, i, j) =>
                     <div className="reviewContainer">
                         <p key={i}>{rev.review}</p>
-                        <h6 key={j}>Reviewd by: {rev.reviewer.username}</h6>
                     </div>
                 )} */}
+                {/* <h6 key={j}>Reviewd by: {rev.reviewer.username}</h6> */}
             </div>
         </section>
 

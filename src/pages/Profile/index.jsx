@@ -22,7 +22,7 @@ function Profile(props) {
     useEffect(() => {
         const userId = 2
         // Runs the getOneUser function from the API utils page
-        API.getOneUser(userId).then((userData) => { //props.userId is 0 untill we can make tokens work
+        API.getOneUser(props.userId).then((userData) => { //props.userId is 0 untill we can make tokens work
             setUserObj(userData);
             console.log(userData)
         });
