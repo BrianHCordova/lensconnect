@@ -26,13 +26,13 @@ const API = {
         }).then(res=>res.json())
     },
     // Check token function 
-    // checkToken:token=>{
-    //     return fetch(`${URL_PREFIX}/tokendata`,{
-    //         headers:{
-    //             "Authorization":`Bearer ${token}`
-    //         }
-    //     }).then(res=>res.json())
-    // },
+    checkToken:token=>{
+        return fetch(`${URL_PREFIX}/tokendata`,{
+            headers:{
+                "Authorization":`Bearer ${token}`
+            }
+        }).then(res=>res.json())
+    },
     // GetOneUser function
     getOneUser:userId=>{
         // GET fetch request to the backend passing in userId

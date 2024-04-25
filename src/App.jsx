@@ -4,6 +4,8 @@ import Home from "./pages/Home/"
 import Profile from "./pages/Profile/"
 import Search from "./pages/Search/"
 import Browse from "./pages/Browse/"
+import Login from "./pages/Login"
+import Signup from './pages/Signup'
 
 // Router-dom for page routes
 import {
@@ -48,6 +50,7 @@ export default function App() {
   // Function that sets the token and userId on login
   const handleLogin = obj => {
     API.login(obj).then(data => {
+      console.log(data)
       setToken(data.token);
       setUserId(data.user.id);
       localStorage.setItem("token", data.token)
@@ -70,6 +73,8 @@ export default function App() {
         <Route path="/profile/:id" element={<Profile />}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/browse" element={<Browse />}></Route>
+        <Route path="/login" element={<Login type="Login"  handleSubmit={handleLogin} userId={userId}/>}/>
+        <Route path="/signup" element={<Signup type="Signup" handleSubmit={handleSignup} userId={userId}/>}/>
         {/* <Route path="/hire" element={<Hire />}></Route> */}
       </Routes>
     </Router>
