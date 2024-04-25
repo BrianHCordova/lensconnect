@@ -6,7 +6,8 @@ import "./style.css"
 // Imports the profile pages components
 import UserInfo from "../../components/UserInfo"
 import UserImages from "../../components/UserImages"
-import UserReviews from "../../components/UserReviews"
+import UserReviwee from "../../components/UserReviewee"
+import UserReviwer from "../../components/UserReviewer"
 // Imports api fetch functions
 import API from "../../utils/API"
 
@@ -14,17 +15,22 @@ function Profile(props) {
 
     // Use state hook to store the users data
     const [userObj, setUserObj] = useState({});
+    const [reviewArr, setReviewArr] = useState({});
+    // const [imgArr, setImgArr] = useState({});
 
     // API useEffect to gather users info from the API on page load
     useEffect(() => {
         const userId = 2
         // Runs the getOneUser function from the API utils page
-        API.getOneUser(userId).then((data) => { //props.userId is 0 untill we can make tokens work
-            setUserObj(data);
-            console.log(data)
+        API.getOneUser(props.userId).then((userData) => { //props.userId is 0 untill we can make tokens work
+            setUserObj(userData);
+            console.log(userData)
+        });
+        // Runs the getReviewsByReviewee function from the API utils page
+        API.getReviewsByReviewee(userId).then((revData) => {
+            setReviewArr(revData)
         });
     }, []);
-    // console.log(userObj)
 
     // HTML
     return (
@@ -36,14 +42,16 @@ function Profile(props) {
                     biography={userObj.biography}
                     specialties={userObj.Specialties}
                     serveLocations={userObj.ServeLocations}
-                    Reviews={userObj.reviews}
                 />
             </div>
             <div className="col-span-full">
                 <UserImages />
             </div>
             <div className="col-span-full">
-                <UserReviews />
+                <UserReviwee reviews={reviewArr} />
+            </div>
+            <div className="col-span-full">
+                <UserReviwer reviews={userObj.Reviews}/>
             </div>
         </main>
 
