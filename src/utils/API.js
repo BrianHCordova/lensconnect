@@ -38,6 +38,12 @@ const API = {
         // GET fetch request to the backend passing in userId
         return fetch(`${URL_PREFIX}/api/users/${userId}`).then(res=>res.json())
     },
+    // getReviewsByReviewee function
+    getReviewsByReviewee:userId=>{
+        // GET fetch request to the backend passing in userId as the revieweeId
+        return fetch(`${URL_PREFIX}/api/reviews/reviewee/${userId}`).then(res=>res.json())
+    }
 }
+
 
 export default API

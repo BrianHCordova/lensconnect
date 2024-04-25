@@ -1,0 +1,22 @@
+function UserReviewer(props) {
+    console.log(props)
+    // HTML
+    return (
+
+        <section >
+            <div className="columns-1 reviews">
+                <h2>Reviews I've Written</h2>
+                {/* {props.reviews?.map((rev, i, j) =>
+                    <div className="reviewContainer">
+                        <p key={i}>{rev.review}</p>
+                        <h6 key={j}>Reviewd for:</h6>
+                    </div>
+                )} */}
+            </div>
+        </section>
+
+    );
+}
+
+// Exports the UserReviewer component
+export default UserReviewer;
