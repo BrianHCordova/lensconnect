@@ -15,22 +15,25 @@ function Profile(props) {
 
     // Use state hook to store the users data
     const [userObj, setUserObj] = useState({});
-    const [reviewArr, setReviewArr] = useState({});
+    const [reviewArr, setReviewArr] = useState([]);
     // const [imgArr, setImgArr] = useState({});
 
     // API useEffect to gather users info from the API on page load
     useEffect(() => {
-        const userId = 2
+        if (!props.userId) {
+            return
+        }
         // Runs the getOneUser function from the API utils page
+        console.log(`props`, props)
         API.getOneUser(props.userId).then((userData) => { //props.userId is 0 untill we can make tokens work
             setUserObj(userData);
             console.log(userData)
         });
         // Runs the getReviewsByReviewee function from the API utils page
-        API.getReviewsByReviewee(userId).then((revData) => {
+        API.getReviewsByReviewee(props.userId).then((revData) => {
             setReviewArr(revData)
         });
-    }, []);
+    }, [props.userId]);
 
     // HTML
     return (
