@@ -8,7 +8,7 @@ function classNames(...classes) {
 
 const Nav = () => {
     return (
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-zinc-800">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -24,7 +24,7 @@ const Nav = () => {
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                      <a href="#" className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">
+                      <a href="#" className="rounded-md bg-emerald-700 px-3 py-2 text-sm font-medium text-white">
                         Home
                       </a>
                       <a
