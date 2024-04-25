@@ -1,0 +1,19 @@
+
+main {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+        #2E4551,
+        #141515
+    );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+}
+
+main {
+    flex: 1 0 auto;
+}
