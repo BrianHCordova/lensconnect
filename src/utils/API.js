@@ -2,17 +2,21 @@ const URL_PREFIX="http://localhost:3000"
 // const URL_PREFIX="https://uci-fish-back.onrender.com"
 
 const API = {
-    //auth
+    // Signup function
     signup:userObj=>{
+        // Makes a post request to the backend
         return fetch(`${URL_PREFIX}/api/users`,{
             method:"POST",
+            // Passes in the user oject
             body:JSON.stringify(userObj),
             headers:{
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
     },
+    // Login function
     login:userObj=>{
+        // Makes to post request to the backend
         return fetch(`${URL_PREFIX}/api/users/login`,{
             method:"POST",
             body:JSON.stringify(userObj),
@@ -21,15 +25,17 @@ const API = {
             }
         }).then(res=>res.json())
     },
-    checkToken:token=>{
-        return fetch(`${URL_PREFIX}/tokendata`,{
-            headers:{
-                "Authorization":`Bearer ${token}`
-            }
-        }).then(res=>res.json())
-    },
-    //user
+    // Check token function 
+    // checkToken:token=>{
+    //     return fetch(`${URL_PREFIX}/tokendata`,{
+    //         headers:{
+    //             "Authorization":`Bearer ${token}`
+    //         }
+    //     }).then(res=>res.json())
+    // },
+    // GetOneUser function
     getOneUser:userId=>{
+        // GET fetch request to the backend passing in userId
         return fetch(`${URL_PREFIX}/api/users/${userId}`).then(res=>res.json())
     },
 }
