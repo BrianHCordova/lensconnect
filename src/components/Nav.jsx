@@ -8,7 +8,7 @@ function classNames(...classes) {
 
 const Nav = () => {
     return (
-        <Disclosure as="nav" className="bg-zinc-800">
+        <Disclosure as="nav" className="bg-zinc-900">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -17,37 +17,37 @@ const Nav = () => {
                   <div className="flex-shrink-0">
                     <img
                       className="h-8 w-auto"
-                      src="/src/Public/LC Logo.png"
-                      alt="Your Company"
+                      src="/logo.png"
+                      alt="logo"
                     />
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                      <a href="#" className="rounded-md bg-emerald-700 px-3 py-2 text-sm font-medium text-white">
+                      <a href="#" className="rounded-md bg-emerald-700 hover:bg-emerald-600 duration-200 px-3 py-2 text-sm font-medium text-white">
                         Home
                       </a>
                       <a
                         href="#"
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-zinc-500 duration-200 ease-in-out hover:text-white"
                       >
                         Profile
                       </a>
                       <a
                         href="#"
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-zinc-500 duration-200 hover:text-white"
                       >
                         Search
                       </a>
                       <a
                         href="#"
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-zinc-500 duration-200 hover:text-white"
                       >
                         Browse
                       </a>
                       <a
                         href="#"
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-zinc-500 duration-200 hover:text-white"
                       >
                         Auth
                       </a>
@@ -58,7 +58,7 @@ const Nav = () => {
                   <div className="flex items-center">
                     <button
                       type="button"
-                      className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View notifications</span>
