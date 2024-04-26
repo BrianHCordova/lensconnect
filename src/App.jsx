@@ -6,6 +6,7 @@ import Search from "./pages/Search/"
 import Browse from "./pages/Browse/"
 import Login from "./pages/Login"
 import Signup from './pages/Signup'
+import Footer from "./components/Footer"
 
 // Router-dom for page routes
 import {
@@ -77,6 +78,7 @@ export default function App() {
         <Route path="/signup" element={<Signup type="Signup" handleSubmit={handleSignup} userId={userId}/>}/>
         {/* <Route path="/hire" element={<Hire />}></Route> */}
       </Routes>
+      <Footer />
     </Router>
   )
 }
