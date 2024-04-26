@@ -2,15 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import Welcome from './components/Welcome.jsx'
 import Footer from './components/Footer.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <main>
     <App />
-    <Welcome />
-    <div className="w-full bg-[#020C0E]">
+  
+    {/* <div className="w-full bg-[#020C0E]">
         <div className="max-w-lg space-y-4 mx-auto py-24 text-neutral-300">
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam quae
@@ -55,8 +54,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             nobis reprehenderit molestiae.
           </p>
         </div>
-        <Footer />
-      </div>
+      </div> */}
       
     </main>
   </>

@@ -9,7 +9,7 @@ function classNames(...classes) {
 
 const Nav = (props) => {
     return (
-        <Disclosure as="nav" className="bg-zinc-800">
+        <Disclosure as="nav" className="bg-zinc-900">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -18,8 +18,8 @@ const Nav = (props) => {
                   <div className="flex-shrink-0">
                     <img
                       className="h-8 w-auto"
-                      src="/public/LC Logo.png"
-                      alt="Your Company"
+                      src="/logo.png"
+                      alt="logo"
                     />
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
@@ -28,14 +28,14 @@ const Nav = (props) => {
                       <Link to='/' className="rounded-md bg-emerald-700 px-3 py-2 text-sm font-medium text-white">
                         Home
                       </Link>
-                      <Link
-                        to = "/profile"
+                      <a
+                        href="#"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
                         Profile
-                      </Link>
+                      </a>
                       <Link
-                        to="/search"
+                        href="#"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
                         Search
@@ -47,7 +47,7 @@ const Nav = (props) => {
                         Browse
                       </Link>
                       <Link
-                        to="/login"
+                        href="#"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
                         Login
@@ -59,7 +59,7 @@ const Nav = (props) => {
                   <div className="flex items-center">
                     <button
                       type="button"
-                      className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View notifications</span>

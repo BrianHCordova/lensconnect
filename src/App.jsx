@@ -7,6 +7,7 @@ import Browse from "./pages/Browse/"
 import Login from "./pages/Login"
 import Signup from './pages/Signup'
 import Logout from "./pages/Logout"
+import Footer from "./components/Footer"
 
 // Router-dom for page routes
 import {
@@ -79,6 +80,7 @@ export default function App() {
         <Route path="/logout" element={<Logout handleSubmit={logout} userId={userId}/>}/>
         {/* <Route path="/hire" element={<Hire />}></Route> */}
       </Routes>
+      <Footer />
     </Router>
   )
 }

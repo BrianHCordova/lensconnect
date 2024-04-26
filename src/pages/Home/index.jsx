@@ -1,7 +1,7 @@
 import './style.css'
 import React, { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-
+import Welcome from '../../components/Welcome';
 
 export default function App() {
 
@@ -13,7 +13,7 @@ export default function App() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
   return (
-    
+   <>
     <div
     ref={ref}
     className="w-full h-screen overflow-hidden relative grid place-items-center">
@@ -26,7 +26,7 @@ export default function App() {
     <motion.div 
     className='absolute inset-0 z-0'
     style={{
-      backgroundImage: 'url("/layer1F.jpg")',
+      backgroundImage: 'url("/layermain.jpg")',
       backgroundPosition: 'bottom',
       backgroundSize: 'cover',
       y: backgroundY,
@@ -59,7 +59,8 @@ export default function App() {
       y: backgroundY,
     }}>
     </div> 
-    
   </div>
+    <Welcome />
+  </> 
   )
 }
