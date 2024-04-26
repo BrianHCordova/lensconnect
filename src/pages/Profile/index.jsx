@@ -15,8 +15,8 @@ function Profile(props) {
 
     // Use state hook to store the users data
     const [userObj, setUserObj] = useState({});
-    const [reviewArr, setReviewArr] = useState({});
-    // const [imgArr, setImgArr] = useState({});
+    const [reviewArr, setReviewArr] = useState([]);
+    // const [imgArr, setImgArr] = useState([]);
 
     // API useEffect to gather users info from the API on page load
     useEffect(() => {

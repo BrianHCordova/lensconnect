@@ -10,7 +10,7 @@ function UserReviewer(props) {
                 {props.reviews?.map((rev, i, j) =>
                     <div className="reviewContainer">
                         <p key={i}>{rev.review}</p>
-                        <h6 key={j}>Reviewd for:</h6>
+                        <h6 key={j}>Review for: {rev.reviewee.username}</h6>
                     </div>
                 )}
             </div>
