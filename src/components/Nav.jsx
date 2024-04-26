@@ -7,7 +7,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const Nav = () => {
+const Nav = (props) => {
     return (
         <Disclosure as="nav" className="bg-zinc-800">
         {({ open }) => (
@@ -18,7 +18,7 @@ const Nav = () => {
                   <div className="flex-shrink-0">
                     <img
                       className="h-8 w-auto"
-                      src="/src/Public/LC Logo.png"
+                      src="/public/LC Logo.png"
                       alt="Your Company"
                     />
                   </div>
@@ -40,12 +40,12 @@ const Nav = () => {
                       >
                         Search
                       </Link>
-                      <a
-                        href="#"
+                      <Link
+                        to="/browse"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
                         Browse
-                      </a>
+                      </Link>
                       <Link
                         to="/login"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
@@ -117,15 +117,16 @@ const Nav = () => {
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                href="#"
+                              <Link
+                                to="/logout"
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
                                 )}
+                                // onClick={props.handleSubmit()}
                               >
                                 Sign out
-                              </a>
+                              </Link>
                             )}
                           </Menu.Item>
                         </Menu.Items>

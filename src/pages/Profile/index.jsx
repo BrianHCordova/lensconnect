@@ -13,6 +13,7 @@ import API from "../../utils/API"
 
 function Profile(props) {
 
+    
     // Use state hook to store the users data
     const [userObj, setUserObj] = useState({});
     const [reviewArr, setReviewArr] = useState([]);

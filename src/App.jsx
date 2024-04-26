@@ -6,6 +6,7 @@ import Search from "./pages/Search/"
 import Browse from "./pages/Browse/"
 import Login from "./pages/Login"
 import Signup from './pages/Signup'
+import Logout from "./pages/Logout"
 
 // Router-dom for page routes
 import {
@@ -66,15 +67,16 @@ export default function App() {
 
   return (
     <Router>
-      <Nav />
+      <Nav handleSubmit={logout}/>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/profile" element={<Profile userId={userId} token={token} />}></Route>
         <Route path="/profile/:id" element={<Profile />}></Route>
         <Route path="/search" element={<Search />}></Route>
-        <Route path="/browse" element={<Browse />}></Route>
+        <Route path="/browse" element={<Browse userId={userId} token={token} />}></Route>
         <Route path="/login" element={<Login type="Login"  handleSubmit={handleLogin} userId={userId}/>}/>
         <Route path="/signup" element={<Signup type="Signup" handleSubmit={handleSignup} userId={userId}/>}/>
+        <Route path="/logout" element={<Logout handleSubmit={logout} userId={userId}/>}/>
         {/* <Route path="/hire" element={<Hire />}></Route> */}
       </Routes>
     </Router>
