@@ -1,5 +1,3 @@
-import "./style.css"
-
 function UserInfo(props) {
     // HTML
     return (
@@ -11,6 +9,7 @@ function UserInfo(props) {
                 <ul>
                     <li>Username: {props.username}</li>
                     <li>About Me: {props.biography}</li>
+                    {/* <li>About Me: <textarea name="" id="" cols="38" rows="5">{props.biography}</textarea></li> */}
                 </ul>
             </div>
             <div className="userDetails col-span-2">
@@ -19,7 +18,6 @@ function UserInfo(props) {
                         <span key={i}>{loc.location},&nbsp;</span>
                     ))}
                     </li>
-                    {/* <li>Serves: {props.serveLocations[0].location}</li> */}
                     <li>Specialties:&nbsp; {props.specialties?.map((spec, i) => (
                         <span key={i}>{spec.specialty},&nbsp;</span>
                     ))}
