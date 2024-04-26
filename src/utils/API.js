@@ -42,6 +42,12 @@ const API = {
     getReviewsByReviewee:userId=>{
         // GET fetch request to the backend passing in userId as the revieweeId
         return fetch(`${URL_PREFIX}/api/reviews/reviewee/${userId}`).then(res=>res.json())
+    },
+    postImage: (formData)=> {
+        return fetch(`${URL_PREFIX}/api/image`, {
+            method: "POST",
+            body: formData           
+        }).then(res=>res.json())
     }
 }
 
