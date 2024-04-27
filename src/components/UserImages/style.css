@@ -1,0 +1,84 @@
+.image-container {
+    width: 40rem ;
+    border: 1px solid white;
+    border-radius: 15px;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    height: auto;
+    
+    
+}
+
+.image-section {
+    display: flex;
+    justify-content: center;
+}
+
+.addPhotoBtn-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.addPhotoBtn {
+    display:flex;
+    /* flex-direction: column; */
+    justify-content: flex-end;
+    position: relative;
+    bottom: 0;
+    align-items: flex-end;
+    padding: 0;
+    margin: 0;
+    margin-top: 1rem;
+    button {
+        text-align: center;
+        border: 2px solid white;
+        border-radius: 15px;
+        width: 7rem;
+        height: 2rem
+    }
+}
+
+.dropzone {
+    width: 38rem;
+    min-height: 10rem;
+    border: 2px dashed white;
+    padding: 2rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(100, 100, 100, 0.5);
+    li {
+        list-style-type:square;
+    }
+}
+
+.select-files, .cancel-upload, .upload-files {
+    border: 1px solid rgb(255, 255, 255);
+    width: 7rem;
+    height: 2rem;
+    background-color: gray;
+    border-radius: 5px;
+    margin: 1rem;
+}
+
+.cancel-upload {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.upload-files {
+    background-color: rgba(0, 128, 0, 0.5);
+}
+
+.image-position img {
+    height: 100px;
+
+}
+
+
+
+/* input[type="file"] {
+    display: none;
+} */
