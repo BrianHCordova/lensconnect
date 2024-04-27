@@ -56,7 +56,7 @@ function Browse(props) {
                 <input type="submit" value="submit" />
             </form>
             {/* each card is imported as passed imaged and title props, these are just... placeholders */}
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4 image-container">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                 <div className="flex flex-col gap-4">
 
                     {image.map((img) => {
