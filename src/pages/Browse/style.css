@@ -1,0 +1,13 @@
+#card-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.card {
+    height: auto;
+}
+
+.image-container {
+    height: 1000px;
+}

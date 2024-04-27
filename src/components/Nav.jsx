@@ -28,14 +28,14 @@ const Nav = (props) => {
                       <Link to='/' className="rounded-md bg-emerald-700 px-3 py-2 text-sm font-medium text-white">
                         Home
                       </Link>
-                      <a
-                        href="#"
+                      <Link
+                        to='/profile'
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
                         Profile
-                      </a>
+                      </Link>
                       <Link
-                        href="#"
+                        to='/search'
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
                         Search
@@ -47,7 +47,7 @@ const Nav = (props) => {
                         Browse
                       </Link>
                       <Link
-                        href="#"
+                        to='/login'
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
                         Login

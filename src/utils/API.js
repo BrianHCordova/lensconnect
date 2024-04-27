@@ -48,6 +48,11 @@ const API = {
             method: "POST",
             body: formData           
         }).then(res=>res.json())
+    },
+    getImages: () => {
+        return fetch(`http://localhost:3000/api/image`, {
+            method: "GET"
+        }).then(res=>res.json())
     }
 }
 
