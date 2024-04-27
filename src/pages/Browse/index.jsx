@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react'
 import Card from './card';
 import API from '../../utils/API';
 import "./style.css"
+import { useParams } from 'react-router-dom'
 
 function Browse(props) {
 
     const [file, setFile] = useState()
     const [image, setImage] = useState([])
+    const params = useParams()
+    const [filename, setFilename] = useState()
 
 
     const postImage = async (e) => {
@@ -14,9 +17,15 @@ function Browse(props) {
 
         const formData = new FormData();
         formData.append("image", file)
+        // formData.append("userId", props.userId)
 
-        API.postImage(formData)
+        console.log("=======================================")
+        console.log(file)
+        await console.log(formData)
+
+        API.postImage(formData, props.userId)
         alert('image has been posted!')
+        setFilename('')
     }
 
     // const getImages = async () => {
@@ -35,7 +44,7 @@ function Browse(props) {
             console.log(data)
             setImage(data)
         })
-    }, [])
+    }, [filename])
 
     // const division = Math.floor(image.length/4)    8/4 = 2   division=2
     // const firstCol = []
@@ -51,8 +60,17 @@ function Browse(props) {
     return (
         <>
             <h1>BROWSE</h1>
+            {/* testing route for uploading single image */}
             <form onSubmit={postImage}>
-                <input onChange={e => setFile(e.target.files[0])} type="file" accept="image/*" />
+                <input 
+                    name="image" 
+                    onChange={e => { 
+                        setFile(e.target.files[0])
+                        setFilename(e.target.files[0].image)
+                    }} 
+                    type="file" 
+                    accept="image/*" 
+                    multiple value={filename}/>
                 <input type="submit" value="submit" />
             </form>
             {/* each card is imported as passed imaged and title props, these are just... placeholders */}

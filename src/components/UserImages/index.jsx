@@ -21,24 +21,29 @@ function UserImages(props) {
             setAttach(false)
         )
     }
-    const postImage = async (e) => {
+    const handleUpload = async (e) => {
         e.preventDefault()
 
         const formData = new FormData();
-        formData.append("image", file)
+        for (let i = 0; i < file.length; i++) {
+            formData.append("multipleFiles", file[i])
+        }
+        console.log(formData)
 
-        API.postImage(formData)
+        API.postMutlipleImages(formData, props.userId)
         alert('image has been posted!')
+        setFile('')
+        setAttach(false)
     }
 
     const handleDragOver = (e) => {
         e.preventDefault()
-        // console.log(e)
     }
 
     const handleDrop = (e) => {
         e.preventDefault()
-        console.log(e)
+        // console.log(Array.from(e.dataTransfer.files))
+        setFile(e.dataTransfer.files)
     }
 
     useEffect(() => {
@@ -49,23 +54,26 @@ function UserImages(props) {
             console.log(data)
             setImage(data)
         })
-    }, [])
+    }, [file])
 
     // HTML
     return (
         <div className="image-section">
             <div className=" image-container">
                 <div className="individual-image-container">
-                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 image-position">
                         {image.map((img) => {
-                            img.UserId === props.userId ? (
-                                <Card image={img.imageUrl} title={img.image} />
-                            ) : (
-                                <div>
-                                    <h3>Click add photos below!</h3>
+                            console.log(img)
+                            console.log(props.userId)
+                            if (img.UserId === props.userId) {
+                                return <Card image={img.imageUrl} title={img.image} />
+                            }
 
-                                </div>
-                            )
+                            else {
+                                return
+                            }
+
+
                         })}
                     </div>
                 </div>
@@ -75,42 +83,80 @@ function UserImages(props) {
 
                             <button onClick={showAttach} >Add photos</button>
                         </div>
-                    ) : (
-                    <>
-                        <div
-                            className="dropzone"
-                            onDragOver={handleDragOver}
-                            onDrop={handleDrop}
-                        >
-                            <h1>Drag and Drop Files to Upload</h1>
-                            <h1>Or</h1>
-                            {/* <label for="file-upload" type="submit" value="submit">
-                                <button className="select-files">
+                    ) : (!file ? (
+                        <>
+                            <div
+                                className="dropzone"
+                                onDragOver={handleDragOver}
+                                onDrop={handleDrop}
+                            >
+                                <h1>Drag and Drop Files to Upload</h1>
+                                <h1>Or</h1>
+
+                                <input
+                                    onChange={e => setFile(e.target.files)}
+                                    type="file"
+                                    multiple
+                                    accept="image/*"
+                                    hidden
+                                    ref={inputRef}
+                                    id="file-upload"
+                                    name="multipleFiles"
+                                />
+
+                                <button
+                                    className="select-files"
+                                    onClick={() => inputRef.current.click()}
+                                >
                                     Select Files
                                 </button>
-                            </label> */}
-                            <input
-                                onChange={e => setFile(e.target.files)}
-                                type="file"
-                                multiple
-                                accept="image/*"
-                                hidden
-                                ref={inputRef}
-                                id="file-upload"
-                            />
-                            <button className="select-files" onClick={() => inputRef.current.click()}>Select Files </button>
-                        </div>
-                        <form onSubmit={postImage}>
-
-                            {/*                             
-                            <input onChange={e => setFile(e.target.files[0])} type="file" hidden accept="image/*" id="file-upload" /> */}
-
-                            <div className="addPhotoBtn">
-                                <button onClick={showAttach} >Add photos</button>
 
                             </div>
-                        </form>
-                    </>
+
+                            <div className="addPhotoBtn">
+                                <button onClick={showAttach} >Close</button>
+
+                            </div>
+
+                        </>) :
+                        (
+                            <>
+                                <div
+                                    className="dropzone"
+                                >
+                                    <ul>
+                                        {Array.from(file).map((file, i) => <li key={i}>{file.name}</li>)}
+                                    </ul>
+                                    <div className="flex">
+                                        <button onClick={() => setFile(null)} className="cancel-upload">Cancel</button>
+                                        <form onSubmit={handleUpload}>
+                                            <input
+                                                type="file"
+                                                multiple
+                                                accept="image/*"
+                                                hidden
+                                                ref={inputRef}
+                                                onChange={async e => setFile(e.target.files)}
+                                                id="file-upload"
+                                                name="multipleFiles"
+                                            />
+                                            <button type="submit" className="upload-files">Upload</button>
+                                        </form>
+
+                                        <button
+                                            className="select-files"
+                                            onClick={() => inputRef.current.click()}
+                                        >
+                                            Select Files
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="addPhotoBtn">
+                                    <button onClick={showAttach}>Close</button>
+
+                                </div>
+
+                            </>)
                     )}
 
                 </div>

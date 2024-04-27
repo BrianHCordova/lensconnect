@@ -43,8 +43,14 @@ const API = {
         // GET fetch request to the backend passing in userId as the revieweeId
         return fetch(`${URL_PREFIX}/api/reviews/reviewee/${userId}`).then(res=>res.json())
     },
-    postImage: (formData)=> {
-        return fetch(`${URL_PREFIX}/api/image`, {
+    postImage: (formData, id)=> {
+        return fetch(`${URL_PREFIX}/api/image/singlefile/${id}`, {
+            method: "POST",
+            body: formData           
+        }).then(res=>res.json())
+    },
+    postMutlipleImages: (formData, id)=> {
+        return fetch(`${URL_PREFIX}/api/image/multipleFiles/${id}`, {
             method: "POST",
             body: formData           
         }).then(res=>res.json())
