@@ -79,7 +79,7 @@ export default function App() {
         <Route path="/login" element={<Login type="Login"  handleSubmit={handleLogin} userId={userId}/>}/>
         <Route path="/signup" element={<Signup type="Signup" handleSubmit={handleSignup} userId={userId}/>}/>
         <Route path="/logout" element={<Logout handleSubmit={logout} userId={userId}/>}/>
-        <Route path="/chat" element={<Chat />}></Route>
+        <Route path="/chat" element={<Chat userId={userId} token={token}/>}></Route>
         {/* <Route path="/hire" element={<Hire />}></Route> */}
       </Routes>
       <Footer />

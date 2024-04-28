@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
-
-const NewMessage = ({socket}) => {
+const NewMessage = ({ socket, username }) => {
     const [value, setValue] = useState('');
+    console.log('username', username);
+
     const message = {
-        user: socket.id,
+        user: username.username,
         message: value,
         date: new Date().toLocaleTimeString()
     }
     
+    //first 'message' is the name of the event being emitted, the second 'message' is the data being sent
     const submitForm = (e) => {
       e.preventDefault();
       socket.emit('message', message);
