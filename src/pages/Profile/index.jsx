@@ -49,7 +49,7 @@ function Profile(props) {
                 />
             </div>
             <div className="col-span-full">
-                <UserImages />
+                <UserImages userId={props.userId}/>
             </div>
             <div className="col-span-full">
                 <UserReviwee reviews={reviewArr} />

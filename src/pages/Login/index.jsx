@@ -43,7 +43,7 @@ import { useNavigate, Link } from 'react-router-dom'
 // export default Auth
 
 
-export default function Auth(props) {
+export default function Login(props) {
     const [formState, setFormState] = useState({
         email:"",
         password:""

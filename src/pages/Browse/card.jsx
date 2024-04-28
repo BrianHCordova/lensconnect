@@ -2,7 +2,7 @@
 function Card({ title, image }) {
   return (
     <div className="card">
-        <a href="#"><img src={image} alt={title} /></a>
+        <img src={image} alt={title} id="card-image" />
     </div>
   );
 }
