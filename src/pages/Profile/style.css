@@ -1,14 +1,11 @@
-
 main {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(
-        #2E4551,
-        #141515
-    );
+    background-image: linear-gradient(#2E4551,
+            #141515);
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: white;
@@ -58,6 +55,8 @@ section {
     display: flex;
     justify-content: end;
     margin: 1rem;
+    max-width: 9rem;
+
     button {
         text-align: center;
         border: 2px solid white;
@@ -76,16 +75,149 @@ section {
 .reviewContainer {
     margin: 1rem;
     border-bottom: 5px solid #32677d;
+
     p {
         font-size: 125%;
     }
+
     h6 {
         font-size: 65%;
     }
 }
 
-textarea {
+.textarea {
     border: 2px solid #698795;
     background: transparent;
 }
 
+.editInput {
+    border: 2px solid #698795;
+    background: transparent;
+}
+
+.chipWrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chip {
+    margin: .2rem;
+    padding: .2rem;
+    text-align: center;
+    font-size: 85%;
+    border: 2px solid rgb(45, 98, 115);
+    border-radius: 10px;
+}
+
+.chipDelete {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 75%;
+    color: red;
+    padding-left: .3rem;
+    padding-bottom: .3rem;
+}
+
+.addChip {
+    margin: .2rem;
+    padding: .2rem;
+    text-align: center;
+    font-size: 85%;
+    border: 2px solid rgb(45, 98, 115);
+    border-radius: 10px;
+    input{
+        display: inline-block;
+        vertical-align: middle;
+        background: transparent;
+        width: auto;
+        height: 100%;
+        font-size: 100%;
+        border: none;
+        border: 1px solid black;
+        border-radius: 15px;
+    }
+    button {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 150%;
+        color: green;
+        padding-left: .3rem;
+        padding-bottom: .3rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+.check {
+    cursor: pointer;
+    position: relative;
+    margin: auto;
+    width: 18px;
+    height: 18px;
+    -webkit-tap-highlight-color: transparent;
+    transform: translate3d(0, 0, 0);
+}
+
+.check:before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(34, 50, 84, 0.03);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.check svg {
+    position: relative;
+    z-index: 1;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #c8ccd4;
+    stroke-width: 1.5;
+    transform: translate3d(0, 0, 0);
+    transition: all 0.2s ease;
+}
+
+.check svg path {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 0;
+}
+
+.check svg polyline {
+    stroke-dasharray: 22;
+    stroke-dashoffset: 66;
+}
+
+.check:hover:before {
+    opacity: 1;
+}
+
+.check:hover svg {
+    stroke: #4285f4;
+}
+
+#cbx:checked+.check svg {
+    stroke: #4285f4;
+}
+
+#cbx:checked+.check svg path {
+    stroke-dashoffset: 60;
+    transition: all 0.3s linear;
+}
+
+#cbx:checked+.check svg polyline {
+    stroke-dashoffset: 42;
+    transition: all 0.2s linear;
+    transition-delay: 0.15s;
+}

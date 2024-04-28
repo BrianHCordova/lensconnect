@@ -13,24 +13,29 @@ import API from "../../utils/API"
 
 function Profile(props) {
 
+
     // Use state hook to store the users data
     const [userObj, setUserObj] = useState({});
     const [reviewArr, setReviewArr] = useState([]);
-    // const [imgArr, setImgArr] = useState([]);
+    // const [imgArr, setImgArr] = useState({});
 
     // API useEffect to gather users info from the API on page load
     useEffect(() => {
-        const userId = 2
+        if (!props.userId) {
+            return
+        }
         // Runs the getOneUser function from the API utils page
+        console.log(`props`, props)
         API.getOneUser(props.userId).then((userData) => { //props.userId is 0 untill we can make tokens work
             setUserObj(userData);
             console.log(userData)
         });
         // Runs the getReviewsByReviewee function from the API utils page
-        API.getReviewsByReviewee(userId).then((revData) => {
+        API.getReviewsByReviewee(props.userId).then((revData) => {
             setReviewArr(revData)
         });
-    }, []);
+    }, [props.userId]);
+
 
     // HTML
     return (
@@ -38,10 +43,13 @@ function Profile(props) {
             <div className="col-span-full">
                 {/* pass the userObj into UserInfo as props when tokens work */}
                 <UserInfo
+                    userId={props.userId}
                     username={userObj.username}
                     biography={userObj.biography}
                     specialties={userObj.Specialties}
                     serveLocations={userObj.ServeLocations}
+                    website={userObj.website}
+                    videograpgy={userObj.videography}
                 />
             </div>
             <div className="col-span-full">
@@ -51,7 +59,7 @@ function Profile(props) {
                 <UserReviwee reviews={reviewArr} />
             </div>
             <div className="col-span-full">
-                <UserReviwer reviews={userObj.Reviews}/>
+                <UserReviwer reviews={userObj.Reviews} />
             </div>
         </main>
 

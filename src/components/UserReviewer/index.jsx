@@ -1,6 +1,4 @@
 function UserReviewer(props) {
-    console.log(props)
-
     // HTML
     return (
 
