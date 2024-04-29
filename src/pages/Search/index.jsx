@@ -1,4 +1,8 @@
-//form doesnt do anything yet, just a placeholder for now
+import Card from "../../pages/Browse/card";
+import API from "../../utils/API";
+import { useEffect, useState, useRef } from 'react'
+import './style.css'
+import FeaturedPro from "../../components/FeaturedPro";
 
 function Search() {
     const handleSubmit = (event) => {
@@ -11,16 +15,28 @@ function Search() {
             alert("Please fill in at least one field");
         }
     }
+
+    const getPhotographers = async () => {
+        await fetch
+
+    }
     // HTML
     return (
         <>
-            <h1>Search</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="container mx-auto mb-5" >
+
+            <div className="text-3xl my-4">Search for photographers!</div>
+            <form className="flex flex-row search-bar-input" onSubmit={handleSubmit}>
                 <input type="text" name="zipCode" placeholder="Zip Code" />
                 <input type="text" name="city" placeholder="City" />
                 <input type="text" name="specialty" placeholder="Specialty" />
-                <button type="submit">Search</button>
+                <button type="submit" className="search-button">Search</button>
             </form>
+        </div>
+
+        <div className="container">
+            <FeaturedPro />
+        </div>
         </>
     );
 }
