@@ -59,6 +59,11 @@ const API = {
         return fetch(`http://localhost:3000/api/image`, {
             method: "GET"
         }).then(res=>res.json())
+    },
+    getChat: () => {
+        return fetch(`${URL_PREFIX}/api/chat`, {
+            method: "GET"
+        }).then(res=>res.json())
     }
 }
 
