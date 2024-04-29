@@ -36,6 +36,12 @@ function Profile(props) {
         });
     }, [props.userId]);
 
+    // Chat hook
+    const navigate = useNavigate();
+    const handleChatOpen = () => {
+        navigate("/chat");
+    }
+
     // HTML
     return (
         <main className="grid">
@@ -57,6 +63,12 @@ function Profile(props) {
             <div className="col-span-full">
                 <UserReviwer reviews={userObj.Reviews}/>
             </div>
+            {/* conditionally renders chat button if user is logged in */}
+            {props.userId && (
+            <div className="chatBtn col-span-2">
+                <button onClick={handleChatOpen}>Start Chat!</button>
+            </div>
+    )}
         </main>
 
     );

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import io from 'socket.io-client';
-import Messages from './Messages';
-import MessageInput from './MessageInput';
+import io from 'socket.io-client'
+import Messages from '../../components/ChatComponents/Messages';
+import MessageInput from '../../components/ChatComponents/MessageInput';
+import MessageHistory from '../../components/ChatComponents/MessageHistory';
+import Sidebar from '../../components/ChatComponents/Sidebar';
 import API from '../../utils/API';
 
 export default function Chat(props) {
@@ -32,16 +34,22 @@ export default function Chat(props) {
       });
       // runs setUser function when the user data is retrieved
     }, [props.userId]);
-
+    
   return (
     <div>
       <header>
-        Chat
+        {user.username ? (
+          <h1>Welcome, {user.username}!</h1>
+        ) : (
+          <h1>Welcome</h1>
+        )}
       </header>
       <div>
         { socket ? (
             <div>
-                <Messages socket={socket} />
+                <Sidebar />
+                <MessageHistory />
+                <Messages socket={socket}/>
                 <MessageInput socket={socket} username={user} />
             </div>
             ) : (

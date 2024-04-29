@@ -67,6 +67,19 @@ section {
     }
 }
 
+.chatBtn {
+    display: flex;
+    justify-content: end;
+    margin: 1rem;
+    button {
+        text-align: center;
+        border: 2px solid white;
+        border-radius: 15px;
+        width: 6rem;
+        height: 2rem
+    }
+}
+
 .reviews {
     h2 {
         text-align: center;
