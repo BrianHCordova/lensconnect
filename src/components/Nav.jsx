@@ -25,30 +25,30 @@ const Nav = (props) => {
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                      <Link to='/' className="rounded-md bg-emerald-700 px-3 py-2 text-sm font-medium text-white">
+                      <Link to='/' className="rounded-md bg-emerald-700 px-3 py-2 text-sm font-medium hover:bg-emerald-500 duration-200 ease-in-out text-white">
                         Home
                       </Link>
                       <Link
                         to='/profile'
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
                       >
                         Profile
                       </Link>
                       <Link
                         to='/search'
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
                       >
                         Search
                       </Link>
                       <Link
                         to="/browse"
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
                       >
                         Browse
                       </Link>
                       <Link
                         to='/login'
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
                       >
                         Login
                       </Link>
