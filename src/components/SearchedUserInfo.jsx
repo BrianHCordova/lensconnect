@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 // Imports api fetch functions
 // import API from "../../utils/API"
 function SearchedUserInfo(props) {
+    console.log(props.username)
+    console.log(props.ServeLocations)
     return (
         <section className="grid grid-cols-2 grid-rows-1 gap-6">
             <div className="profilePicture col-span-1 ">

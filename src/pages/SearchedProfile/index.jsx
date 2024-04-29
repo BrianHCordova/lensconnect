@@ -25,6 +25,7 @@ function Profile(props) {
         // Runs the getOneUser function from the API utils page
         API.getOneUser(id).then((userData) => { //props.userId is 0 untill we can make tokens work
             setUserObj(userData);
+            console.log(userObj)
         });
         // Runs the getReviewsByReviewee function from the API utils page
         API.getReviewsByReviewee(props.userId).then((revData) => {
@@ -42,8 +43,8 @@ function Profile(props) {
                     userId={props.userId}
                     username={userObj.username}
                     biography={userObj.biography}
-                    specialties={userObj.Specialties}
-                    serveLocations={userObj.ServeLocations}
+                    Specialties={userObj.Specialties}
+                    ServeLocations={userObj.ServeLocations}
                     website={userObj.website}
                     videograpgy={userObj.videography}
                     isPhotographer={userObj.isPhotographer}

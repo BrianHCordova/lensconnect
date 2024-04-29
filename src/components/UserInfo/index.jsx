@@ -176,7 +176,7 @@ function UserInfo(props) {
         );
     } else { // Will render the editable photographer userInfo
         return (
-            <section className="grid grid-cols-2 grid-rows-3 gap-4">
+            <section className=" container mx-auto grid grid-cols-2 grid-rows-3 gap-4">
                 <div className="profilePicture col-span-1 row-span-1 ">
                     <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="250" width="250" alt="" />
                 </div>

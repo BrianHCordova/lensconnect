@@ -53,11 +53,12 @@ section {
 }
 
 .editBtn {
+    position: relative;
+    left: 29rem;
     display: flex;
     justify-content: end;
     margin: 1rem;
     max-width: 9rem;
-
     button {
         text-align: center;
         border: 2px solid white;
