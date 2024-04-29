@@ -2,7 +2,7 @@ function UserReviewer(props) {
     // HTML
     return (
 
-        <section >
+        <section className="userInfoSection" >
             <div className="columns-1 reviews">
                 <h2>Reviews I've Written</h2>
                 {props.reviews?.map((rev, i, j) =>
