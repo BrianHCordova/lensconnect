@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import API from "../../utils/API"
 
 function UserInfo(props) {
-    console.log(props)
     // Sets an editing usestate for when the user is editing their profile
     const [editing, setEditing] = useState(false)
     const [newUserObj, setNewUserObj] = useState({})
@@ -15,8 +14,6 @@ function UserInfo(props) {
     const refreshUserData = () => {
         API.getOneUser(props.userId).then((userData) => {
             setNewUserObj(userData);
-            // setIsPhotographer(newUserObj.isPhotographer)
-            // useState(newUserObj.videography)
             console.log("Refreshed Data")
         });
     }
@@ -138,7 +135,7 @@ function UserInfo(props) {
 
     if (!editing) { // Will render the basic photographers userInfo
         return (
-            <section className="grid grid-cols-2 grid-rows-1 gap-6">
+            <section className=" userInfoSection grid grid-cols-2 grid-rows-1 gap-6">
                 <div className="profilePicture col-span-1 ">
                     <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="250" width="250" alt="" />
                 </div>
@@ -176,7 +173,7 @@ function UserInfo(props) {
         );
     } else { // Will render the editable photographer userInfo
         return (
-            <section className=" container mx-auto grid grid-cols-2 grid-rows-3 gap-4">
+            <section className="userInfoSection grid grid-cols-2 grid-rows-3 gap-4">
                 <div className="profilePicture col-span-1 row-span-1 ">
                     <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="250" width="250" alt="" />
                 </div>
