@@ -1,5 +1,4 @@
 function UserReviewee(props) {
-    console.log(props)
     // HTML
     return (
 
@@ -13,7 +12,6 @@ function UserReviewee(props) {
                     </div>
                     
                 )}
-                {/* <h6 key={j}>Reviewd by: {rev.reviewer.username}</h6> */}
             </div>
         </section>
 
