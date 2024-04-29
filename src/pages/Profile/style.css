@@ -43,8 +43,9 @@ section {
 }
 
 .userDetails {
+    display: flex;
+    flex-wrap: wrap;
     margin-left: 1rem;
-
     li {
 
         margin-bottom: 1rem;
@@ -95,22 +96,49 @@ section {
     background: transparent;
 }
 
+.instructions{
+    margin-bottom: .2rem;
+    padding: .3rem;
+    background-color: rgb(71, 104, 114);
+    width: fit-content;
+    border-radius: 15px;
+}
+
 .chipWrap {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: .5rem;
+    border: 1.5px solid white;
+}
+
+.specialtyChip {
     display: flex;
     flex-wrap: wrap;
 }
 
+.serveLocationChip {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
 .chip {
     margin: .2rem;
     padding: .2rem;
+    padding-right: .4rem;
+    padding-left: .7rem;
     text-align: center;
+    align-items: center;
     font-size: 85%;
-    border: 2px solid rgb(45, 98, 115);
-    border-radius: 10px;
+    background-color: rgb(45, 98, 115);
+    border-radius: 15px;
 }
 
 .chipDelete {
-    display: inline-block;
+    /* display: inline-block; */
     vertical-align: middle;
     font-size: 75%;
     color: red;
@@ -119,105 +147,24 @@ section {
 }
 
 .addChip {
-    margin: .2rem;
-    padding: .2rem;
-    text-align: center;
-    font-size: 85%;
+    margin: auto;
+    height: 1.8rem;
+    font-size: 65%;
     border: 2px solid rgb(45, 98, 115);
-    border-radius: 10px;
+    border-radius: 15px;
     input{
-        display: inline-block;
-        vertical-align: middle;
         background: transparent;
-        width: auto;
-        height: 100%;
-        font-size: 100%;
-        border: none;
-        border: 1px solid black;
+        height: 1.6rem;
+        font-size: 125%;
+        border: 1px solid transparent;
         border-radius: 15px;
     }
     button {
-        display: inline-block;
+        /* display: inline-block; */
         vertical-align: middle;
         font-size: 150%;
         color: green;
         padding-left: .3rem;
         padding-bottom: .3rem;
     }
-}
-
-
-
-
-
-
-
-
-
-.check {
-    cursor: pointer;
-    position: relative;
-    margin: auto;
-    width: 18px;
-    height: 18px;
-    -webkit-tap-highlight-color: transparent;
-    transform: translate3d(0, 0, 0);
-}
-
-.check:before {
-    content: "";
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(34, 50, 84, 0.03);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.check svg {
-    position: relative;
-    z-index: 1;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke: #c8ccd4;
-    stroke-width: 1.5;
-    transform: translate3d(0, 0, 0);
-    transition: all 0.2s ease;
-}
-
-.check svg path {
-    stroke-dasharray: 60;
-    stroke-dashoffset: 0;
-}
-
-.check svg polyline {
-    stroke-dasharray: 22;
-    stroke-dashoffset: 66;
-}
-
-.check:hover:before {
-    opacity: 1;
-}
-
-.check:hover svg {
-    stroke: #4285f4;
-}
-
-#cbx:checked+.check svg {
-    stroke: #4285f4;
-}
-
-#cbx:checked+.check svg path {
-    stroke-dashoffset: 60;
-    transition: all 0.3s linear;
-}
-
-#cbx:checked+.check svg polyline {
-    stroke-dashoffset: 42;
-    transition: all 0.2s linear;
-    transition-delay: 0.15s;
 }

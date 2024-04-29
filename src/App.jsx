@@ -3,6 +3,7 @@ import Nav from "./components/Nav"
 import Home from "./pages/Home/"
 import Profile from "./pages/Profile/"
 import Search from "./pages/Search/"
+import SearchedProfile from "./pages/SearchedProfile"
 import Browse from "./pages/Browse/"
 import Login from "./pages/Login"
 import Signup from './pages/Signup'
@@ -65,6 +66,7 @@ export default function App() {
     setUserId(0);
     localStorage.removeItem("token")
   }
+  const searchedUser = 1
 
   return (
     <Router>
@@ -72,7 +74,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/profile" element={<Profile userId={userId} token={token} />}></Route>
-        <Route path="/profile/:id" element={<Profile />}></Route>
+        <Route path="/profile/:id" element={<SearchedProfile userId={searchedUser}/>}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/browse" element={<Browse userId={userId} token={token} />}></Route>
         <Route path="/login" element={<Login type="Login"  handleSubmit={handleLogin} userId={userId}/>}/>

@@ -8,74 +8,63 @@ function classNames(...classes) {
 }
 
 const Nav = (props) => {
-  return (
-    <Disclosure as="nav" className="bg-zinc-900">
-      {({ open }) => (
-        <>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <img
-                    className="h-8 w-auto"
-                    src="/logo.png"
-                    alt="logo"
-                  />
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                    {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                    <Link to='/' className="rounded-md bg-emerald-700 px-3 py-2 text-sm font-medium text-white">
-                      Home
-                    </Link>
-                    <Link
-                    
-                      to={props.userId?("/profile"):("/login")}
-                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                    >
-                      Profile
-                    </Link>
-                    <Link
-                      to="/search"
-                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                    >
-                      Search
-                    </Link>
-                    <Link
-                      to="/browse"
-                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                    >
-                      Browse
-                    </Link>
-                    {props.userId ? (
+    return (
+        <Disclosure as="nav" className="bg-zinc-900">
+        {({ open }) => (
+          <>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="flex h-16 items-center justify-between">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="h-8 w-auto"
+                      src="/logo.png"
+                      alt="logo"
+                    />
+                  </div>
+                  <div className="hidden sm:ml-6 sm:block">
+                    <div className="flex space-x-4">
+                      {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
+                      <Link to='/' className="rounded-md bg-emerald-700 px-3 py-2 text-sm font-medium text-white">
+                        Home
+                      </Link>
                       <Link
-                        to="/logout"
+                        to='/profile'
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
-                        Logout
+                        Profile
                       </Link>
-                    ):(
                       <Link
-                      to="/login"
-                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                    >
-                      Login
-                    </Link>
-                    ) 
-                      }
+                        to='/search'
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      >
+                        Search
+                      </Link>
+                      <Link
+                        to="/browse"
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      >
+                        Browse
+                      </Link>
+                      <Link
+                        to='/login'
+                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      >
+                        Login
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex items-center">
-                  <button
-                    type="button"
-                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                <div className="hidden sm:ml-6 sm:block">
+                  <div className="flex items-center">
+                    <button
+                      type="button"
+                      className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    >
+                      <span className="absolute -inset-1.5" />
+                      <span className="sr-only">View notifications</span>
+                      <BellIcon className="h-6 w-6" aria-hidden="true" />
+                    </button>
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">

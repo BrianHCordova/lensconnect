@@ -3,16 +3,20 @@ import React, { useEffect, useState } from "react";
 import API from "../../utils/API"
 
 function UserInfo(props) {
+    console.log(props)
     // Sets an editing usestate for when the user is editing their profile
     const [editing, setEditing] = useState(false)
     const [newUserObj, setNewUserObj] = useState({})
-    const [newUserBio, setNewUserBio] = useState("")
-
-    // const [isPhotographer, setIsPhotographer] = useState(false)
+    const [newUserBio, setNewUserBio] = useState(props.biography)
+    const [newWebsite, setNewWebsite] = useState(props.website)
+    const [isPhotographer, setIsPhotographer] = useState(props.isPhotographer)
+    const [videography, setVideography] = useState(props.videography)
 
     const refreshUserData = () => {
-        API.getOneUser(props.userId).then((userData) => { //props.userId is 0 untill we can make tokens work
+        API.getOneUser(props.userId).then((userData) => {
             setNewUserObj(userData);
+            // setIsPhotographer(newUserObj.isPhotographer)
+            // useState(newUserObj.videography)
             console.log("Refreshed Data")
         });
     }
@@ -25,12 +29,21 @@ function UserInfo(props) {
         refreshUserData()
     }, [props.userId]);
 
-    const [isPhotographer, setIsPhotographer] = useState(newUserObj.isPhotographer)
+
+
     const toggleIsPhotographer = () => {
         setIsPhotographer(!isPhotographer)
     }
 
+    const toggleVideography = () => {
+        console.log(videography)
+        setVideography(!videography)
+        console.log(videography)
+        console.log('clicked')
+    }
+
     const toggelEditing = () => {
+        setIsPhotographer(newUserObj.isPhotographer)
         setEditing(!editing);
         refreshUserData()
     };
@@ -96,21 +109,34 @@ function UserInfo(props) {
         setNewUserBio(event.target.value);
     };
     // Function that runs the APi fetch request from the utils API page
-    const editUserBio = () => {
-        // Net to catch if the user does not update the bio in the edit page
-        if (newUserBio === "") {
-            return
-        }
+    const editUser = () => {
         // Create an object that includes the logged in userId and the new spec
-        const passData = { biography: newUserBio, userId: props.userId }
+        const passData = {
+            biography: newUserBio,
+            userId: props.userId,
+            isPhotographer: isPhotographer,
+            website: newWebsite,
+            videography: videography
+        }
+        console.log(passData)
         API.editUserBio(passData).then((newData) => {
         });
         refreshUserData()
         refreshUserData()
     };
 
-    // Will render the basic photographers userInfo
-    if (!editing) {
+    const handleWebsiteInput = (event) => {
+        setNewWebsite(event.target.value)
+    }
+
+    const locInputStyle = {
+        width: `${newLoc.length * 5 + 50}px`
+    };
+    const specInputStyle = {
+        width: `${newSpec.length * 5 + 50}px`
+    };
+
+    if (!editing) { // Will render the basic photographers userInfo
         return (
             <section className="grid grid-cols-2 grid-rows-1 gap-6">
                 <div className="profilePicture col-span-1 ">
@@ -123,23 +149,23 @@ function UserInfo(props) {
                     </ul>
                 </div>
                 <div className="userDetails col-span-1 ">
-                    {isPhotographer
-                        ? <></>
-                        : <ul>
-                            <li className="chipWrap" >Serves:&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
+                    {newUserObj.isPhotographer
+                        ? <ul>
+                            <li className="serveLocationChip" >Serves:&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
                                 <span className="chip" key={i}>{loc.location}&nbsp;</span>
                             ))}
                             </li>
-                            <li className="chipWrap" >Specialties:&nbsp; {newUserObj.Specialties?.map((spec, i) => (
+                            <li className="specialtyChip" >Specialties:&nbsp; {newUserObj.Specialties?.map((spec, i) => (
                                 <span className="chip" key={i}>{spec.specialty}&nbsp;</span>
                             ))}
                             </li>
                             <li>Website:&nbsp;<a target="_blank" href={props.website}>{newUserObj.website}</a></li>
-                            {props.videograpgy
-                                ? <li>Videography: No</li>
-                                : <li>Videography: Yes</li>
+                            {newUserObj.videography
+                                ? <li>Videography: Yes</li>
+                                : <li>Videography: No</li>
                             }
                         </ul>
+                        : <></>
                     }
                 </div>
                 <div className="editBtn col-span-2">
@@ -148,49 +174,56 @@ function UserInfo(props) {
             </section>
 
         );
-        // Will render the editable photographer userInfo
-    } else {
+    } else { // Will render the editable photographer userInfo
         return (
-            <section className="grid grid-cols-2 grid-rows-2 gap-4">
+            <section className="grid grid-cols-2 grid-rows-3 gap-4">
                 <div className="profilePicture col-span-1 row-span-1 ">
                     <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="250" width="250" alt="" />
                 </div>
                 <div className="bio col-span-1 row-span-2">
                     <ul>
                         <li>Username: {newUserObj.username}</li>
-                        <li>About Me: <textarea onChange={handleBioInput} className="textarea" name="" id="" cols="35" rows="5">{newUserObj.biography}</textarea></li>
+                        <li>About Me: <textarea onChange={handleBioInput} className="textarea" cols="30" rows="6">{newUserObj.biography}</textarea></li>
                     </ul>
                 </div>
-                <div className="userDetails col-span-1">
+                <div className="userDetails col-span-1 row-span-2">
                     {isPhotographer
-                        ? <div><p>Are you a a Photographer looking for work?: <input onChange={toggleIsPhotographer} type="checkbox" /></p></div>
-                        : <div><p>Are you a a Photographer looking for work?: <input onChange={toggleIsPhotographer} checked type="checkbox" /></p></div>
+                        ? <div><p>Are you a a Photographer looking for work?: <input onChange={toggleIsPhotographer} checked  type="checkbox" /></p></div>
+                        : <div><p>Are you a a Photographer looking for work?: <input onChange={toggleIsPhotographer} type="checkbox" /></p></div>
                     }
                     {isPhotographer
-                        ? <></>
-                        : <ul>
-                            <li className="chipWrap" >Serves:&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
+                        ? <ul>
+                        <div className="chipWrap"> <div className="instructions"><span className="text-green-600">+</span> to add, or <span className="text-red-600">x</span> to remove a location</div>
+                            <li className="serveLocationChip" >&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
                                 <span className="chip" key={i}>{loc.location}&nbsp;<button onClick={delUserLoc} id={loc.id} className="chipDelete">X</button>&nbsp;</span>
                             ))}
                                 <div className="addChip">
-                                    <input onChange={handleLocInput} value={newLoc} placeholder="add Location" type="text" />&nbsp;<button onClick={addUserLoc} className="chipDelete">+</button>&nbsp;
+                                    <input onChange={handleLocInput} value={newLoc} placeholder="add Location" type="text" style={locInputStyle} />&nbsp;<button onClick={addUserLoc} className="chipDelete">+</button>&nbsp;
                                 </div>
                             </li>
-                            <li className="chipWrap" >Specialties:&nbsp; {newUserObj.Specialties?.map((spec, i) => (
+                        </div>
+                        <div className="chipWrap"> 
+                        <div className="instructions"><span className="text-green-600">+</span> to add, or <span className="text-red-600">x</span> to remove a specialty</div>
+                            <li className="specialtyChip" >&nbsp; {newUserObj.Specialties?.map((spec, i) => (
                                 <span className="chip" key={i}>{spec.specialty}&nbsp;<button onClick={delUserSpec} id={spec.id} className="chipDelete">X</button>&nbsp;</span>
                             ))}
                                 <div className="addChip">
-                                    <input onChange={handleSpecInput} value={newSpec} placeholder="add specialty" type="text" />&nbsp;<button onClick={addUserSpec} className="chipDelete">+</button>&nbsp;
+                                    <input onChange={handleSpecInput} value={newSpec} placeholder="add specialty" type="text" style={specInputStyle} />&nbsp;<button onClick={addUserSpec} className="chipDelete">+</button>&nbsp;
                                 </div>
                             </li>
-                            <li>Website: <input className="editInput"></input></li>
-                            <li>Videography: <input type="checkbox" name="" id="" />
-                            </li>
-                        </ul>
+                        </div>
+                        
+                        <li>Website: <input onChange={handleWebsiteInput} placeholder={newUserObj.website} className="editInput"></input></li>
+                        {videography
+                                ? <li>Videography: <input onChange={toggleVideography} checked type="checkbox" /></li>
+                                : <li>Videography: <input onChange={toggleVideography} type="checkbox" /></li>
+                            }
+                    </ul>
+                        : <></>
                     }
                 </div>
                 <div className="editBtn col-span-2">
-                    <button onClick={() => { toggelEditing(), editUserBio() }}>Save</button>
+                    <button onClick={() => { toggelEditing(), editUser() }}>Save</button>
                 </div>
             </section>
         )
