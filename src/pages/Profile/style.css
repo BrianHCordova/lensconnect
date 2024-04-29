@@ -4,6 +4,7 @@ main {
     flex-direction: column;
     width: 100%;
     height: 100%;
+    justify-content: center;
     background-image: linear-gradient(#2E4551,
             #141515);
     background-repeat: no-repeat;
@@ -15,7 +16,7 @@ main {
     flex: 1 0 auto;
 }
 
-section {
+.userInfoSection {
     display: flex;
     margin: auto;
     justify-content: center;
