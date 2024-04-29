@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../../components/Footer';
 
 const people = [
   {
@@ -41,6 +42,7 @@ const people = [
 
 export default function About() {
   return (
+    <>
     <div className="bg-zinc-800 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
@@ -94,6 +96,8 @@ export default function About() {
           ))}
         </ul>
       </div>
+      <Footer />    
     </div>
+    </>
   );
 }
