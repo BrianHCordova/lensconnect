@@ -5,11 +5,14 @@ import './style.css'
 import FeaturedPro from "../../components/FeaturedPro";
 
 function Search() {
+    const [photographers, setPhotographers] = useState([])
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        const zipCode = event.target.zipCode.value;
-        const city = event.target.city.value;
-        const specialty = event.target.specialty.value;
+        const zipCode = event.target.zipCode.value.toLowerCase();
+        const city = event.target.city.value.toLowerCase();
+        const specialty = event.target.specialty.value.toLowerCase();
 //if no value is entered in the search fields, an alert will appear
         if (!zipCode && !city && !specialty) {
             alert("Please fill in at least one field");
@@ -17,9 +20,19 @@ function Search() {
     }
 
     const getPhotographers = async () => {
-        await fetch
+        await fetch('http://localhost:3000/api/searchusers').then(res=>res.json())
+            .then(data => {
+                setPhotographers(data)
+            })
+        }
 
-    }
+    
+
+    useEffect(() => {
+        getPhotographers()
+        console.log(photographers)
+
+    }, [])
     // HTML
     return (
         <>
@@ -34,7 +47,7 @@ function Search() {
             </form>
         </div>
 
-        <div className="container">
+        <div className="container mx-auto mb-5">
             <FeaturedPro />
         </div>
         </>
