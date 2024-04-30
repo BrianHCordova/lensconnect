@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from "react-router-dom";
@@ -8,12 +8,20 @@ function classNames(...classes) {
 }
 
 const Nav = (props) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const closeMobileMenu = () => {
+    console.log("Mobile menu closed");
+    setMobileMenuOpen(false);
+  };
+  
+
   return (
     <Disclosure as="nav" className="bg-zinc-900">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2"> {/* Adjusted padding here */}
+            <div className="flex h-20 items-center justify-between"> {/* Increased height here */}
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <img
@@ -172,34 +180,57 @@ const Nav = (props) => {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-              >
-                Dashboard
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
+              <Link to='/' className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" onClick={closeMobileMenu}>
+                Home
+              </Link>
+              <Link
+                to={props.userId ? ('/profile') : ('/login')}
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                onClick={closeMobileMenu}
               >
-                Team
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
+                Profile
+              </Link>
+
+              <Link
+                to='/search'
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                onClick={closeMobileMenu}
               >
-                Projects
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
+                Search
+              </Link>
+              <Link
+                to="/browse"
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                onClick={closeMobileMenu}
               >
-                Calendar
-              </Disclosure.Button>
+                Browse
+              </Link>
+              {props.userId ? (
+                <Link
+                  to="/chat"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  onClick={closeMobileMenu}
+                >
+                  Chat
+                </Link>
+              ) : null}
+              {props.userId ? (
+                <Link
+                  to='/logout'
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  onClick={closeMobileMenu}
+                >
+                  Logout
+                </Link>
+              ) : (
+                <Link
+                  to='/login'
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  onClick={closeMobileMenu}
+                >
+                  Login
+                </Link>
+              )}
             </div>
             <div className="border-t border-gray-700 pb-3 pt-4">
               <div className="flex items-center px-5">
@@ -211,8 +242,8 @@ const Nav = (props) => {
                   />
                 </div>
                 <div className="ml-3">
-                  <div className="text-base font-medium text-white">Tom Cook</div>
-                  <div className="text-sm font-medium text-gray-400">tom@example.com</div>
+                  <div className="text-base font-medium text-white"></div>
+                  <div className="text-sm font-medium text-gray-400"></div>
                 </div>
                 <button
                   type="button"
@@ -224,27 +255,27 @@ const Nav = (props) => {
                 </button>
               </div>
               <div className="mt-3 space-y-1 px-2">
-                <Disclosure.Button
-                  as="a"
-                  href="#"
+                <Link
+                  to='/profile'
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                  onClick={closeMobileMenu}
                 >
                   Your Profile
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
+                </Link>
+                <Link
+                  to='/settings'
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                  onClick={closeMobileMenu}
                 >
                   Settings
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
+                </Link>
+                <Link
+                  to='/logout'
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                  onClick={closeMobileMenu}
                 >
                   Sign out
-                </Disclosure.Button>
+                </Link>
               </div>
             </div>
           </Disclosure.Panel>
