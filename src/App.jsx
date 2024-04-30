@@ -10,6 +10,8 @@ import Signup from './pages/Signup'
 import Logout from "./pages/Logout"
 import Footer from "./components/Footer"
 import Chat from "./pages/Chat"
+import Review from "./pages/Review"
+import Report from "./pages/Report"
 
 // Router-dom for page routes
 import {
@@ -82,6 +84,8 @@ export default function App() {
         <Route path="/signup" element={<Signup type="Signup" handleSubmit={handleSignup} userId={userId}/>}/>
         <Route path="/logout" element={<Logout handleSubmit={logout} userId={userId}/>}/>
         <Route path="/chat" element={<Chat userId={userId} token={token}/>}></Route>
+        <Route path="/review/:id" element={<Review userId={userId} token={token}/>}></Route>
+        <Route path="/report" element={<Report userId={userId} token={token}/>}></Route>
         {/* <Route path="/hire" element={<Hire />}></Route> */}
       </Routes>
       <Footer />

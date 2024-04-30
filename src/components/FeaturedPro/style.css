@@ -13,3 +13,15 @@
     margin: 0 5px; 
   }
    */
+
+  .featured-component { 
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .profile-pic-container {
+    width: 25%
+  }
