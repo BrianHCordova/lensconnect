@@ -11,10 +11,10 @@ function Search() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const servelocation = event.target.servelocation.value.toLowerCase();
-        const city = event.target.city.value.toLowerCase();
+        const username = event.target.username.value.toLowerCase();
         const specialty = event.target.specialty.value.toLowerCase();
         //if no value is entered in the search fields, an alert will appear
-        if (!servelocation && !city && !specialty) {
+        if (!servelocation && !username && !specialty) {
             alert("Please fill in at least one field");
         }
     }
@@ -38,7 +38,7 @@ function Search() {
                     <div className="text-3xl my-4">Search for photographers!</div>
                     <form className="flex flex-row search-bar-input" onSubmit={handleSubmit}>
                         <input type="text" name="servelocation" placeholder="Location" />
-                        <input type="text" name="city" placeholder="City" onChange={(e) => setSearch(e.target.value)} />
+                        <input type="text" name="username" placeholder="Username" onChange={(e) => setSearch(e.target.value)} />
                         <input type="text" name="specialty" placeholder="Specialty" />
                         <button type="submit" className="search-button">Search</button>
                     </form>
