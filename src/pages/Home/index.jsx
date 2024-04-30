@@ -4,7 +4,7 @@ import Welcome from '../../components/Welcome';
 import { useLenis } from '@studio-freight/react-lenis';
 import PhotographerCard from '../../components/PhotographerCard';
 import API from '../../utils/API';
-import CreateAccountButton from '../../components/CreateAccountButton';
+// import CreateAccountButton from '../../components/CreateAccountButton';
 import './style.css'
 
 const ParallaxZoomComponent = () => {
@@ -55,7 +55,7 @@ const ParallaxZoomComponent = () => {
         <img src="/main.png" alt="Main" style={{ width: '100vw' }} />
       </motion.div>
       {/* Render CreateAccountButton component */}
-      <CreateAccountButton />
+      {/* <CreateAccountButton /> */}
       <div className="other-content">
         <Welcome />
         <div className=' w-3/4 mx-auto'>
