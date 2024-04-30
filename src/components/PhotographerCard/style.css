@@ -25,3 +25,22 @@
   .profile-pic-container {
     width: 25%
   }
+
+  .card-header {
+    padding: 0.6rem;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1rem;
+  }
+
+  .carousel-item img {
+    width: 300px;
+    height: auto;
+    object-fit:contain;
+    background-color: rgba(0, 0, 0, 0.445);
+    
+  }
