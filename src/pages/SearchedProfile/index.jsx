@@ -22,15 +22,15 @@ function Profile(props) {
     const [userObj, setUserObj] = useState({});
     const [reviewArr, setReviewArr] = useState([]);
     const {id} = useParams()
-    const URL_PREFIX = "http://localhost:3000"
-    const [socket, setSocket] = useState(null);
+    // const URL_PREFIX = "http://localhost:3000"
+    // const [socket, setSocket] = useState(null);
 
-    useEffect(() => {
-        const newSocket = io(URL_PREFIX);
-        setSocket(newSocket);
-        return () => newSocket.close();
-    }
-    , [setSocket]);
+    // useEffect(() => {
+    //     const newSocket = io(URL_PREFIX);
+    //     setSocket(newSocket);
+    //     return () => newSocket.close();
+    // }
+    // , [setSocket]);
 
     // API useEffect to gather users info from the API on page load
     useEffect(() => {
@@ -44,6 +44,11 @@ function Profile(props) {
             setReviewArr(revData)
         });
     }, [props.userId]);    
+
+    const joinChat = (e) => {
+        e.preventDefault();
+        window.location.href = "/chat"
+    }
 
     
     // HTML
@@ -65,7 +70,7 @@ function Profile(props) {
             <div className="col-span-full">
                 <UserReviwer reviews={userObj.Reviews} />
             </div>
-                <CreateRoom />
+            <button type="submit" onClick={joinChat}>Start Chat</button>
         </main>
 
     );

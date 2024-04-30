@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react'
 
 export default function Messages({ socket, username }) {
     const [messages, setMessages] = useState([])
-    const user = username.username
+    const [user, setUser] = useState('')
+    
+    useState(() => {
+        setUser(username.username)
+    }
+    , [username]);
+    
 
     useEffect(() => {
         socket.on('messageResponse', (message) => {
