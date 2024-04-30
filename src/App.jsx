@@ -74,6 +74,7 @@ export default function App() {
   return (
     <Router>
       <Nav handleSubmit={logout} userId={userId} />
+        <body>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/profile" element={<Profile userId={userId} token={token} />}></Route>
@@ -88,6 +89,7 @@ export default function App() {
         <Route path="/report" element={<Report userId={userId} token={token}/>}></Route>
         {/* <Route path="/hire" element={<Hire />}></Route> */}
       </Routes>
+        </body>
       <Footer />
     </Router>
   )

@@ -21,6 +21,7 @@ body {
 body {
   /* background-image: linear-gradient(#2E4551,
             #141515); */
+    min-height: 100vh;
 
 }
 
