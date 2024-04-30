@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 function UserReviewee(props) {
-    console.log(props)
 
 
     const [averageRating, setAverageRating] = useState()
@@ -30,8 +29,10 @@ function UserReviewee(props) {
             return '★★★'
         } else if (rating <= 2.5 && rating >= 1.6) {
             return '★★'
-        } else {
+        } else if (rating < 0 && rating >= 1.6) {
             return '★'
+        } else {
+            return "No reviews yet"
         }
     };
 
@@ -41,7 +42,7 @@ function UserReviewee(props) {
         <section className="userInfoSection" >
             <div className="columns-1 reviews">
                 <h2>Reviews About Me</h2>
-                <h2>Average Rating: {generateStars(averageRating)}</h2>
+                <h3>Average Rating: {generateStars(averageRating)}</h3>
                 {props.reviews?.map((rev, i) =>
                     <div key={i} className="reviewContainer">
                         <p>{rev.review}</p>

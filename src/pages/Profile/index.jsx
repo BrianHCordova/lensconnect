@@ -61,26 +61,31 @@ function Profile(props) {
                 />
             </div>
             <div className="col-span-full">
-                <UserImages userId={props.userId}/>
+                <UserImages userId={props.userId} />
             </div>
             <div className="col-span-full">
                 <UserReviwee reviews={reviewArr} />
             </div>
             <div className="col-span-full">
-                <UserReviwer reviews={userObj.Reviews}/>
+                <UserReviwer reviews={userObj.Reviews} />
             </div>
-            <div className="col-span-full userInfoSection grid grid-cols-1 grid-rows-1 gap-6">
-                    <h3>Blah Blah Blah about transaction report</h3>
+            <div className="col-span-full transacReport userInfoSection">
+                <h3>Transaction Report</h3>
+                <p>Transaction Reports are a confidential report a photographer can make after performing any kind of work for another person, organized though LensConnect. Theese reports are used by our customer service and admit team to review promised transactions and photography gigs that are organized on LensConnect.</p>
+                <div className="addreportBtn-Container">
                     <button onClick={handleReport}>Create a transaction Report</button>
+                </div>
             </div>
             {/* conditionally renders chat button if user is logged in */}
-            {props.userId && (
-                
-            <div className="chatBtn col-span-2">
-                <button onClick={handleChatOpen}>Start Chat!</button>
-            </div>
-    )}
-        </div>
+            {
+                props.userId && (
+
+                    <div className="chatBtn col-span-2">
+                        <button onClick={handleChatOpen}>Start Chat!</button>
+                    </div>
+                )
+            }
+        </div >
 
     );
 }
