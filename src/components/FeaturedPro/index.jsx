@@ -1,18 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import './style.css'
 
-const featured = [
-  {
-    userimage: 'https://source.unsplash.com/random',
-    username: 'Eric Lee',
-    rating: '5',
-    about: "As a full stack developer, I thrive in the dynamic world of technology, where coding and problem-solving are my daily bread and butter. Yet, beyond the lines of code and the intricacies of software development lies a unique passion that sets me apart: my love for capturing the beauty of feet through photography. It may seem like an unexpected juxtaposition, but for me, it's a harmonious blend of my technical expertise and creative expression. Through my lens, I aim to showcase the elegance and diversity of feet, each pair telling a story of its own.",
-    servelocation: 'San Francisco, CA',
-    specialties: "Full Stack Development, Photography",
-  }
-];
 
-export default function FeaturedPro() {
-  const user = featured[0];
+export default function FeaturedPro(props) {
   const carouselRef = useRef(null);
 
   const scrollLeft = () => {
@@ -22,6 +12,7 @@ export default function FeaturedPro() {
         behavior: 'smooth',
       });
     }
+    console.log(props)
   };
 
   const scrollRight = () => {
@@ -34,29 +25,29 @@ export default function FeaturedPro() {
   };
 
   return (
-    <div className='featured-component lg:w-3/4 mx-auto'>
+    <div className='featured-component'>
       {/* Existing card component */}
       <div className="card lg:card-side bg-base-100 shadow-xl rounded-b-none">
-        <figure className="h-full w-full">
-          <img className="h-auto" src={user.userimage} alt="Album"/>
+        <figure className="profile-pic-container">
+          <img className="h-auto" src="https://source.unsplash.com/random" alt="Album"/>
         </figure>
         <div className="card-body">
-          <h2 className="card-title text-2xl font-bold">{user.username}</h2>
+          <h2 className="card-title text-4xl font-bold">{props.username}</h2>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4'>Rating:</p>
-            <p className="w-3/4">{user.rating}</p>
+            <p className="w-3/4">4</p>
           </div>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4'>About Me:</p>
-            <p className="w-3/4">{user.about}</p>
+            <p className="w-3/4">{props.bio}</p>
           </div>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4'>Service Location:</p>
-            <p className="w-3/4">{user.servelocation}</p>
+            <p className="w-3/4">{props.serveloc.map((loc)=> {return loc.location})}</p>
           </div>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4'>Specialties:</p>
-            <p className="w-3/4">{user.specialties}</p>
+            <p className="w-3/4">{props.spec.map((sp)=> {return sp.Specialty})}</p>
           </div>
           <div className="card-actions justify-end">
             <button className="btn text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out">To My Page</button>
