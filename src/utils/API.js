@@ -133,7 +133,7 @@ const API = {
         }).then(res => res.json())
     },
     getImages: () => {
-        return fetch(`http://localhost:3000/api/image`, {
+        return fetch(`${URL_PREFIX}/api/image`, {
             method: "GET"
         }).then(res => res.json())
     },
@@ -141,6 +141,12 @@ const API = {
         return fetch(`${URL_PREFIX}/api/chat`, {
             method: "GET"
         }).then(res => res.json())
+    },
+    getPhotographers: () => {
+        return fetch(`${URL_PREFIX}/api/searchusers/`).then(res=>res.json())
+    },
+    getFeatPro: () => {
+        return fetch(`${URL_PREFIX}/api/searchusers/featured`).then(res=>res.json()) 
     }
 }
 
