@@ -1,66 +1,95 @@
-import './style.css'
-import React, { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import Welcome from '../../components/Welcome';
+import { useLenis } from '@studio-freight/react-lenis';
+import PhotographerCard from '../../components/PhotographerCard';
+import API from '../../utils/API';
+import './style.css'
 
-export default function App() {
+const ParallaxZoomComponent = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const [photographers, setPhotographers] = useState([])
+  const [featPro, setFeatPro] = useState([])
 
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  });
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!photographers) {
+      return
+    }
+    API.getPhotographers().then((data) => {
+      setPhotographers(data)
+    })
+
+    API.getFeatPro().then((data) => {
+      setFeatPro(data)
+      console.log(featPro)
+    })
+
+  }, [])
+
+  // Initialize lenis scroll effect
+  useLenis();
+
   return (
-   <>
-    <div
-    ref={ref}
-    className="w-full h-screen overflow-hidden relative grid place-items-center">
-    <motion.h1 
-    style={{ y: textY }}
-    className="font-bold text-black text-7xl md:text-9xl relative z-40">
-      LOGIN
-    </motion.h1>
+    <div className="parallax-container">
+      {/* Image container with parallax zoom effect */}
+      <motion.div
+        className="parallax-image"
+        style={{
+          scale: 1 + scrollY * 0.0005, // Adjust the scale factor as needed
+          opacity: 1 - scrollY * 0.001, // Adjust the opacity factor as needed
+        }}
+      >
+        <img src="/main.jpg" alt="Main" style={{ width: '100vw' }} />
+      </motion.div>
+      <div className="other-content">
+        <Welcome />
+        <div className=' w-3/4 mx-auto'>
+          <h1 className='text-5xl feat-pro-text'>Featured Photographer</h1>
+        <div className='featured-photographer'>
 
-    <motion.div 
-    className='absolute inset-0 z-0'
-    style={{
-      backgroundImage: 'url("/layermain.jpg")',
-      backgroundPosition: 'bottom',
-      backgroundSize: 'cover',
-      y: backgroundY,
-    }}
-    />
-     <div 
-    className='absolute inset-0 z-10 '
-    style={{
-      backgroundImage: 'url("/layer3F.png")',
-      backgroundPosition: 'bottom',
-      backgroundSize: 'cover',
-      y: backgroundY,
-    }}
-    /> 
-      <div 
-    className='absolute inset-0 z-20'
-    style={{
-      backgroundImage: 'url("/layer2F.png")',
-      backgroundPosition: 'bottom',
-      backgroundSize: 'cover',
-      y: backgroundY,
-    }}>
-    </div> 
-      <div 
-    className='absolute inset-0 z-30'
-    style={{
-      backgroundImage: 'url("/layer1F.png")',
-      backgroundPosition: 'bottom',
-      backgroundSize: 'cover',
-      y: backgroundY,
-    }}>
-    </div> 
-  </div>
-    <Welcome />
-  </> 
-  )
-}
+          <PhotographerCard
+            username={featPro[0]?.username}
+            bio={featPro[0]?.biography}
+            userId={featPro[0]?.id}
+            serveloc={featPro[0]?.ServeLocations}
+            spec={featPro[0]?.Specialties}
+            />
+            </div>
+        </div>
+
+        <div className='container mx-auto'>
+
+          {photographers?.map((photographer) => {
+            return <>
+
+              <PhotographerCard
+
+
+                username={photographer.username}
+                bio={photographer.biography}
+                userId={photographer.id}
+                serveloc={photographer.ServeLocations}
+                spec={photographer.Specialties}
+              />
+            </>
+
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ParallaxZoomComponent;

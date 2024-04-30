@@ -11,6 +11,7 @@ import Logout from "./pages/Logout"
 import Footer from "./components/Footer"
 import Chat from "./pages/Chat"
 import Review from "./pages/Review"
+import ReviewBySearch from "./pages/ReviewBySearch"
 import Report from "./pages/Report"
 
 // Router-dom for page routes
@@ -74,6 +75,7 @@ export default function App() {
   return (
     <Router>
       <Nav handleSubmit={logout} userId={userId} />
+        <body>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/profile" element={<Profile userId={userId} token={token} />}></Route>
@@ -84,10 +86,12 @@ export default function App() {
         <Route path="/signup" element={<Signup type="Signup" handleSubmit={handleSignup} userId={userId}/>}/>
         <Route path="/logout" element={<Logout handleSubmit={logout} userId={userId}/>}/>
         <Route path="/chat" element={<Chat userId={userId} token={token}/>}></Route>
+        <Route path="/review/" element={<ReviewBySearch userId={userId} token={token}/>}></Route>
         <Route path="/review/:id" element={<Review userId={userId} token={token}/>}></Route>
         <Route path="/report" element={<Report userId={userId} token={token}/>}></Route>
         {/* <Route path="/hire" element={<Hire />}></Route> */}
       </Routes>
+        </body>
       <Footer />
     </Router>
   )

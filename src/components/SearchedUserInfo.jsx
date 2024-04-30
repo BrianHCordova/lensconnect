@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+
 // Imports api fetch functions
 // import API from "../../utils/API"
 function SearchedUserInfo(props) {
     console.log(props.username)
     console.log(props.ServeLocations)
     return (
-        <section className="grid grid-cols-2 grid-rows-1 gap-6">
+        <div className="container mx-auto">
+
+        <div className="grid grid-cols-2 grid-rows-1 gap-6">
             <div className="profilePicture col-span-1 ">
                 <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="250" width="250" alt="" />
             </div>
@@ -35,7 +38,8 @@ function SearchedUserInfo(props) {
                     : <></>
                 }
             </div>
-        </section>
+        </div>
+        </div>
 
     );
 }
