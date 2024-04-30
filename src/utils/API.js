@@ -86,7 +86,7 @@ const API = {
         }).then(res => res.json())
     },
 
-    editUserBio:userObj => {
+    editUserBio: userObj => {
         return fetch(`${URL_PREFIX}/api/prop/editprofile/${userObj.userId}`, {
             method: "PUT",
             body: JSON.stringify(userObj),
@@ -96,27 +96,51 @@ const API = {
         }).then(res => res.json())
     },
 
-    postImage: (formData, id)=> {
+    postUserReview: reviewObj => {
+        return fetch(`${URL_PREFIX}/api/reviews`, {
+            method: "POST",
+            body: JSON.stringify(reviewObj),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+    },
+
+    postUserReport: reportObj => {
+        return fetch(`${URL_PREFIX}/api/report`, {
+            method: "POST",
+            body: JSON.stringify(reportObj),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+    },
+
+    getUserByUsername: username => {
+        return fetch(`${URL_PREFIX}/api/users/byusername/${username}`).then(res => res.json())
+    },
+
+    postImage: (formData, id) => {
         return fetch(`${URL_PREFIX}/api/image/singlefile/${id}`, {
             method: "POST",
-            body: formData           
-        }).then(res=>res.json())
+            body: formData
+        }).then(res => res.json())
     },
-    postMutlipleImages: (formData, id)=> {
+    postMutlipleImages: (formData, id) => {
         return fetch(`${URL_PREFIX}/api/image/multipleFiles/${id}`, {
             method: "POST",
-            body: formData           
-        }).then(res=>res.json())
+            body: formData
+        }).then(res => res.json())
     },
     getImages: () => {
         return fetch(`http://localhost:3000/api/image`, {
             method: "GET"
-        }).then(res=>res.json())
+        }).then(res => res.json())
     },
     getChat: () => {
         return fetch(`${URL_PREFIX}/api/chat`, {
             method: "GET"
-        }).then(res=>res.json())
+        }).then(res => res.json())
     }
 }
 
