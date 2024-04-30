@@ -21,7 +21,7 @@ function UserReviewer(props) {
                     </div>
                 )}
             </div>
-            <div >
+            <div className=" btnWrap">
                     <button className="writeBtn" onClick={handleChatOpen}>Write A Review</button>
                 </div>
         </section>
