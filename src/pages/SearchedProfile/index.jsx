@@ -12,8 +12,7 @@ import UserReviwer from "../../components/UserReviewer"
 // Imports api fetch functions
 import API from "../../utils/API"
 import Chat from "../Chat";
-import ChatButton from "../../components/ChatComponents/ChatButton";
-import io from 'socket.io-client'
+
 
 
 function Profile(props) {
@@ -66,7 +65,7 @@ function Profile(props) {
             <div className="col-span-full">
                 <UserReviwer reviews={userObj.Reviews} />
             </div>
-                <ChatButton socket={socket} username={userObj.username}/>
+                <CreateRoom />
         </main>
 
     );

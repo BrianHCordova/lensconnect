@@ -73,13 +73,6 @@ function Profile(props) {
                     <h3>Blah Blah Blah about transaction report</h3>
                     <button onClick={handleReport}>Create a transaction Report</button>
             </div>
-            {/* conditionally renders chat button if user is logged in */}
-            {props.userId && (
-                
-            <div className="chatBtn col-span-2">
-                <button onClick={handleChatOpen}>Start Chat!</button>
-            </div>
-    )}
         </div>
 
     );

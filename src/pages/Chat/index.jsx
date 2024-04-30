@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+//function to create a new socket connection
 import io from 'socket.io-client'
 import Messages from '../../components/ChatComponents/Messages';
 import MessageInput from '../../components/ChatComponents/MessageInput';
 import MessageHistory from '../../components/ChatComponents/MessageHistory';
 import Sidebar from '../../components/ChatComponents/Sidebar';
 import API from '../../utils/API';
+// import CreateRoom from '../../components/ChatComponents/CreateRoom';
 
 export default function Chat(props) {
     const URL_PREFIX = "http://localhost:3000"
@@ -36,6 +38,10 @@ export default function Chat(props) {
       // runs setUser function when the user data is retrieved
     }, [props.userId]);
 
+    // socket.on('connect', () => {
+    //   console.log(`${socket.id} connected`)
+    // })
+
   return (
     <div>
       <header>
@@ -50,8 +56,9 @@ export default function Chat(props) {
             <div>
                 <Sidebar />
                 <MessageHistory />
-                <Messages socket={socket}/>
+                <Messages socket={socket} username={user}/>
                 <MessageInput socket={socket} username={user} />
+                {/* <CreateRoom socket={socket} /> */}
             </div>
             ) : (
             <div>
