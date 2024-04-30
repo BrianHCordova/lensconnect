@@ -35,9 +35,18 @@ function Profile(props) {
         });
     }, [props.userId]);
 
+    const handleReport = () => {
+        navigate("/report")
+    }
+    // Chat hook
+    const navigate = useNavigate();
+    const handleChatOpen = () => {
+        navigate("/chat");
+    }
+
     // HTML
     return (
-        <main className="grid">
+        <div className="grid profile-container">
             <div className="col-span-full">
                 {/* pass the userObj into UserInfo as props when tokens work */}
                 <UserInfo
@@ -60,7 +69,19 @@ function Profile(props) {
             <div className="col-span-full">
                 <UserReviwer reviews={userObj.Reviews}/>
             </div>
-        </main>
+            <div className="col-span-full userInfoSection grid grid-cols-1 grid-rows-1 gap-6">
+                    <h3>Blah Blah Blah about transaction report</h3>
+                    <button onClick={handleReport}>Create a transaction Report</button>
+            </div>
+            {/* conditionally renders chat button if user is logged in */}
+            {props.userId && (
+                
+            <div className="chatBtn col-span-2">
+                <button onClick={handleChatOpen}>Start Chat!</button>
+            </div>
+    )}
+        </div>
+
     );
 }
 

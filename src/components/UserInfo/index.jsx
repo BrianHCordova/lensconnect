@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import API from "../../utils/API"
 
 function UserInfo(props) {
-    console.log(props)
     // Sets an editing usestate for when the user is editing their profile
     const [editing, setEditing] = useState(false)
     const [newUserObj, setNewUserObj] = useState({})
@@ -12,15 +11,15 @@ function UserInfo(props) {
     const [isPhotographer, setIsPhotographer] = useState(props.isPhotographer)
     const [videography, setVideography] = useState(props.videography)
 
+    // Function to refresh the user data to load fresh after each chip is deleted
     const refreshUserData = () => {
         API.getOneUser(props.userId).then((userData) => {
             setNewUserObj(userData);
-            // setIsPhotographer(newUserObj.isPhotographer)
-            // useState(newUserObj.videography)
             console.log("Refreshed Data")
         });
     }
 
+    // UseEffect to run the data refresh on page load
     useEffect(() => {
         if (!props.userId) {
             return
@@ -30,19 +29,17 @@ function UserInfo(props) {
     }, [props.userId]);
 
 
-
+    // Hook to change the users boolian properties on checkbox click
     const toggleIsPhotographer = () => {
         setIsPhotographer(!isPhotographer)
     }
-
     const toggleVideography = () => {
-        console.log(videography)
         setVideography(!videography)
-        console.log(videography)
-        console.log('clicked')
     }
 
+    // Hook to change the editing state that will render the edit version of the page
     const toggelEditing = () => {
+        // I set photographer here for cleaner page data load
         setIsPhotographer(newUserObj.isPhotographer)
         setEditing(!editing);
         refreshUserData()
@@ -118,7 +115,7 @@ function UserInfo(props) {
             website: newWebsite,
             videography: videography
         }
-        console.log(passData)
+        // Runs the fetch request from the API utils page
         API.editUserBio(passData).then((newData) => {
         });
         refreshUserData()
@@ -129,6 +126,7 @@ function UserInfo(props) {
         setNewWebsite(event.target.value)
     }
 
+    // Hooks to adjust the add chip size dynamically with what is being inputed
     const locInputStyle = {
         width: `${newLoc.length * 5 + 50}px`
     };
@@ -136,9 +134,11 @@ function UserInfo(props) {
         width: `${newSpec.length * 5 + 50}px`
     };
 
+    // HTML
     if (!editing) { // Will render the basic photographers userInfo
         return (
-            <section className="grid grid-cols-2 grid-rows-1 gap-6">
+            <>
+            <section className=" userInfoSection grid grid-cols-2 grid-rows-1 gap-6">
                 <div className="profilePicture col-span-1 ">
                     <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="250" width="250" alt="" />
                 </div>
@@ -172,11 +172,11 @@ function UserInfo(props) {
                     <button onClick={toggelEditing} >Edit</button>
                 </div>
             </section>
-
+            </>
         );
     } else { // Will render the editable photographer userInfo
         return (
-            <section className=" container mx-auto grid grid-cols-2 grid-rows-3 gap-4">
+            <section className="userInfoSection grid grid-cols-2 grid-rows-3 gap-4">
                 <div className="profilePicture col-span-1 row-span-1 ">
                     <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="250" width="250" alt="" />
                 </div>
