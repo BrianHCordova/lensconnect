@@ -8,6 +8,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <main>
     <App />
+    {/* <FeaturedPro  /> */}
     </main>
   </>
 )

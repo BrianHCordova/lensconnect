@@ -1,66 +1,43 @@
-import './style.css'
-import React, { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import Welcome from '../../components/Welcome';
+import { useLenis } from '@studio-freight/react-lenis';
 
-export default function App() {
+const ParallaxZoomComponent = () => {
+  const [scrollY, setScrollY] = useState(0);
 
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  });
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Initialize lenis scroll effect
+  useLenis();
+
   return (
-   <>
-    <div
-    ref={ref}
-    className="w-full h-screen overflow-hidden relative grid place-items-center">
-    <motion.h1 
-    style={{ y: textY }}
-    className="font-bold text-black text-7xl md:text-9xl relative z-40">
-      LOGIN
-    </motion.h1>
+    <div className="parallax-container">
+      {/* Image container with parallax zoom effect */}
+      <motion.div
+        className="parallax-image"
+        style={{
+          scale: 1 + scrollY * 0.0005, // Adjust the scale factor as needed
+          opacity: 1 - scrollY * 0.001, // Adjust the opacity factor as needed
+        }}
+      >
+        <img src="/main.jpg" alt="Main" style={{ width: '100vw' }} />
+      </motion.div>
+      <div className="other-content">
+      <Welcome />
+      </div>
+    </div>
+  );
+};
 
-    <motion.div 
-    className='absolute inset-0 z-0'
-    style={{
-      backgroundImage: 'url("/layermain.jpg")',
-      backgroundPosition: 'bottom',
-      backgroundSize: 'cover',
-      y: backgroundY,
-    }}
-    />
-     <div 
-    className='absolute inset-0 z-10 '
-    style={{
-      backgroundImage: 'url("/layer3F.png")',
-      backgroundPosition: 'bottom',
-      backgroundSize: 'cover',
-      y: backgroundY,
-    }}
-    /> 
-      <div 
-    className='absolute inset-0 z-20'
-    style={{
-      backgroundImage: 'url("/layer2F.png")',
-      backgroundPosition: 'bottom',
-      backgroundSize: 'cover',
-      y: backgroundY,
-    }}>
-    </div> 
-      <div 
-    className='absolute inset-0 z-30'
-    style={{
-      backgroundImage: 'url("/layer1F.png")',
-      backgroundPosition: 'bottom',
-      backgroundSize: 'cover',
-      y: backgroundY,
-    }}>
-    </div> 
-  </div>
-    <Welcome />
-  </> 
-  )
-}
+export default ParallaxZoomComponent;
