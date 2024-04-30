@@ -1,6 +1,6 @@
 .image-container {
     width: 40rem ;
-    border: 1px solid white;
+    border: 1px solid rgb(201, 201, 201);
     border-radius: 15px;
     margin-top: 1.5rem;
     padding: 1rem;
@@ -32,7 +32,7 @@
     margin-top: 1rem;
     button {
         text-align: center;
-        border: 2px solid white;
+        border: 2px solid rgb(201, 201, 201);
         border-radius: 15px;
         width: 7rem;
         height: 2rem
@@ -42,7 +42,7 @@
 .dropzone {
     width: 38rem;
     min-height: 10rem;
-    border: 2px dashed white;
+    border: 2px dashed rgb(201, 201, 201);
     padding: 2rem;
     margin-top: 1rem;
     display: flex;

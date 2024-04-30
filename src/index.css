@@ -17,3 +17,8 @@ body {
 /* footer {
   margin-top: auto;
 } */
+
+main {
+  background-image: linear-gradient(#2E4551,
+            #141515);
+}

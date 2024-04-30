@@ -43,7 +43,7 @@ function Profile(props) {
 
     // HTML
     return (
-        <main className="grid">
+        <div className="grid profile-container">
             <div className="col-span-full">
                 {/* pass the userObj into UserInfo as props when tokens work */}
                 <UserInfo
@@ -72,7 +72,7 @@ function Profile(props) {
                 <button onClick={handleChatOpen}>Start Chat!</button>
             </div>
     )}
-        </main>
+        </div>
 
     );
 }
