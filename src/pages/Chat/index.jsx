@@ -7,6 +7,7 @@ import Sidebar from '../../components/ChatComponents/Sidebar';
 import API from '../../utils/API';
 
 export default function Chat(props) {
+    const URL_PREFIX = "http://localhost:3000"
 
     const [socket, setSocket] = useState(null);
     const [user, setUser] = useState([]);
@@ -14,7 +15,7 @@ export default function Chat(props) {
     //hook to create a new socket connection
     useEffect(() => {
         // Creates a new socket connection
-        const newSocket = io('http://localhost:3000');
+        const newSocket = io(URL_PREFIX);
         setSocket(newSocket);
         return () => newSocket.close();
     }
@@ -34,7 +35,7 @@ export default function Chat(props) {
       });
       // runs setUser function when the user data is retrieved
     }, [props.userId]);
-    
+
   return (
     <div>
       <header>

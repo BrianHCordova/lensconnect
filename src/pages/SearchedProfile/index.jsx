@@ -11,6 +11,10 @@ import SearchedUserInfo from "../../components/SearchedUserInfo"
 import UserReviwer from "../../components/UserReviewer"
 // Imports api fetch functions
 import API from "../../utils/API"
+import Chat from "../Chat";
+import ChatButton from "../../components/ChatComponents/ChatButton";
+import io from 'socket.io-client'
+
 
 function Profile(props) {
 
@@ -19,6 +23,15 @@ function Profile(props) {
     const [userObj, setUserObj] = useState({});
     const [reviewArr, setReviewArr] = useState([]);
     const {id} = useParams()
+    const URL_PREFIX = "http://localhost:3000"
+    const [socket, setSocket] = useState(null);
+
+    useEffect(() => {
+        const newSocket = io(URL_PREFIX);
+        setSocket(newSocket);
+        return () => newSocket.close();
+    }
+    , [setSocket]);
 
     // API useEffect to gather users info from the API on page load
     useEffect(() => {
@@ -31,7 +44,7 @@ function Profile(props) {
         API.getReviewsByReviewee(props.userId).then((revData) => {
             setReviewArr(revData)
         });
-    }, [props.userId]);
+    }, [props.userId]);    
 
     
     // HTML
@@ -53,6 +66,7 @@ function Profile(props) {
             <div className="col-span-full">
                 <UserReviwer reviews={userObj.Reviews} />
             </div>
+                <ChatButton socket={socket} username={userObj.username}/>
         </main>
 
     );
