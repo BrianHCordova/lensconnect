@@ -42,7 +42,7 @@ export default function PhotographerCard(props) {
   return (
     <div className='featured-component'>
       {/* Existing card component */}
-      <div className="card lg:card-side bg-base-100 shadow-xl rounded-b-none">
+      <div className="card lg:card-side bg-zinc-900 shadow-xl rounded-b-none">
         <figure className="profile-pic-container">
           <img className="h-auto" src="https://source.unsplash.com/random" alt="Album" />
         </figure>
