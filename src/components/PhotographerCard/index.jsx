@@ -58,11 +58,11 @@ export default function PhotographerCard(props) {
           </div>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>Service Location:</p>
-            <p className="w-3/4 card-content">{props.serveloc?.map((loc) => { return loc.location })}</p>
+            <p className="w-3/4 card-content">{props.serveloc?.map((loc) => { return loc.location + ', ' })}</p>
           </div>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>Specialties:</p>
-            <p className="w-3/4 card-content">{props.spec?.map((sp) => { return sp.Specialty })}</p>
+            <p className="w-3/4 card-content">{props.spec?.map((sp) => { return sp.specialty + ', '})}</p>
           </div>
           <div className="card-actions justify-end">
             <Link to={profileUrl}>
@@ -83,7 +83,6 @@ export default function PhotographerCard(props) {
                 <div className="carousel-item">
                   <img src={img.imageUrl} alt={img.image} />
                 </div>
-                {/* <Card image={img.imageUrl} title={img.image} /> */}
               </>
             }
 
@@ -93,54 +92,7 @@ export default function PhotographerCard(props) {
 
 
           })}
-
-          {/* <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" alt="Burger" />
-          </div>
-
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="Burger" />
-          </div> */}
-          {/* Add more carousel items here */}
+          
         </div>
         {/* Navigation buttons */}
         <div className="carousel-navigation m-0-5">
