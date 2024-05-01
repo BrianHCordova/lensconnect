@@ -16,7 +16,7 @@ const Nav = (props) => {
   };
 
   return (
-    <Disclosure as="nav" className="bg-zinc-800 shadow-md shadow-white z-10 ">
+    <Disclosure as="nav" className="bg-zinc-800 shadow-md shadow-[rgb(0,0,0,0.5)] z-10">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2 "> {/* Adjusted padding here */}
