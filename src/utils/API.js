@@ -152,6 +152,11 @@ const API = {
             method: "GET"
         }).then(res => res.json())
     },
+    getRoomById: roomId => {
+        return fetch(`${URL_PREFIX}/api/chatroom/${roomId}`, {
+            method: "GET"
+        }).then(res => res.json())
+    },
     getPhotographers: () => {
         return fetch(`${URL_PREFIX}/api/searchusers/`).then(res=>res.json())
     },
