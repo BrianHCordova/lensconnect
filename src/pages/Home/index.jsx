@@ -6,6 +6,7 @@ import PhotographerCard from '../../components/PhotographerCard';
 import API from '../../utils/API';
 // import CreateAccountButton from '../../components/CreateAccountButton';
 import './style.css'
+import Lamp from '../../components/Lamp';
 
 const ParallaxZoomComponent = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -59,6 +60,7 @@ const ParallaxZoomComponent = () => {
       <div className="other-content">
         <Welcome />
         <div className=' w-3/4 mx-auto'>
+          <Lamp />
           <h1 className='text-5xl feat-pro-text'>Featured Photographer</h1>
           <div className='featured-photographer'>
             <PhotographerCard
