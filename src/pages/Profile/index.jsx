@@ -41,7 +41,7 @@ function Profile(props) {
 
     // HTML
     return (
-        <div className="grid profile-container">
+        <div className="container mx-auto w-1/3 grid profile-container ">
             <div className="col-span-full">
                 {/* pass the userObj into UserInfo as props when tokens work */}
                 <UserInfo
@@ -55,25 +55,26 @@ function Profile(props) {
                     isPhotographer={userObj.isPhotographer}
                 />
             </div>
-            <div className="col-span-full">
+            <div className=" col-span-full">
                 <UserImages userId={props.userId} />
             </div>
-            <div className="col-span-full">
+            <div className=" col-span-full">
                 <UserReviwee reviews={reviewArr} />
             </div>
             <div className="col-span-full">
                 <UserReviwer reviews={userObj.Reviews} />
             </div>
-            <div className="col-span-full transacReport userInfoSection">
+            <div className="col-span-full container mx-auto transacReport bg-zinc-900 userInfoSection">
                 <h3>Transaction Report</h3>
                 <p>Transaction Reports are a confidential report a photographer can make after performing any kind of work for another person, organized though LensConnect. Theese reports are used by our customer service and admit team to review promised transactions and photography gigs that are organized on LensConnect.</p>
-                <div className="addreportBtn-Container">
-                    <button onClick={handleReport}>Create a transaction Report</button>
+                <div className=" reportBtnWrap container">
+                    <button className="bg-zinc-700" onClick={handleReport}>Create a Report</button>
                 </div>
             </div>
-
+            {/* <div className="chatBtn col-span-2">
+                <button onClick={handleChatOpen}>Start Chat!</button>
+            </div> */}
         </div >
-
     );
 }
 

@@ -11,7 +11,7 @@ function UserReviewer(props) {
     // HTML
     return (
 
-        <section className="userReviewSection" >
+        <section className="userReviewSection bg-zinc-900" >
             <div className=" reviews ">
                 <h3>Reviews I've Written</h3>
                 {props.reviews?.map((rev, i, j) =>
@@ -21,8 +21,8 @@ function UserReviewer(props) {
                     </div>
                 )}
             </div>
-            <div className=" btnWrap">
-                    <button className="writeBtn" onClick={handleChatOpen}>Write A Review</button>
+            <div className="container writeBtnWrap">
+                    <button className="writeBtn bg-zinc-700" onClick={handleChatOpen}>Write A Review</button>
                 </div>
         </section>
 

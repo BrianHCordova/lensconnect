@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 function UserReviewee(props) {
+    console.log(props)
 
 
     const [averageRating, setAverageRating] = useState()
@@ -39,7 +40,7 @@ function UserReviewee(props) {
     // HTML
     return (
 
-        <section className="userInfoSection" >
+        <section className="userInfoSection bg-zinc-900" >
             <div className="columns-1 reviews">
                 <h2>Reviews About Me</h2>
                 <h3>Average Rating: {generateStars(averageRating)}</h3>

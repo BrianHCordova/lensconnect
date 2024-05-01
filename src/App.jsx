@@ -74,6 +74,7 @@ export default function App() {
   const searchedUser = 1
 
   return (
+    <>
     <Router>
       <Nav handleSubmit={logout} userId={userId} />
       <Routes>
@@ -92,7 +93,8 @@ export default function App() {
         <Route path="/report" element={<Report userId={userId} token={token}/>}></Route>
         {/* <Route path="/hire" element={<Hire />}></Route> */}
       </Routes>
-      <Footer />
     </Router>
+     <Footer />
+     </>
   )
 }
