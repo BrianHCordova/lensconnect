@@ -66,7 +66,7 @@ function UserImages(props) {
                             console.log(img)
                             console.log(props.userId)
                             if (img.UserId === props.userId) {
-                                return <Cards image={img.imageUrl} title={img.image} />
+                                return <Cards image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
                             }
 
                             else {

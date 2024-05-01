@@ -80,7 +80,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===1) {
                             return (
-                                <Cards image={img.imageUrl} title={img.image} userId={img.UserId} />
+                                <Cards key={img.id} imgId={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
                             )
                         } else {}
                     })}
@@ -90,7 +90,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===2) {
                             return (
-                                <Cards image={img.imageUrl} title={img.image} userId={img.UserId} />
+                                <Cards key={img.id} imgId={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
                             )
                         } else {}
                     })}
@@ -100,7 +100,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===3) {
                             return (
-                                <Cards image={img.imageUrl} title={img.image} userId={img.UserId}/>
+                                <Cards key={img.id} imgId={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
                             )
                         } else {}
                     })}
@@ -110,7 +110,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===4) {
                             return (
-                                <Cards image={img.imageUrl} title={img.image} userId={img.UserId}/>
+                                <Cards key={img.id} imgId={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
                             )
                         } else {}
                     })}
