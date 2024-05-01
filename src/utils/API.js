@@ -142,6 +142,16 @@ const API = {
             method: "GET"
         }).then(res => res.json())
     },
+    getChatRooms: userId => {
+        return fetch(`${URL_PREFIX}/api/chatroom/user_receiver/${userId}`, {
+            method: "GET"
+        }).then(res => res.json())
+    },
+    getMyRooms: userId => {
+        return fetch(`${URL_PREFIX}/api/chatroom/user_sender/${userId}`, {
+            method: "GET"
+        }).then(res => res.json())
+    },
     getPhotographers: () => {
         return fetch(`${URL_PREFIX}/api/searchusers/`).then(res=>res.json())
     },

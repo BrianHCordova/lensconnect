@@ -38,11 +38,6 @@ function Profile(props) {
     const handleReport = () => {
         navigate("/report")
     }
-    // Chat hook
-    const navigate = useNavigate();
-    const handleChatOpen = () => {
-        navigate("/chat");
-    }
 
     // HTML
     return (
@@ -76,17 +71,10 @@ function Profile(props) {
                     <button className="bg-zinc-700" onClick={handleReport}>Create a Report</button>
                 </div>
             </div>
-            {/* conditionally renders chat button if user is logged in */}
-            {
-                props.userId && (
-
-                    <div className="chatBtn col-span-2">
-                        <button  onClick={handleChatOpen}>Start Chat!</button>
-                    </div>
-                )
-            }
+            {/* <div className="chatBtn col-span-2">
+                <button onClick={handleChatOpen}>Start Chat!</button>
+            </div> */}
         </div >
-
     );
 }
 
