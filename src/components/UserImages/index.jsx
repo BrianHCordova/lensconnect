@@ -1,4 +1,4 @@
-import Card from "../../pages/Browse/card";
+import Cards from "../../pages/Browse/card";
 import API from "../../utils/API";
 import { useEffect, useState, useRef } from 'react'
 import './style.css'
@@ -66,7 +66,7 @@ function UserImages(props) {
                             console.log(img)
                             console.log(props.userId)
                             if (img.UserId === props.userId) {
-                                return <Card image={img.imageUrl} title={img.image} />
+                                return <Cards image={img.imageUrl} title={img.image} />
                             }
 
                             else {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Card from './card';
+import Cards from './card';
 import API from '../../utils/API';
 import "./style.css"
 import { useParams } from 'react-router-dom'
@@ -80,7 +80,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===1) {
                             return (
-                                <Card image={img.imageUrl} title={img.image} />
+                                <Cards image={img.imageUrl} title={img.image} userId={img.UserId} />
                             )
                         } else {}
                     })}
@@ -90,7 +90,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===2) {
                             return (
-                                <Card image={img.imageUrl} title={img.image} />
+                                <Cards image={img.imageUrl} title={img.image} userId={img.UserId} />
                             )
                         } else {}
                     })}
@@ -100,7 +100,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===3) {
                             return (
-                                <Card image={img.imageUrl} title={img.image} />
+                                <Cards image={img.imageUrl} title={img.image} userId={img.UserId}/>
                             )
                         } else {}
                     })}
@@ -110,7 +110,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===4) {
                             return (
-                                <Card image={img.imageUrl} title={img.image} />
+                                <Cards image={img.imageUrl} title={img.image} userId={img.UserId}/>
                             )
                         } else {}
                     })}
