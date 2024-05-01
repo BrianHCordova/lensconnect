@@ -42,7 +42,7 @@ const ParallaxZoomComponent = () => {
   useLenis();
 
   return (
-    <div className="parallax-container relative">
+    <div className="parallax-container relative overflow-hidden ">
       {/* Image container with parallax zoom effect */}
       <motion.div
         className="parallax-image"
@@ -53,6 +53,7 @@ const ParallaxZoomComponent = () => {
       >
         <img src="/main.png" alt="Main" style={{ width: '100vw' }} />
       </motion.div>
+   
 
         <Welcome />
       <div className="other-content">

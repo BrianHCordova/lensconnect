@@ -1,11 +1,10 @@
 .image-container {
-    width: 40rem ;
-    border: 1px solid rgb(201, 201, 201);
+    width: 100% ;
     border-radius: 15px;
     margin-top: 1.5rem;
     padding: 1rem;
     height: auto;
-    
+    box-shadow: 4px 4px 0px 1px  #29292d;
     
 }
 
@@ -32,10 +31,16 @@
     margin-top: 1rem;
     button {
         text-align: center;
-        border: 2px solid rgb(201, 201, 201);
+        
         border-radius: 15px;
         width: 7rem;
         height: 2rem
+    }
+    button:hover {
+        transition-delay: .3s;
+        -webkit-transition: all .05s ease;
+        transition: all .05s ease;
+        border: 2px solid rgb(201, 201, 201);
     }
 }
 

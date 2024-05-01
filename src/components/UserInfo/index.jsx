@@ -138,17 +138,17 @@ function UserInfo(props) {
     if (!editing) { // Will render the basic photographers userInfo
         return (
             <>
-            <section className=" userInfoSection grid grid-cols-2 grid-rows-1 gap-6">
-                <div className="profilePicture col-span-1 ">
-                    <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="250" width="250" alt="" />
+            <section className=" userInfoSection bg-zinc-900 ">
+                <div className="profilePicture col-span-1  ">
+                    <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="200" width="200" alt="" />
                 </div>
-                <div className="bio col-span-1 row-span-2">
-                    <ul>
+                <div className="bio ">
+                    <ul className="biography">
                         <li>Username:&nbsp;{newUserObj.username}</li>
                         <li>About Me:<br /><span>{newUserObj.biography}</span></li>
                     </ul>
                 </div>
-                <div className="userDetails col-span-1 ">
+                <div className="userDetails">
                     {newUserObj.isPhotographer
                         ? <ul>
                             <li className="serveLocationChip" >Serves:&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
@@ -159,34 +159,35 @@ function UserInfo(props) {
                                 <span className="chip" key={i}>{spec.specialty}&nbsp;</span>
                             ))}
                             </li>
-                            <li>Website:&nbsp;<a target="_blank" href={props.website}>{newUserObj.website}</a></li>
+                            <li className="websiteAndVideo" >Website:&nbsp;<a target="_blank" href={props.website}>{newUserObj.website}</a></li>
                             {newUserObj.videography
-                                ? <li>Videography: Yes</li>
-                                : <li>Videography: No</li>
+                                ? <li className="websiteAndVideo">Videography: Yes</li>
+                                : <li className="websiteAndVideo">Videography: No</li>
                             }
                         </ul>
                         : <></>
                     }
                 </div>
-                <div className="editBtn col-span-2">
-                    <button onClick={toggelEditing} >Edit</button>
+                <div className="editBtn container duration-200">
+                    <button className= " bg-zinc-700" onClick={toggelEditing} >Edit</button>
                 </div>
             </section>
             </>
         );
     } else { // Will render the editable photographer userInfo
         return (
-            <section className="userInfoSection grid grid-cols-2 grid-rows-3 gap-4">
-                <div className="profilePicture col-span-1 row-span-1 ">
-                    <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="250" width="250" alt="" />
+            <section className="userInfoSectionRow bg-zinc-900">
+                <div className="profilePicture  col-span-1 row-span-1 ">
+                    <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="200" width="200" alt="" />
+                    <button>Update Image</button>
                 </div>
-                <div className="bio col-span-1 row-span-2">
+                <div className="editBio mx-auto">
                     <ul>
-                        <li>Username: {newUserObj.username}</li>
-                        <li>About Me: <textarea onChange={handleBioInput} className="textarea" cols="30" rows="6">{newUserObj.biography}</textarea></li>
+                        <li>&nbsp;&nbsp;&nbsp;Username: {newUserObj.username}</li>
+                        <li>&nbsp;&nbsp;&nbsp;About Me: <textarea onChange={handleBioInput} className="textarea" cols="40" rows="6">{newUserObj.biography}</textarea></li>
                     </ul>
                 </div>
-                <div className="userDetails col-span-1 row-span-2">
+                <div className="userDetails">
                     {isPhotographer
                         ? <div><p>Are you a a Photographer looking for work?: <input onChange={toggleIsPhotographer} checked  type="checkbox" /></p></div>
                         : <div><p>Are you a a Photographer looking for work?: <input onChange={toggleIsPhotographer} type="checkbox" /></p></div>
@@ -222,8 +223,8 @@ function UserInfo(props) {
                         : <></>
                     }
                 </div>
-                <div className="editBtn col-span-2">
-                    <button onClick={() => { toggelEditing(), editUser() }}>Save</button>
+                <div className="editBtn justify-end container">
+                    <button className="bg-zinc-700" onClick={() => { toggelEditing(), editUser() }}>Save</button>
                 </div>
             </section>
         )
