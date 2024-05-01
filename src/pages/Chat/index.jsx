@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from 'react';
-//function to create a new socket connection
-import io from 'socket.io-client'
-import Messages from '../../components/ChatComponents/Messages';
-import MessageInput from '../../components/ChatComponents/MessageInput';
-import MessageHistory from '../../components/ChatComponents/MessageHistory';
 import Sidebar from '../../components/ChatComponents/Sidebar';
 import API from '../../utils/API';
-// import CreateRoom from '../../components/ChatComponents/CreateRoom';
+import io from 'socket.io-client'
 
 export default function Chat(props) {
-    const URL_PREFIX = "http://localhost:3000"
+  const URL_PREFIX = "http://localhost:3000"
 
-    const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState(null);
+
     const [user, setUser] = useState([]);
 
-    //hook to create a new socket connection
     useEffect(() => {
-        // Creates a new socket connection
-        const newSocket = io(URL_PREFIX);
-        setSocket(newSocket);
-        return () => newSocket.close();
-    }
-    // runs setSocket when the socket is created
-    , [setSocket]);
-
+      // Creates a new socket connection
+      const newSocket = io(URL_PREFIX);
+      setSocket(newSocket);
+      return () => newSocket.close();
+  }
+  // runs setSocket when the socket is created
+  , [setSocket]);
+    
     //hook to get the user data
     useEffect(() => {
       //if there is no user id, return
@@ -36,11 +31,8 @@ export default function Chat(props) {
         console.log(userData);
       });
       // runs setUser function when the user data is retrieved
-    }, [props.userId]);
-
-    // socket.on('connect', () => {
-    //   console.log(`${socket.id} connected`)
-    // })
+    }
+    , [props.userId]);
 
   return (
     <div>
@@ -52,19 +44,9 @@ export default function Chat(props) {
         )}
       </header>
       <div>
-        { socket ? (
             <div>
-                <Sidebar />
-                <MessageHistory />
-                <Messages socket={socket} username={user}/>
-                <MessageInput socket={socket} username={user} />
-                {/* <CreateRoom socket={socket} /> */}
+                <Sidebar userId={props.userId} socket={socket}/>
             </div>
-            ) : (
-            <div>
-                <p>Not connected</p>
-            </div>
-        )}
       </div>
     </div>
   );

@@ -12,25 +12,18 @@ import UserReviwer from "../../components/UserReviewer"
 // Imports api fetch functions
 import API from "../../utils/API"
 import Chat from "../Chat";
+import io from 'socket.io-client';
 
+const socket = io('http://localhost:3000');
 
 
 function Profile(props) {
-
+console.log(props.id);
 
     // Use state hook to store the users data
     const [userObj, setUserObj] = useState({});
     const [reviewArr, setReviewArr] = useState([]);
-    const {id} = useParams()
-    // const URL_PREFIX = "http://localhost:3000"
-    // const [socket, setSocket] = useState(null);
-
-    // useEffect(() => {
-    //     const newSocket = io(URL_PREFIX);
-    //     setSocket(newSocket);
-    //     return () => newSocket.close();
-    // }
-    // , [setSocket]);
+    const {id} = useParams();
 
     // API useEffect to gather users info from the API on page load
     useEffect(() => {
@@ -45,11 +38,20 @@ function Profile(props) {
         });
     }, [props.userId]);    
 
-    const joinChat = (e) => {
-        e.preventDefault();
-        window.location.href = "/chat"
-    }
 
+    const createString = () => {
+        const loggedInUserId = props.id;
+        const reqParamsId = userObj.id;
+        const result = `${loggedInUserId}${reqParamsId}`;
+        return result;
+      };
+
+    const createRoom = (e) => {
+        e.preventDefault();
+        //create a room with the string of logged in userid and searched user id
+        socket.emit('joinRoom', createString(), props.id, id);
+        window.location.href = `/chat/${createString()}`;
+      }
     
     // HTML
     return (
@@ -70,7 +72,7 @@ function Profile(props) {
             <div className="col-span-full">
                 <UserReviwer reviews={userObj.Reviews} />
             </div>
-            <button type="submit" onClick={joinChat}>Start Chat</button>
+            <button type="button" onClick={createRoom}>Start Chat</button>
         </main>
 
     );
