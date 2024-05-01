@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { cn } from "../../utils/cn";
+import PhotographerCard from "../PhotographerCard";
 
 
 export default function Lamp() {
@@ -13,9 +14,9 @@ export default function Lamp() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+        className=" "
       >
-        Build lamps <br /> the right way
+      <PhotographerCard />
       </motion.h1>
     </LampContainer>
   );
