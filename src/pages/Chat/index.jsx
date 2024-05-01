@@ -3,12 +3,20 @@ import Sidebar from '../../components/ChatComponents/Sidebar';
 import API from '../../utils/API';
 import io from 'socket.io-client'
 
+const url = window.location.href;
+const id = url.substring(url.lastIndexOf('/') + 1);
+
+API.getRoomById(id).then((roomData) => {
+  console.log(roomData);
+});
+
+
 export default function Chat(props) {
   const URL_PREFIX = "http://localhost:3000"
 
   const [socket, setSocket] = useState(null);
-
-    const [user, setUser] = useState([]);
+  const [user, setUser] = useState([]);
+  const [roomData, setRoomData] = useState([]);
 
     useEffect(() => {
       // Creates a new socket connection
@@ -33,6 +41,15 @@ export default function Chat(props) {
       // runs setUser function when the user data is retrieved
     }
     , [props.userId]);
+
+    useEffect(() => {
+      API.getRoomById(id).then((roomData) => {
+        setRoomData(roomData);
+      });
+    }
+    , []);
+
+    // socket.emit('joinRoom', roomData.room_name);
 
   return (
     <div>

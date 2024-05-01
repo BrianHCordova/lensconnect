@@ -38,7 +38,7 @@ function ChatRooms(props) {
       {chatRooms.map((chatRoom, index) => (
         <div key={index}>
           <button onClick={openChatRoom}>
-          {chatRoom.room_name}
+          {chatRoom.id}
           </button>
         </div>
       ))}
@@ -50,7 +50,7 @@ function ChatRooms(props) {
       {myRooms.map((myRoom, index) => (
         <div key={index}>
           <button onClick={openChatRoom}>
-          {myRoom.room_name}
+          {myRoom.id}
           </button>
         </div>
       ))}
