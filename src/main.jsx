@@ -6,9 +6,6 @@ import FeaturedPro from './components/PhotographerCard/index.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
-    <main>
     <App />
-    {/* <FeaturedPro  /> */}
-    </main>
   </>
 )
