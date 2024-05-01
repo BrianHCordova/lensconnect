@@ -34,10 +34,6 @@ export default function Messages({ socket, username }) {
             <div>
                 <h1>Current Chat</h1>
             </div>
-
-                <div>
-                    You have connected with ID: {socket.id}
-                </div>
             {messages.map((message, index) => (
                 <div key={index}>{message.user}: {message.message} - {message.date}</div>
             ))}
