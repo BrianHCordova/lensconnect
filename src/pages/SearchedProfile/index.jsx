@@ -8,17 +8,18 @@ import "./style.css"
 import SearchedUserInfo from "../../components/SearchedUserInfo"
 // import UserImages from "../../components/UserImages"
 // import UserReviwee from "../../components/UserReviewee"
-import UserReviwer from "../../components/UserReviewer"
+import UserReviwee from "../../components/UserReviewee"
 // Imports api fetch functions
 import API from "../../utils/API"
 
-function Profile(props) {
+function SearchedProfile(props) {
 
 
     // Use state hook to store the users data
+    const navigate = useNavigate()
     const [userObj, setUserObj] = useState({});
     const [reviewArr, setReviewArr] = useState([]);
-    const {id} = useParams()
+    const { id } = useParams()
 
     // API useEffect to gather users info from the API on page load
     useEffect(() => {
@@ -28,16 +29,20 @@ function Profile(props) {
             console.log(userObj)
         });
         // Runs the getReviewsByReviewee function from the API utils page
-        API.getReviewsByReviewee(props.userId).then((revData) => {
+        API.getReviewsByReviewee(id).then((revData) => {
             setReviewArr(revData)
         });
     }, [props.userId]);
 
-    
+    const handleReview = () => {
+        navigate(`/review/${userObj.id}`)
+    }
+
+
     // HTML
     return (
-        <main className="grid">
-            <div className="col-span-full">
+        <div className="container mx-auto w-1/3 grid profile-container ">
+            <div className="">
                 {/* pass the userObj into UserInfo as props when tokens work */}
                 <SearchedUserInfo
                     userId={props.userId}
@@ -50,13 +55,16 @@ function Profile(props) {
                     isPhotographer={userObj.isPhotographer}
                 />
             </div>
-            <div className="col-span-full">
-                <UserReviwer reviews={userObj.Reviews} />
+            <div className="">
+                <UserReviwee reviews={reviewArr} />
+                <div className="reviewUserBtn ">
+                    <button onClick={handleReview} className="reviewUserBtn bg-zinc-800">Review {userObj.username}</button>
+                </div>
             </div>
-        </main>
+        </div>
 
     );
 }
 
 // Exports the Profile page
-export default Profile;
+export default SearchedProfile;

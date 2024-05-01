@@ -58,8 +58,8 @@ function UserImages(props) {
 
     // HTML
     return (
-        <div className="image-section">
-            <div className=" image-container">
+        <div className="image-section ">
+            <div className=" image-container bg-zinc-900">
                 <div className="individual-image-container">
                     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 image-position">
                         {image.map((img) => {
@@ -81,7 +81,7 @@ function UserImages(props) {
                     {!attach ? (
                         <div className="addPhotoBtn">
 
-                            <button onClick={showAttach} >Add photos</button>
+                            <button className='bg-zinc-700' onClick={showAttach} >Add photos</button>
                         </div>
                     ) : (!file ? (
                         <>

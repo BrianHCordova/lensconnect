@@ -47,7 +47,7 @@ export default function Review(props) {
     API.editUserBio(newAverage).then((newData) => {
     });
     // takes the user back to the homepage
-    navigate("/")
+    navigate("/profile")
   }
 
   // Hooks to handle the review content and rating change

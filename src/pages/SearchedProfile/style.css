@@ -1,0 +1,24 @@
+.reviewUserBtn {
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+    position: relative;
+    bottom: 1.6rem;
+    margin-right: .4rem;
+    button {
+        text-align: center;
+        border-radius: 15px;
+        width: fit-content;
+        padding-left: .3rem;
+        padding-right: .3rem;
+        padding-top: .2rem;
+        height: 2.2rem;
+        border: 2px solid transparent;
+    }
+    button:hover {
+        transition-delay: .3s;
+        -webkit-transition: all .05s ease;
+        transition: all .05s ease;
+        border: 2px solid rgb(201, 201, 201);
+    }
+}
