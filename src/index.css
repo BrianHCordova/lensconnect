@@ -27,3 +27,8 @@ body {
   color: rgb(201, 201, 201);
   z-index: -1
 }
+
+main {
+  min-height: calc(100vh - 96px - 120px)
+};
+
