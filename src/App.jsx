@@ -75,26 +75,26 @@ export default function App() {
 
   return (
     <>
-    <Router>
-      <Nav handleSubmit={logout} userId={userId} />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/profile" element={<Profile userId={userId} token={token} />}></Route>
-        <Route path="/profile/:id" element={<SearchedProfile userId={searchedUser} id={userId}/>}></Route>
-        <Route path="/search" element={<Search />}></Route>
-        <Route path="/browse" element={<Browse userId={userId} token={token} />}></Route>
-        <Route path="/login" element={<Login type="Login"  handleSubmit={handleLogin} userId={userId}/>}/>
-        <Route path="/signup" element={<Signup type="Signup" handleSubmit={handleSignup} userId={userId}/>}/>
-        <Route path="/logout" element={<Logout handleSubmit={logout} userId={userId}/>}/>
-        <Route path="/chat" element={<Chat userId={userId} token={token}/>}></Route>
-        <Route path="/chat/:id" element={<ChatOne userId={userId} token={token}/>}></Route>
-        <Route path="/review/" element={<ReviewBySearch userId={userId} token={token}/>}></Route>
-        <Route path="/review/:id" element={<Review userId={userId} token={token}/>}></Route>
-        <Route path="/report" element={<Report userId={userId} token={token}/>}></Route>
-        {/* <Route path="/hire" element={<Hire />}></Route> */}
-      </Routes>
-    </Router>
-     <Footer />
-     </>
+      <Router>
+        <Nav handleSubmit={logout} userId={userId} />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/profile" element={<Profile userId={userId} token={token} />}></Route>
+          <Route path="/profile/:id" element={<SearchedProfile userId={searchedUser} id={userId} />}></Route>
+          <Route path="/search" element={<Search />}></Route>
+          <Route path="/browse" element={<Browse userId={userId} token={token} />}></Route>
+          <Route path="/login" element={<Login type="Login" handleSubmit={handleLogin} userId={userId} />} />
+          <Route path="/signup" element={<Signup type="Signup" handleSubmit={handleSignup} userId={userId} />} />
+          <Route path="/logout" element={<Logout handleSubmit={logout} userId={userId} />} />
+          <Route path="/chat" element={<Chat userId={userId} token={token} />}></Route>
+          <Route path="/chat/:id" element={<ChatOne userId={userId} token={token} />}></Route>
+          <Route path="/review/" element={<ReviewBySearch userId={userId} token={token} />}></Route>
+          <Route path="/review/:id" element={<Review userId={userId} token={token} />}></Route>
+          <Route path="/report" element={<Report userId={userId} token={token} />}></Route>
+          {/* <Route path="/hire" element={<Hire />}></Route> */}
+        </Routes>
+      </Router>
+      <Footer />
+    </>
   )
 }
