@@ -137,6 +137,11 @@ const API = {
             method: "GET"
         }).then(res => res.json())
     },
+    getSingleUserImages: (id) => {
+        return fetch(`${URL_PREFIX}/api/image/${id}`, {
+            method: "GET"
+        }).then(res => res.json())
+    },
     getChat: () => {
         return fetch(`${URL_PREFIX}/api/chat`, {
             method: "GET"
@@ -162,6 +167,12 @@ const API = {
     },
     getFeatPro: () => {
         return fetch(`${URL_PREFIX}/api/searchusers/featured`).then(res=>res.json()) 
+    },
+    postProfilePic: (formData, userId) => {
+        return fetch(`${URL_PREFIX}/api/image/profilepic/${userId}`, {
+            method: "POST",
+            body: formData
+        }).then(res => res.json())
     }
 }
 
