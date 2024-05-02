@@ -2,13 +2,14 @@ import React, { useRef, useState, useEffect } from 'react';
 import './style.css'
 import { Link } from 'react-router-dom';
 import API from '../../utils/API';
-import Cards from '../../pages/Browse/card';
+// import Cards from '../../pages/Browse/card';
 
 export default function PhotographerCard(props) {
   const carouselRef = useRef(null);
   const profileUrl = '/profile/' + props.userId
   const [image, setImage] = useState([])
   const [refresh, setRefresh] = useState(true)
+  const [profilePic, setProfilePic] = useState([])
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -30,6 +31,7 @@ export default function PhotographerCard(props) {
   };
 
   useEffect(() => {
+    console.log(props)
     if (!image) {
       return
     }
@@ -37,20 +39,30 @@ export default function PhotographerCard(props) {
       // console.log(data)
       setImage(data)
     })
-  }, [refresh])
+
+    if (props.userId){
+    API.getSingleUserImages(props.userId).then((data)=> {
+      console.log(data)
+      const pfp = data.filter((dat)=>(dat.isProfilePic))
+      
+      setProfilePic(pfp[(pfp.length-1)])
+      console.log(profilePic)
+    })
+    }
+  }, [props.userId])
 
   return (
     <div className='featured-component'>
       {/* Existing card component */}
-      <div className="card lg:card-side bg-zinc-900 shadow-xl rounded-b-none flex flex-row">
+      <div className="card lg:card-side bg-zinc-900 shadow-md shadow-black duration-200 ease-in-out rounded-b-none flex flex-row">
         <figure className="profile-pic-container w-1/4">
-          <img className="h-auto" src="https://source.unsplash.com/random" alt="Album" />
+          <img className="h-auto" src={profilePic?.imageUrl? profilePic.imageUrl: '/defaultProfile.png'} alt="Album" />
         </figure>
         <div className="card-body">
           <h2 className="card-title text-4xl font-bold">@{props.username}</h2>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>Rating:</p>
-            <p className="w-3/4 card-content">4</p>
+            <p className="w-3/4 card-content">{(props.avgRate!==0)? props.avgRate: 'No ratings yet'}</p>
           </div>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>About Me:</p>
@@ -66,7 +78,7 @@ export default function PhotographerCard(props) {
           </div>
           <div className="card-actions justify-end">
             <Link to={profileUrl}>
-              <button className="btn text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out">To My Page</button>
+              <button className="btn text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out">View Profile</button>
             </Link>
           </div>
         </div>
@@ -79,11 +91,10 @@ export default function PhotographerCard(props) {
             // console.log(img)
             // console.log(props.userId)
             if (img.UserId === props.userId) {
-              return <>
-                <div className="carousel-item">
+              return <div className="carousel-item" key={img.id}>
                   <img src={img.imageUrl} alt={img.image} />
                 </div>
-              </>
+              
             }
 
             else {
@@ -96,8 +107,8 @@ export default function PhotographerCard(props) {
         </div>
         {/* Navigation buttons */}
         <div className="carousel-navigation m-0-5">
-          <button className="btn  text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out mr-5" onClick={scrollLeft}>{"<"}</button>
-          <button className="btn  text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out" onClick={scrollRight}>{">"}</button>
+          <button className="btn  text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out mr-5 shadow-black shadow-md" onClick={scrollLeft}>{"<"}</button>
+          <button className="btn  text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out shadow-black shadow-md" onClick={scrollRight}>{">"}</button>
         </div>
       </div>
     </div>

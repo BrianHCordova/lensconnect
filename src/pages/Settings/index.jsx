@@ -7,7 +7,7 @@ export default function Settings(props) {
     const navigate = useNavigate()
     const [newUsername, setNewUsername] = useState();
     const [newEmail, setNewEmail] = useState();
-    const [newPass, setNewPass] = useState('********');
+    const [newPass, setNewPass] = useState();
     const [verifyPass, setVerifyPass] = useState();
     const [verifyBool, setVerifyBool] = useState(false);
     const [oldPass, setOldPass] = useState();
@@ -51,6 +51,7 @@ export default function Settings(props) {
     }
 
     const verifyPassword = e => {
+        e.preventDefault()
         const passedData = { password: oldPass, userId: props.userId }
         API.passwordVerification(passedData).then((verificationData) =>
             setVerifyOldPass(verificationData)
@@ -81,7 +82,7 @@ export default function Settings(props) {
                 return
             }
         } else {
-            // navigate("/profile")
+            navigate("/profile")
         }
         API.editUserBio(passedData).then((newData) => { })
     }
@@ -119,7 +120,7 @@ export default function Settings(props) {
                                         required
                                         className="block w-3/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
                                     />
-                                     <button onClick={submitHandler} id="saveUsername" className='ml-5 flex w-1/5 justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600' >Save</button>
+                                    <button onClick={submitHandler} id="saveUsername" className='ml-5 flex w-1/5 justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600' >Save</button>
                                 </div>
                             </div>
                             <div>
@@ -157,7 +158,7 @@ export default function Settings(props) {
                                         // required
                                         className="block w-3/4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
                                     />
-                                    <button onClick={verifyPassword} id="saveEmail" className='ml-5 flex w-1/5 justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600' >Verify</button>
+                                    <button onClick={verifyPassword} id="verifyPassword" className='ml-5 flex w-1/5 justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600' >Verify</button>
                                 </div>
                             </div>
                             {verifyOldPass
@@ -198,23 +199,23 @@ export default function Settings(props) {
                                             <button onClick={submitHandler} id="savePassword" className='ml-5 flex w-1/5 justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600' >Save</button>
                                         </div>
                                         {verifyBool
-                                                ? <span className="verifySymbol">✔</span>
-                                                : <span className="verifySymbol">❌</span>
-                                            }
+                                            ? <span className="verifySymbol">✔</span>
+                                            : <span className="verifySymbol">❌</span>
+                                        }
                                     </div>
                                 </>
                                 : <></>
-                                
+
                             }
-                                                                <div>
-                                        <button
-                                            type="submit"
-                                            onClick={submitHandler}
-                                            className="flex w-full justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
-                                        >
-                                            Return to Profile
-                                        </button>
-                                    </div>
+                            <div>
+                                <button
+                                    type="submit"
+                                    onClick={submitHandler}
+                                    className="flex w-full justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+                                >
+                                    Return to Profile
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

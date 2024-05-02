@@ -17,6 +17,7 @@ function Profile(props) {
     // Use state hook to store the users data
     const [userObj, setUserObj] = useState({});
     const [reviewArr, setReviewArr] = useState([]);
+    const [profilePic, setProfilePic] = useState()
 
 
     // API useEffect to gather users info from the API on page load
@@ -32,15 +33,22 @@ function Profile(props) {
         API.getReviewsByReviewee(props.userId).then((revData) => {
             setReviewArr(revData)
         });
+
+        // API.getSingleUserImages(props.userId).then((data)=> {
+        //     console.log(data)
+        //     setImages(data)
+
+        // })
     }, [props.userId]);
 
     const handleReport = () => {
         navigate("/report")
     }
 
+
     // HTML
     return (
-        <div className="container mx-auto w-1/3 grid profile-container ">
+        <div className="container mx-auto w-1/3 profile-container justify-start">
             <div className="col-span-full">
                 {/* pass the userObj into UserInfo as props when tokens work */}
                 <UserInfo
@@ -52,24 +60,31 @@ function Profile(props) {
                     website={userObj.website}
                     videograpgy={userObj.videography}
                     isPhotographer={userObj.isPhotographer}
+                    profilePic={profilePic}
                 />
             </div>
-            <div className=" col-span-full">
+            <div className="col-span-full">
                 <UserImages userId={props.userId} />
             </div>
-            <div className=" col-span-full">
-                <UserReviwee reviews={reviewArr} />
-            </div>
-            <div className="col-span-full">
+            {userObj.isPhotographer ? (
+                <div className=" col-span-full">
+                    <UserReviwee reviews={reviewArr} />
+                </div>
+            ) : (<></>)}
+
+            <div className={!userObj.isPhotographer? "mb-5": "col-span-full" }>
                 <UserReviwer reviews={userObj.Reviews} />
             </div>
-            <div className="col-span-full container mx-auto transacReport bg-zinc-900 userInfoSection">
-                <h3>Transaction Report</h3>
-                <p>Transaction Reports are a confidential report a photographer can make after performing any kind of work for another person, organized though LensConnect. Theese reports are used by our customer service and admit team to review promised transactions and photography gigs that are organized on LensConnect.</p>
-                <div className=" reportBtnWrap container">
-                    <button className="bg-zinc-700" onClick={handleReport}>Create a Report</button>
+            {userObj.isPhotographer ? (
+                <div className="col-span-full container mx-auto transacReport bg-zinc-900 userInfoSection">
+                    <h3>Transaction Report</h3>
+                    <p>Transaction Reports are a confidential report a photographer can make after performing any kind of work for another person, organized though LensConnect. Theese reports are used by our customer service and admit team to review promised transactions and photography gigs that are organized on LensConnect.</p>
+                    <div className=" reportBtnWrap container">
+                        <button className="bg-zinc-700" onClick={handleReport}>Create a Report</button>
+                    </div>
                 </div>
-            </div>
+            ) : (<></>)}
+
             {/* <div className="chatBtn col-span-2">
                 <button onClick={handleChatOpen}>Start Chat!</button>
             </div> */}

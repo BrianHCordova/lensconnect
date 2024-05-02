@@ -1,9 +1,25 @@
 import { motion } from "framer-motion";
 import { cn } from "../../utils/cn";
 import PhotographerCard from "../PhotographerCard";
+import { useLenis } from '@studio-freight/react-lenis'; // Import the useLenis hook
+import { useEffect, useState } from "react";
+import API from "../../utils/API";
 
+export default function Lamp(props) {
+  useLenis(); // Call the useLenis hook to initialize Lenis scroll effect
+  const [featPro, setFeatPro] = useState([])
 
-export default function Lamp() {
+  useEffect(() => {
+    if (!props.userId) {
+      return
+    }
+    API.getFeatPro().then((data) => {
+      setFeatPro(data);
+      console.log(featPro);
+    });
+
+  }, [props.userId])
+
   return (
     <LampContainer>
       <motion.h1
@@ -14,10 +30,22 @@ export default function Lamp() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className=" "
+        className="flex flex-col w-3/4 h-[50%]"
       >
-      <PhotographerCard />
+
       </motion.h1>
+      <div className="text-4xl text-center">Featured Photographer</div>
+      <div className="h-[10rem] w-[80%] ">
+
+        <PhotographerCard
+          key={featPro[0]?.id}
+          username={featPro[0]?.username}
+          bio={featPro[0]?.biography}
+          userId={featPro[0]?.id}
+          serveloc={featPro[0]?.ServeLocations}
+          spec={featPro[0]?.Specialties}
+        />
+      </div>
     </LampContainer>
   );
 }
@@ -30,7 +58,7 @@ export function LampContainer({ children, className }) {
         className
       )}
     >
-      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
+      <div className="absolute top-[15rem] flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
           whileInView={{ opacity: 1, width: "30rem" }}
