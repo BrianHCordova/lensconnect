@@ -80,7 +80,7 @@ export default function App() {
       <main>
         
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Home userId={userId} />}></Route>
         <Route path="/profile" element={<Profile userId={userId} token={token} />}></Route>
         <Route path="/profile/:id" element={<SearchedProfile userId={searchedUser} id={userId}/>}></Route>
         <Route path="/search" element={<Search />}></Route>

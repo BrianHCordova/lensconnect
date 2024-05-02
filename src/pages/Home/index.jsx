@@ -6,7 +6,7 @@ import PhotographerCard from "../../components/PhotographerCard";
 import API from "../../utils/API";
 import Lamp from "../../components/Lamp";
 
-const ParallaxZoomComponent = () => {
+const ParallaxZoomComponent = (props) => {
   const [scrollY, setScrollY] = useState(0);
   const [photographers, setPhotographers] = useState([]);
   const [featPro, setFeatPro] = useState([]);
@@ -24,18 +24,25 @@ const ParallaxZoomComponent = () => {
   }, []);
 
   useEffect(() => {
+    
     if (!photographers) {
       return;
     }
     API.getPhotographers().then((data) => {
       setPhotographers(data);
     });
-
+    if (!props.userId) {
+      return
+    }
+    if (!featPro) {
+      return
+    }
     API.getFeatPro().then((data) => {
+      console.log(data)
       setFeatPro(data);
       console.log(featPro);
     });
-  }, []);
+  }, [props.userId]);
 
   // Initialize lenis scroll effect on the page
   useLenis();
@@ -57,28 +64,30 @@ const ParallaxZoomComponent = () => {
       </motion.div>
 
       <Welcome />
-      <div className="other-content">
+      <div className="other-content relative">
         <div className="inset-0 flex items-center justify-center">
-          <Lamp />
+          <Lamp userId={props.userId}/>
         </div>
         <div className="">
-          <h1 className="text-5xl feat-pro-text">Featured Photographer</h1>
           <div className="featured-photographer">
-            <PhotographerCard
-              username={featPro[0]?.username}
-              bio={featPro[0]?.biography}
-              userId={featPro[0]?.id}
-              serveloc={featPro[0]?.ServeLocations}
-              spec={featPro[0]?.Specialties}
-            />
+            {/* {featPro.map((pro)=> (<>{pro.id}</>))} */}
+          {/* <PhotographerCard
+                key={featPro[0]?.id}
+                username={featPro[0]?.username}
+                bio={featPro[0]?.biography}
+                userId={featPro[0]?.id}
+                serveloc={featPro[0]?.ServeLocations}
+                spec={featPro[0]?.Specialties}
+              /> */}
+            
           </div>
         </div>
       </div>
 
       <div className="container mx-auto">
+      
         {photographers?.map((photographer) => {
-          return (
-            <PhotographerCard
+          return <PhotographerCard
               key={photographer.id}
               username={photographer.username}
               bio={photographer.biography}
@@ -86,7 +95,7 @@ const ParallaxZoomComponent = () => {
               serveloc={photographer.ServeLocations}
               spec={photographer.Specialties}
             />
-          );
+          ;
         })}
       </div>
     </div>
