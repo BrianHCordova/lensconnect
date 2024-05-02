@@ -71,7 +71,6 @@ export default function App() {
     setUserId(0);
     localStorage.removeItem("token")
   }
-  const searchedUser = 1
 
   return (
     <>
@@ -82,7 +81,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home userId={userId} />}></Route>
         <Route path="/profile" element={<Profile userId={userId} token={token} />}></Route>
-        <Route path="/profile/:id" element={<SearchedProfile userId={searchedUser} id={userId}/>}></Route>
+        <Route path="/profile/:id" element={<SearchedProfile userId={userId} id={userId}/>}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/browse" element={<Browse userId={userId} token={token} />}></Route>
         <Route path="/login" element={<Login type="Login"  handleSubmit={handleLogin} userId={userId}/>}/>

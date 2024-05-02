@@ -5,14 +5,15 @@ import React, { useEffect, useState } from "react";
 function SearchedUserInfo(props) {
     return (
             <>
-            <section className=" userInfoSection bg-zinc-900 ">
-                <div className="profilePicture col-span-1  ">
+            <section className="bg-zinc-900 flex rounded-[15px] ">
+                <div className="profilePicture w-1/3 ">
                     <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="200" width="200" alt="" />
                 </div>
-                <div className="bio ">
-                    <ul className="biography">
-                        <li>Username:&nbsp;{props.username}</li>
-                        <li>About Me:<br /><span>{props.biography}</span></li>
+                <div className="flex flex-col pt-3">
+                    <ul className="biography flex flex-col justify-start">
+                        <li className="pb-3">Username:&nbsp;{props.username}</li>
+                        <li>About Me:</li>
+                        {/* <li>{props.biography}</li> */}
                     </ul>
                 </div>
                 <div className="userDetails">
