@@ -9,6 +9,7 @@ export default function PhotographerCard(props) {
   const profileUrl = '/profile/' + props.userId
   const [image, setImage] = useState([])
   const [refresh, setRefresh] = useState(true)
+  const [profilePic, setProfilePic] = useState([])
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -37,6 +38,14 @@ export default function PhotographerCard(props) {
       console.log(data)
       setImage(data)
     })
+
+    API.getSingleUserImages(props.userId).then((data)=> {
+      console.log(data)
+      const pfp = data.filter((dat)=>(dat.isProfilePic))
+      
+      setProfilePic(pfp[(pfp.length-1)])
+      console.log(profilePic)
+    })
   }, [props.userId])
 
   return (
@@ -44,13 +53,14 @@ export default function PhotographerCard(props) {
       {/* Existing card component */}
       <div className="card lg:card-side bg-zinc-900 shadow-xl rounded-b-none flex flex-row">
         <figure className="profile-pic-container w-1/4">
-          <img className="h-auto" src="https://source.unsplash.com/random" alt="Album" />
+          <img className="h-auto" src={profilePic?.imageUrl? profilePic.imageUrl: '/defaultProfile.png'} alt="Album" />
+          {()=>{console.log(profilePic)}}
         </figure>
         <div className="card-body">
           <h2 className="card-title text-4xl font-bold">@{props.username}</h2>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>Rating:</p>
-            <p className="w-3/4 card-content">4</p>
+            <p className="w-3/4 card-content">{props.avgRate? props.avgRate: 'No ratings yet'}</p>
           </div>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>About Me:</p>
@@ -81,7 +91,7 @@ export default function PhotographerCard(props) {
             if (img.UserId === props.userId) {
               return <>
                 <div className="carousel-item">
-                  <img src={img.imageUrl} alt={img.image} />
+                  <img key={img.id} src={img.imageUrl} alt={img.image} />
                 </div>
               </>
             }

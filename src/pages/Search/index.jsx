@@ -57,6 +57,8 @@ function Search() {
                     }).map((photographer) => {
                         return <>
                             <PhotographerCard
+                                key={photographer.id}
+                                avgRate={photographer.averageRating}
                                 username={photographer.username}
                                 bio={photographer.biography}
                                 userId={photographer.id}
