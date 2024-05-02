@@ -57,10 +57,8 @@ const ParallaxZoomComponent = () => {
       </motion.div>
 
       <Welcome />
-      <Welcome />
       <div className="other-content">
         <div className="inset-0 flex items-center justify-center">
-          <Lamp />
           <Lamp />
         </div>
         <div className="">
