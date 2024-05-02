@@ -162,7 +162,7 @@ function UserInfo(props) {
                     setProfilePic(url)
                     console.log(profilePic)
                 } else {
-                    setProfilePic('/defaultProfile.png')
+                    
                 }
             }
         })
@@ -254,22 +254,22 @@ function UserInfo(props) {
                     }
                     {isPhotographer
                         ? <ul className="px-[2rem]">
-                            <div className="chipWrap rounded-md"> <div className="instructions"><span className="text-green-600">+</span> to add, or <span className="text-red-600">x</span> to remove a location</div>
+                            <div className="chipWrap rounded-md"> <div className="instructions"><span className="text-green-600 pl-2">+</span> to add, or <span className="text-red-600">x</span> to remove a location</div>
                                 <li className="serveLocationChip" >&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
-                                    <span className="chip" key={i}>{loc.location}&nbsp;<button onClick={delUserLoc} id={loc.id} className="chipDelete">X</button>&nbsp;</span>
+                                    <span className="chip" key={i}>{loc.location}&nbsp;<button onClick={delUserLoc} id={loc.id} className="chipDelete pt-1">X</button>&nbsp;</span>
                                 ))}
                                     <div className="addChip">
-                                        <input onChange={handleLocInput} value={newLoc} placeholder="add Location" type="text" style={locInputStyle} />&nbsp;<button onClick={addUserLoc} className="chipDelete">+</button>&nbsp;
+                                        <input onChange={handleLocInput} value={newLoc} placeholder="add Location" type="text" style={locInputStyle} />&nbsp;<button onClick={addUserLoc} className="chipDelete pr-1 mb-1">+</button>&nbsp;
                                     </div>
                                 </li>
                             </div>
                             <div className="chipWrap rounded-md">
-                                <div className="instructions"><span className="text-green-600">+</span> to add, or <span className="text-red-600">x</span> to remove a specialty</div>
+                                <div className="instructions"><span className="text-green-600 pl-2">+</span> to add, or <span className="text-red-600">x</span> to remove a specialty</div>
                                 <li className="specialtyChip" >&nbsp; {newUserObj.Specialties?.map((spec, i) => (
-                                    <span className="chip" key={i}>{spec.specialty}&nbsp;<button onClick={delUserSpec} id={spec.id} className="chipDelete">X</button>&nbsp;</span>
+                                    <span className="chip" key={i}>{spec.specialty}&nbsp;<button onClick={delUserSpec} id={spec.id} className="chipDelete pt-1">X</button>&nbsp;</span>
                                 ))}
                                     <div className="addChip">
-                                        <input onChange={handleSpecInput} value={newSpec} placeholder="add specialty" type="text" style={specInputStyle} />&nbsp;<button onClick={addUserSpec} className="chipDelete">+</button>&nbsp;
+                                        <input onChange={handleSpecInput} value={newSpec} placeholder="add specialty" type="text" style={specInputStyle} />&nbsp;<button onClick={addUserSpec} className="chipDelete pr-1 mb-1">+</button>&nbsp;
                                     </div>
                                 </li>
                             </div>
