@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 export default function Messages({ socket, username }) {
     const [messages, setMessages] = useState([])
     const [user, setUser] = useState('')
+    const [roomData, setRoomData] = useState([]);
     
     useState(() => {
         setUser(username.username)
@@ -14,16 +15,6 @@ export default function Messages({ socket, username }) {
         socket.on('messageResponse', (message) => {
             console.log(message)
             setMessages((messages) => [...messages, message])
-        })
-
-        socket.on('connect', () => {
-            console.log(`${socket.id} connected`)
-        })
-
-        socket.emit('join', (user))
-        
-        socket.on('user-connected', (name) => {
-            console.log(name)
         })
 
     }, [socket])

@@ -16,7 +16,7 @@ const Nav = (props) => {
   };
 
   return (
-    <Disclosure as="nav" className="bg-zinc-800 shadow-md shadow-white z-10 ">
+    <Disclosure as="nav" className="bg-zinc-800 shadow-md shadow-[rgb(0,0,0,0.5)] z-10">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2 "> {/* Adjusted padding here */}
@@ -64,12 +64,7 @@ const Nav = (props) => {
 
                     ) : (<></>)}
                     {props.userId ? (
-                      <Link
-                        to='/logout'
-                        className="rounded-md px-3 focus:bg-emerald-700 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
-                      >
-                        Logout
-                      </Link>
+                      <></>
                     ) : (
 
                       <Link
@@ -118,28 +113,28 @@ const Nav = (props) => {
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                            to={props.userId ? ('/profile') : ('/login')}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
                               Your Profile
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              to="/settings"
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
                               Settings
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>

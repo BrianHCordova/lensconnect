@@ -25,7 +25,6 @@ function Profile(props) {
             return
         }
         // Runs the getOneUser function from the API utils page
-        // console.log(`props`, props)
         API.getOneUser(props.userId).then((userData) => { //props.userId is 0 untill we can make tokens work
             setUserObj(userData);
         });

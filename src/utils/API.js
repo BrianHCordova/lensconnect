@@ -116,6 +116,27 @@ const API = {
         }).then(res => res.json())
     },
 
+    passwordVerification: userObj => {
+        console.log(userObj)
+        return fetch(`${URL_PREFIX}/api/users/verify/${userObj.userId}`, {
+            method: "PUT",
+            body: JSON.stringify(userObj),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+    },
+
+    newUserPassword: userObj => {
+        return fetch(`${URL_PREFIX}/api/prop/password/${userObj.userId}`, {
+            method: "PUT",
+            body: JSON.stringify(userObj),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+    },
+
     getUserByUsername: username => {
         return fetch(`${URL_PREFIX}/api/users/byusername/${username}`).then(res => res.json())
     },
@@ -149,6 +170,11 @@ const API = {
     },
     getMyRooms: userId => {
         return fetch(`${URL_PREFIX}/api/chatroom/user_sender/${userId}`, {
+            method: "GET"
+        }).then(res => res.json())
+    },
+    getRoomById: roomId => {
+        return fetch(`${URL_PREFIX}/api/chatroom/${roomId}`, {
             method: "GET"
         }).then(res => res.json())
     },
