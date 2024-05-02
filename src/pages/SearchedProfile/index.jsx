@@ -28,7 +28,7 @@ function SearchedProfile(props) {
     // API useEffect to gather users info from the API on page load
     useEffect(() => {
         // Runs the getOneUser function from the API utils page
-        API.getOneUser(id).then((userData) => { //props.userId is 0 untill we can make tokens work
+        API.getOneUser(id).then((userData) => {
             setUserObj(userData);
             console.log(userObj)
         });

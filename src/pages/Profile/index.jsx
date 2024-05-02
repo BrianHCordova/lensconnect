@@ -13,7 +13,7 @@ import API from "../../utils/API"
 
 function Profile(props) {
 
-
+    const navigate = useNavigate()
     // Use state hook to store the users data
     const [userObj, setUserObj] = useState({});
     const [reviewArr, setReviewArr] = useState([]);
@@ -26,7 +26,6 @@ function Profile(props) {
             return
         }
         // Runs the getOneUser function from the API utils page
-        // console.log(`props`, props)
         API.getOneUser(props.userId).then((userData) => { //props.userId is 0 untill we can make tokens work
             setUserObj(userData);
         });
