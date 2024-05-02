@@ -34,10 +34,10 @@ export default function PhotographerCard(props) {
       return
     }
     API.getImages().then((data) => {
-      // console.log(data)
+      console.log(data)
       setImage(data)
     })
-  }, [refresh])
+  }, [props.userId])
 
   return (
     <div className='featured-component'>

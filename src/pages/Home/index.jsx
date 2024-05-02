@@ -57,9 +57,23 @@ const ParallaxZoomComponent = () => {
       </motion.div>
 
       <Welcome />
+      <Welcome />
       <div className="other-content">
         <div className="inset-0 flex items-center justify-center">
           <Lamp />
+          <Lamp />
+        </div>
+        <div className="">
+          <h1 className="text-5xl feat-pro-text">Featured Photographer</h1>
+          <div className="featured-photographer">
+            <PhotographerCard
+              username={featPro[0]?.username}
+              bio={featPro[0]?.biography}
+              userId={featPro[0]?.id}
+              serveloc={featPro[0]?.ServeLocations}
+              spec={featPro[0]?.Specialties}
+            />
+          </div>
         </div>
       </div>
 

@@ -19,8 +19,11 @@ body {
 } */
 
 body {
-
+  /* background-image: linear-gradient(#2E4551,
+      #141515); */
   background-color: #27374D;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   min-height: 100vh;
   color: rgb(201, 201, 201);
   z-index: -1
