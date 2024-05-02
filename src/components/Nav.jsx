@@ -101,8 +101,8 @@ const Nav = (props) => {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src="https://source.unsplash.com/random"
-                          alt=""
+                          src="/defaultProfile.png"
+                          alt="profile picture of the user"
                         />
                       </Menu.Button>
                     </div>

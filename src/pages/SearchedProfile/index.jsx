@@ -61,7 +61,7 @@ function SearchedProfile(props) {
     // HTML
     return (
         <>
-            <div className="container mx-auto w-1/3 grid profile-container ">
+            <div className="container mx-auto w-1/3 grid profile-container">
                 <div className="">
                     {/* pass the userObj into UserInfo as props when tokens work */}
                     <SearchedUserInfo
