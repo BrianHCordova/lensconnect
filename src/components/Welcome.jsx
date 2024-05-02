@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -26,8 +26,8 @@ export default function Welcome() {
   }, [fadeInControls, fadeInInView, fadeOutControls, fadeOutInView]);
 
   return (
-    <div className="lg:pb-40 lg:pt-40"> 
-      <div ref={fadeInRef} className="overflow-hidden bg-zinc-800 rounded-lg py-32 mt-12 mb-12 border max-w-7xl mx-auto"> 
+    <div className="lg:pb-40 lg:pt-40">
+      <div ref={fadeInRef} className="overflow-hidden bg-zinc-800 rounded-lg py-32 mt-12 mb-12 border max-w-7xl mx-auto">
         <div className="mx-auto px-6 lg:flex lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -47,7 +47,7 @@ export default function Welcome() {
               <div className="mt-10 flex">
                 <a
                   href="/login"
-                  className="rounded-md bg-emerald-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+                  className="rounded-md bg-cyan-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-100"
                 >
                   Join our team <span aria-hidden="true">&rarr;</span>
                 </a>
