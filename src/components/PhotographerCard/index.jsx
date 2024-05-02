@@ -54,7 +54,7 @@ export default function PhotographerCard(props) {
   return (
     <div className='featured-component'>
       {/* Existing card component */}
-      <div className="card lg:card-side bg-zinc-900 shadow-xl rounded-b-none flex flex-row">
+      <div className="card lg:card-side bg-zinc-900 shadow-md shadow-black duration-200 ease-in-out rounded-b-none flex flex-row">
         <figure className="profile-pic-container w-1/4">
           <img className="h-auto" src={profilePic?.imageUrl? profilePic.imageUrl: '/defaultProfile.png'} alt="Album" />
         </figure>
@@ -78,7 +78,7 @@ export default function PhotographerCard(props) {
           </div>
           <div className="card-actions justify-end">
             <Link to={profileUrl}>
-              <button className="btn text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out">View Profile</button>
+              <button className="btn text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out">View Profile</button>
             </Link>
           </div>
         </div>
@@ -107,8 +107,8 @@ export default function PhotographerCard(props) {
         </div>
         {/* Navigation buttons */}
         <div className="carousel-navigation m-0-5">
-          <button className="btn  text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out mr-5" onClick={scrollLeft}>{"<"}</button>
-          <button className="btn  text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out" onClick={scrollRight}>{">"}</button>
+          <button className="btn  text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out mr-5 shadow-black shadow-md" onClick={scrollLeft}>{"<"}</button>
+          <button className="btn  text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out shadow-black shadow-md" onClick={scrollRight}>{">"}</button>
         </div>
       </div>
     </div>
