@@ -27,7 +27,7 @@ export default function Welcome() {
 
   return (
     <div className="lg:pb-40 lg:pt-40">
-      <div ref={fadeInRef} className="overflow-hidden bg-zinc-800 rounded-lg py-32 mt-12 mb-12 border max-w-7xl mx-auto">
+      <div ref={fadeInRef} className="bg-zinc-800 rounded-lg py-32 mt-12 mb-12 max-w-7xl mx-auto shadow-xl shadow-black">
         <div className="mx-auto px-6 lg:flex lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
