@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import './style.css'
 import { Link } from 'react-router-dom';
 import API from '../../utils/API';
-import Cards from '../../pages/Browse/card';
+// import Cards from '../../pages/Browse/card';
 
 export default function PhotographerCard(props) {
   const carouselRef = useRef(null);

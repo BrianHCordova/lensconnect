@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import { cn } from "../../utils/cn";
 import PhotographerCard from "../PhotographerCard";
-
+import { useLenis } from '@studio-freight/react-lenis'; // Import the useLenis hook
 
 export default function Lamp() {
+  useLenis(); // Call the useLenis hook to initialize Lenis scroll effect
+
   return (
     <LampContainer>
       <motion.h1
@@ -16,7 +18,7 @@ export default function Lamp() {
         }}
         className=" "
       >
-      <PhotographerCard />
+        <PhotographerCard />
       </motion.h1>
     </LampContainer>
   );
