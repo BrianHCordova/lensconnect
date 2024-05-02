@@ -46,19 +46,22 @@ function UserImages(props) {
         if (!image) {
             return
         }
-        API.getImages().then((data) => {
-            console.log(data)
-            setImage(data)
-        })
-        // const userId = props.userId
-        // API.getSingleUserImages(userId).then((data) => {
+        // API.getImages().then((data) => {
         //     console.log(data)
         //     setImage(data)
         // })
+        // const userId = props.userId
+        if (!props.userId) {
+            return
+        }
+        API.getSingleUserImages(props.userId).then((data) => {
+            console.log(data)
+            setImage(data)
+        })
       
         // console.log(props.images)
         // setImage(props.images)
-    }, [])
+    }, [props.userId])
 
     // HTML
     return (

@@ -31,14 +31,16 @@ export default function PhotographerCard(props) {
   };
 
   useEffect(() => {
+    console.log(props)
     if (!image) {
       return
     }
     API.getImages().then((data) => {
-      console.log(data)
+      // console.log(data)
       setImage(data)
     })
 
+    if (props.userId){
     API.getSingleUserImages(props.userId).then((data)=> {
       console.log(data)
       const pfp = data.filter((dat)=>(dat.isProfilePic))
@@ -46,6 +48,7 @@ export default function PhotographerCard(props) {
       setProfilePic(pfp[(pfp.length-1)])
       console.log(profilePic)
     })
+    }
   }, [props.userId])
 
   return (
@@ -54,13 +57,12 @@ export default function PhotographerCard(props) {
       <div className="card lg:card-side bg-zinc-900 shadow-xl rounded-b-none flex flex-row">
         <figure className="profile-pic-container w-1/4">
           <img className="h-auto" src={profilePic?.imageUrl? profilePic.imageUrl: '/defaultProfile.png'} alt="Album" />
-          {()=>{console.log(profilePic)}}
         </figure>
         <div className="card-body">
           <h2 className="card-title text-4xl font-bold">@{props.username}</h2>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>Rating:</p>
-            <p className="w-3/4 card-content">{props.avgRate? props.avgRate: 'No ratings yet'}</p>
+            <p className="w-3/4 card-content">{(props.avgRate!==0)? props.avgRate: 'No ratings yet'}</p>
           </div>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>About Me:</p>
@@ -76,7 +78,7 @@ export default function PhotographerCard(props) {
           </div>
           <div className="card-actions justify-end">
             <Link to={profileUrl}>
-              <button className="btn text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out">To My Page</button>
+              <button className="btn text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out">View Profile</button>
             </Link>
           </div>
         </div>
@@ -89,11 +91,10 @@ export default function PhotographerCard(props) {
             // console.log(img)
             // console.log(props.userId)
             if (img.UserId === props.userId) {
-              return <>
-                <div className="carousel-item">
-                  <img key={img.id} src={img.imageUrl} alt={img.image} />
+              return <div className="carousel-item" key={img.id}>
+                  <img src={img.imageUrl} alt={img.image} />
                 </div>
-              </>
+              
             }
 
             else {
