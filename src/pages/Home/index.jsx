@@ -1,45 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import Welcome from '../../components/Welcome';
-import { useLenis } from '@studio-freight/react-lenis';
-import PhotographerCard from '../../components/PhotographerCard';
-import API from '../../utils/API';
-import Lamp from '../../components/Lamp';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import Welcome from "../../components/Welcome";
+import { useLenis } from "@studio-freight/react-lenis";
+import PhotographerCard from "../../components/PhotographerCard";
+import API from "../../utils/API";
+import Lamp from "../../components/Lamp";
 
 const ParallaxZoomComponent = () => {
   const [scrollY, setScrollY] = useState(0);
-  const [photographers, setPhotographers] = useState([])
-  const [featPro, setFeatPro] = useState([])
+  const [photographers, setPhotographers] = useState([]);
+  const [featPro, setFeatPro] = useState([]);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   useEffect(() => {
     if (!photographers) {
-      return
+      return;
     }
     API.getPhotographers().then((data) => {
-      setPhotographers(data)
-    })
+      setPhotographers(data);
+    });
 
     API.getFeatPro().then((data) => {
-      setFeatPro(data)
-      console.log(featPro)
-    })
+      setFeatPro(data);
+      console.log(featPro);
+    });
+  }, []);
 
-  }, [])
-
-  // Initialize lenis scroll effect
+  // Initialize lenis scroll effect on the page
   useLenis();
+
+  // Define a less aggressive scaling factor, the higher the value, the more aggressive the zoom effect
+  const scale = 1 + scrollY * 0.0003;
 
   return (
     <div className="parallax-container relative overflow-hidden ">
@@ -47,23 +49,23 @@ const ParallaxZoomComponent = () => {
       <motion.div
         className="parallax-image"
         style={{
-          scale: 1 + scrollY * 0.0005,
-          opacity: 1 - scrollY * 0.001,
+          scale: scale,
+          opacity: 1 - scrollY * 0.001, // Adjust the opacity value to control the fade effect, the higher the value, the faster the fade
         }}
       >
-        <img src="/main.png" alt="Main" style={{ width: '100vw' }} />
+        <img src="/main.png" alt="Main" style={{ width: "100vw" }} />
       </motion.div>
 
-
+      <Welcome />
       <Welcome />
       <div className="other-content">
         <div className="inset-0 flex items-center justify-center">
           <Lamp />
+          <Lamp />
         </div>
-        <div className=''>
-
-          <h1 className='text-5xl feat-pro-text'>Featured Photographer</h1>
-          <div className='featured-photographer'>
+        <div className="">
+          <h1 className="text-5xl feat-pro-text">Featured Photographer</h1>
+          <div className="featured-photographer">
             <PhotographerCard
               username={featPro[0]?.username}
               bio={featPro[0]?.biography}
@@ -75,7 +77,7 @@ const ParallaxZoomComponent = () => {
         </div>
       </div>
 
-      <div className='container mx-auto'>
+      <div className="container mx-auto">
         {photographers?.map((photographer) => {
           return (
             <PhotographerCard
@@ -88,7 +90,6 @@ const ParallaxZoomComponent = () => {
             />
           );
         })}
-
       </div>
     </div>
   );

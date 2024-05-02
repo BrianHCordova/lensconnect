@@ -13,7 +13,7 @@ export default function Welcome() {
   }, [controls, inView]);
 
   return (
-    <div className="overflow-hidden bg-transparent py-32">
+    <div className="overflow-hidden bg-zinc-800 rounded py-32 mt-12 mb-12 shadow-white"> {/* Added shadow-white class */}
       <div className="mx-auto max-w-7xl px-6 lg:flex lg:px-8">
         <motion.div
           ref={ref}
