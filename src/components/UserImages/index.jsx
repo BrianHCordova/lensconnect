@@ -3,10 +3,6 @@ import API from "../../utils/API";
 import { useEffect, useState, useRef } from 'react'
 import './style.css'
 
-
-
-
-
 function UserImages(props) {
 
     const [file, setFile] = useState()
@@ -54,7 +50,15 @@ function UserImages(props) {
             console.log(data)
             setImage(data)
         })
-    }, [file])
+        // const userId = props.userId
+        // API.getSingleUserImages(userId).then((data) => {
+        //     console.log(data)
+        //     setImage(data)
+        // })
+      
+        // console.log(props.images)
+        // setImage(props.images)
+    }, [])
 
     // HTML
     return (
@@ -62,11 +66,10 @@ function UserImages(props) {
             <div className=" image-container bg-zinc-900">
                 <div className="individual-image-container">
                     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 image-position">
+                        {/* {image?.map((img) => <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>)} */}
                         {image.map((img) => {
-                            console.log(img)
-                            console.log(props.userId)
                             if (img.UserId === props.userId) {
-                                return <Cards image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
+                                return <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
                             }
 
                             else {

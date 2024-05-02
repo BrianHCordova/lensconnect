@@ -53,16 +53,16 @@ const ParallaxZoomComponent = () => {
       >
         <img src="/main.png" alt="Main" style={{ width: '100vw' }} />
       </motion.div>
-   
 
-        <Welcome />
+
+      <Welcome />
       <div className="other-content">
         <div className="inset-0 flex items-center justify-center">
-        <Lamp />
+          <Lamp />
         </div>
         <div className=''>
 
-        <h1 className='text-5xl feat-pro-text'>Featured Photographer</h1>
+          <h1 className='text-5xl feat-pro-text'>Featured Photographer</h1>
           <div className='featured-photographer'>
             <PhotographerCard
               username={featPro[0]?.username}
@@ -70,25 +70,25 @@ const ParallaxZoomComponent = () => {
               userId={featPro[0]?.id}
               serveloc={featPro[0]?.ServeLocations}
               spec={featPro[0]?.Specialties}
-              />
+            />
           </div>
         </div>
       </div>
 
-        <div className='container mx-auto'>
-          {photographers?.map((photographer) => {
-            return (
-              <PhotographerCard
+      <div className='container mx-auto'>
+        {photographers?.map((photographer) => {
+          return (
+            <PhotographerCard
               key={photographer.id}
               username={photographer.username}
               bio={photographer.biography}
               userId={photographer.id}
               serveloc={photographer.ServeLocations}
               spec={photographer.Specialties}
-              />
-            );
-          })}
-    
+            />
+          );
+        })}
+
       </div>
     </div>
   );

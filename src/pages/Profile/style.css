@@ -19,6 +19,7 @@
     height: fit-content;
     border-radius: 15px;
     margin-top: 1rem;
+    padding: 1rem;
 
     h3 {
         margin-bottom: 1rem;
@@ -31,9 +32,9 @@
 }
 
 .profilePicture {
-    padding: 1rem;
+    /* padding: 1rem; */
     width: fit-content;
-    margin: 1rem;
+    /* margin: 1rem; */
 
     img {
         margin-top: 1rem;
@@ -112,12 +113,12 @@
     display: flex;
     justify-content: end;
     align-items: end;
-    text-align: end;
+    /* text-align: end; */
     max-width: 9rem;
     width: fit-content;
     button {
-        margin-right: 1rem;
-        margin-bottom: 1rem;
+        /* margin-right: 1rem; */
+        /* margin-bottom: 1rem; */
         text-align: center;
         border-radius: 15px;
         width: 6rem;
@@ -365,7 +366,7 @@
         height: 2rem;
         /* margin-top: 1rem; */
         border-radius: 15px;
-        margin-bottom: 1rem;
+        /* margin-bottom: 1rem; */
         /* padding: .2rem; */
         border-radius: 15px;
     }
@@ -390,7 +391,7 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        width: 8rem;
+        width: 8.5rem;
         height: 2rem;
         margin-top: 1rem;
         /* border-radius: 15px;

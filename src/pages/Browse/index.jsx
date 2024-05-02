@@ -59,9 +59,9 @@ function Browse(props) {
     // HTML
     return (
         <>
-            <h1>BROWSE</h1>
+            
             {/* testing route for uploading single image */}
-            <form onSubmit={postImage}>
+            {/* <form onSubmit={postImage}>
                 <input 
                     name="image" 
                     onChange={e => { 
@@ -72,9 +72,9 @@ function Browse(props) {
                     accept="image/*" 
                     multiple value={filename}/>
                 <input type="submit" value="submit" />
-            </form>
+            </form> */}
             {/* each card is imported as passed imaged and title props, these are just... placeholders */}
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4 my-[1rem]">
                 <div className="flex flex-col gap-4">
 
                     {image.map((img) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 // Imports api fetch functions
 import API from "../../utils/API"
 
@@ -10,6 +10,10 @@ function UserInfo(props) {
     const [newWebsite, setNewWebsite] = useState(props.website)
     const [isPhotographer, setIsPhotographer] = useState(props.isPhotographer)
     const [videography, setVideography] = useState(props.videography)
+    const [file, setFile] = useState()
+    const [profilePic, setProfilePic] = useState()
+    const [images, setImages] = useState()
+    const inputRef = useRef()
 
     // Function to refresh the user data to load fresh after each chip is deleted
     const refreshUserData = () => {
@@ -26,8 +30,11 @@ function UserInfo(props) {
         }
         // Runs the getOneUser function from the API utils page
         refreshUserData()
-    }, [props.userId]);
 
+        // handles grabbing profile image
+
+
+    }, [props.userId]);
 
     // Hook to change the users boolian properties on checkbox click
     const toggleIsPhotographer = () => {
@@ -134,96 +141,149 @@ function UserInfo(props) {
         width: `${newSpec.length * 5 + 50}px`
     };
 
+    const handleUpload = async (e) => {
+        e.preventDefault()
+
+        const formData = new FormData();
+        formData.append("image", file)
+
+        API.postProfilePic(formData, props.userId)
+        setFile('')
+    }
+
+    useEffect(() => {
+
+        API.getSingleUserImages(props.userId).then((data) => {
+
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].isProfilePic === true) {
+                    console.log(data[i])
+                    const url = data[i].imageUrl
+                    setProfilePic(url)
+                    console.log(profilePic)
+                } else {
+                    setProfilePic('/defaultProfile.png')
+                }
+            }
+        })
+    }, [props.userId])
+
     // HTML
     if (!editing) { // Will render the basic photographers userInfo
         return (
             <>
-            <section className=" userInfoSection bg-zinc-900 ">
-                <div className="profilePicture col-span-1  ">
-                    <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="200" width="200" alt="" />
-                </div>
-                <div className="bio ">
-                    <ul className="biography">
-                        <li>Username:&nbsp;{newUserObj.username}</li>
-                        <li>About Me:<br /><span>{newUserObj.biography}</span></li>
-                    </ul>
-                </div>
-                <div className="userDetails">
-                    {newUserObj.isPhotographer
-                        ? <ul>
-                            <li className="serveLocationChip" >Serves:&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
-                                <span className="chip" key={i}>{loc.location}&nbsp;</span>
-                            ))}
-                            </li>
-                            <li className="specialtyChip" >Specialties:&nbsp; {newUserObj.Specialties?.map((spec, i) => (
-                                <span className="chip" key={i}>{spec.specialty}&nbsp;</span>
-                            ))}
-                            </li>
-                            <li className="websiteAndVideo" >Website:&nbsp;<a target="_blank" href={props.website}>{newUserObj.website}</a></li>
-                            {newUserObj.videography
-                                ? <li className="websiteAndVideo">Videography: Yes</li>
-                                : <li className="websiteAndVideo">Videography: No</li>
-                            }
+                <section className=" userInfoSection bg-zinc-900 ">
+                    <div className="profilePicture col-span-1 px-[1rem]">
+                        <img src={profilePic ? profilePic : '/defaultProfile.png'}
+                            height="200"
+                            width="200"
+                            alt="" />
+
+                    </div>
+                    <div className="bio ">
+                        <ul className="biography">
+                            <li>Username:&nbsp;{newUserObj.username}</li>
+                            <li>About Me:<br /><span>{newUserObj.biography}</span></li>
+                            {/* <button onClick={()=> handleLoad()}>Refresh</button> */}
                         </ul>
-                        : <></>
-                    }
-                </div>
-                <div className="editBtn container duration-200">
-                    <button className= " bg-zinc-700" onClick={toggelEditing} >Edit</button>
-                </div>
-            </section>
+                    </div>
+                    <div className="userDetails py-[1.5rem] px-[0.5rem]">
+                        {newUserObj.isPhotographer
+                            ? <ul>
+                                <li className="serveLocationChip" >Serves:&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
+                                    <span className="chip" key={i}>{loc.location}&nbsp;</span>
+                                ))}
+                                </li>
+                                <li className="specialtyChip" >Specialties:&nbsp; {newUserObj.Specialties?.map((spec, i) => (
+                                    <span className="chip" key={i}>{spec.specialty}&nbsp;</span>
+                                ))}
+                                </li>
+                                <li className="websiteAndVideo" >Website:&nbsp;<a target="_blank" href={props.website}>{newUserObj.website}</a></li>
+                                {newUserObj.videography
+                                    ? <li className="websiteAndVideo">Videography: Yes</li>
+                                    : <li className="websiteAndVideo">Videography: No</li>
+                                }
+                            </ul>
+                            : <></>
+                        }
+                    </div>
+                    <div className="editBtn container duration-200">
+                        <button className=" bg-zinc-700" onClick={toggelEditing} >Edit</button>
+                    </div>
+                </section>
             </>
         );
     } else { // Will render the editable photographer userInfo
         return (
             <section className="userInfoSectionRow bg-zinc-900">
-                <div className="profilePicture  col-span-1 row-span-1 ">
-                    <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="200" width="200" alt="" />
-                    <button>Update Image</button>
+                <div className="profilePicture  col-span-1 row-span-1 pl-[2rem] pt-[1rem] mb-[1rem]">
+                    <img src={profilePic ? profilePic : '/defaultProfile.png'} height="200" width="200" alt="" />
+                    <form>
+
+                        <input
+                            type="file"
+                            accept="image/*"
+                            name="image"
+                            onChange={e => {
+                                console.log(e.target.files)
+                                setFile(e.target.files[0])
+                            }}
+                            hidden
+                            ref={inputRef}
+                        />
+                        {file ?
+                            <>
+                                <button type="submit" onClick={handleUpload}>Upload!</button>
+                            </>
+                            :
+                            <button onClick={(e) => { e.preventDefault(); inputRef.current.click() }}>Update Image</button>
+                        }
+                    </form>
                 </div>
-                <div className="editBio mx-auto">
-                    <ul>
-                        <li>&nbsp;&nbsp;&nbsp;Username: {newUserObj.username}</li>
-                        <li>&nbsp;&nbsp;&nbsp;About Me: <textarea onChange={handleBioInput} className="textarea" cols="40" rows="6">{newUserObj.biography}</textarea></li>
+                <div className="mx-auto">
+                    <ul className="list-none px-[2rem] ">
+                        <li className="py-2">Username: {newUserObj.username}</li>
+                        <li className="py-2">About Me: </li>
+                        <textarea onChange={handleBioInput} className="textarea text-[rgb(201,201,201)] w-full" cols="40" rows="6" value={newUserObj.biography} ></textarea>
                     </ul>
                 </div>
-                <div className="userDetails">
+                <div className="mx-auto">
                     {isPhotographer
-                        ? <div><p>Are you a a Photographer looking for work?: <input onChange={toggleIsPhotographer} checked  type="checkbox" /></p></div>
-                        : <div><p>Are you a a Photographer looking for work?: <input onChange={toggleIsPhotographer} type="checkbox" /></p></div>
+                        ? <div className="text-center pt-3"><p>Are you a Photographer looking for work? &nbsp; <input onChange={toggleIsPhotographer} checked type="checkbox" /></p></div>
+                        : <div className="text-center pt-3"><p>Are you a Photographer looking for work?: &nbsp; <input onChange={toggleIsPhotographer} type="checkbox" /></p></div>
                     }
                     {isPhotographer
-                        ? <ul>
-                        <div className="chipWrap"> <div className="instructions"><span className="text-green-600">+</span> to add, or <span className="text-red-600">x</span> to remove a location</div>
-                            <li className="serveLocationChip" >&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
-                                <span className="chip" key={i}>{loc.location}&nbsp;<button onClick={delUserLoc} id={loc.id} className="chipDelete">X</button>&nbsp;</span>
-                            ))}
-                                <div className="addChip">
-                                    <input onChange={handleLocInput} value={newLoc} placeholder="add Location" type="text" style={locInputStyle} />&nbsp;<button onClick={addUserLoc} className="chipDelete">+</button>&nbsp;
-                                </div>
-                            </li>
-                        </div>
-                        <div className="chipWrap"> 
-                        <div className="instructions"><span className="text-green-600">+</span> to add, or <span className="text-red-600">x</span> to remove a specialty</div>
-                            <li className="specialtyChip" >&nbsp; {newUserObj.Specialties?.map((spec, i) => (
-                                <span className="chip" key={i}>{spec.specialty}&nbsp;<button onClick={delUserSpec} id={spec.id} className="chipDelete">X</button>&nbsp;</span>
-                            ))}
-                                <div className="addChip">
-                                    <input onChange={handleSpecInput} value={newSpec} placeholder="add specialty" type="text" style={specInputStyle} />&nbsp;<button onClick={addUserSpec} className="chipDelete">+</button>&nbsp;
-                                </div>
-                            </li>
-                        </div>
-                        
-                        <li>Website: <input onChange={handleWebsiteInput} placeholder={newUserObj.website} className="editInput"></input></li>
-                        {videography
-                                ? <li>Videography: <input onChange={toggleVideography} checked type="checkbox" /></li>
-                                : <li>Videography: <input onChange={toggleVideography} type="checkbox" /></li>
+                        ? <ul className="px-[2rem]">
+                            <div className="chipWrap rounded-md"> <div className="instructions"><span className="text-green-600">+</span> to add, or <span className="text-red-600">x</span> to remove a location</div>
+                                <li className="serveLocationChip" >&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
+                                    <span className="chip" key={i}>{loc.location}&nbsp;<button onClick={delUserLoc} id={loc.id} className="chipDelete">X</button>&nbsp;</span>
+                                ))}
+                                    <div className="addChip">
+                                        <input onChange={handleLocInput} value={newLoc} placeholder="add Location" type="text" style={locInputStyle} />&nbsp;<button onClick={addUserLoc} className="chipDelete">+</button>&nbsp;
+                                    </div>
+                                </li>
+                            </div>
+                            <div className="chipWrap rounded-md">
+                                <div className="instructions"><span className="text-green-600">+</span> to add, or <span className="text-red-600">x</span> to remove a specialty</div>
+                                <li className="specialtyChip" >&nbsp; {newUserObj.Specialties?.map((spec, i) => (
+                                    <span className="chip" key={i}>{spec.specialty}&nbsp;<button onClick={delUserSpec} id={spec.id} className="chipDelete">X</button>&nbsp;</span>
+                                ))}
+                                    <div className="addChip">
+                                        <input onChange={handleSpecInput} value={newSpec} placeholder="add specialty" type="text" style={specInputStyle} />&nbsp;<button onClick={addUserSpec} className="chipDelete">+</button>&nbsp;
+                                    </div>
+                                </li>
+                            </div>
+
+                            <li className="pb-[1rem]">Website : <input onChange={handleWebsiteInput} placeholder={newUserObj.website} className="editInput rounded-md"></input></li>
+                            {videography
+                                ? <li>Videography: &nbsp; <input onChange={toggleVideography} checked type="checkbox" /></li>
+                                : <li>Videography: &nbsp; <input onChange={toggleVideography} type="checkbox" /></li>
                             }
-                    </ul>
+                        </ul>
                         : <></>
                     }
                 </div>
-                <div className="editBtn justify-end container">
+                <div className="editBtn justify-end container pt-[1rem] pr-[1rem] pb-[1rem]">
                     <button className="bg-zinc-700" onClick={() => { toggelEditing(), editUser() }}>Save</button>
                 </div>
             </section>
