@@ -27,22 +27,25 @@ const NewMessage = ({ socket, username }) => {
       e.preventDefault();
       socket.emit('message', message);
       setValue('');
+      window.location.reload();
     };
     
     return (
       <>
+    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <form onSubmit={submitForm}>
           <input
               type="text"
               value={value}
               placeholder="Type your message"
               onChange={(e) => {
-              setValue(e.currentTarget.value);
-            }}
-            style={{ color: 'black' }}
-          />
-          <button type="submit">Send</button>
+                setValue(e.currentTarget.value);
+              }}
+              style={{ color: 'black' }}
+              />
+          <button type="submit" className="btn text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out">Send</button>
         </form>
+    </div>
 
 
       

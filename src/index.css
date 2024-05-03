@@ -33,3 +33,6 @@ main {
   min-height: calc(100vh - 96px - 120px)
 };
 
+.delete-button {
+  width: 20rem !important;
+}

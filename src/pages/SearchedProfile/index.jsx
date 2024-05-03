@@ -13,6 +13,7 @@ import UserReviwee from "../../components/UserReviewee"
 import API from "../../utils/API"
 import Chat from "../Chat";
 import io from 'socket.io-client';
+import UserImages from "../../components/UserImages";
 
 const socket = io('http://localhost:3000');
 
@@ -55,17 +56,18 @@ function SearchedProfile(props) {
         e.preventDefault();
         //create a room with the string of logged in userid and searched user id
         socket.emit('joinRoom', createString(), props.id, id);
-        window.location.href = `/chat/${createString()}`;
+        window.location.href = `/chat`;
     }
 
     // HTML
     return (
         <>
-            <div className="container mx-auto w-1/3 grid profile-container">
-                <div className="">
+            <div className="container mx-auto w-1/3 profile-container justify-start">
+                <div className="mt-[1rem]">
                     {/* pass the userObj into UserInfo as props when tokens work */}
                     <SearchedUserInfo
                         userId={props.userId}
+                        profId={id}
                         username={userObj.username}
                         biography={userObj.biography}
                         Specialties={userObj.Specialties}
@@ -75,6 +77,9 @@ function SearchedProfile(props) {
                         isPhotographer={userObj.isPhotographer}
                     />
                 </div>
+                <div className="col-span-full">
+                    <UserImages userId={props.userId} profId={parseInt(id)} />
+                </div>
                 <div className="">
                     <UserReviwee reviews={reviewArr} />
                     <div className="reviewUserBtn ">
@@ -82,7 +87,10 @@ function SearchedProfile(props) {
                     </div>
                 </div>
             </div>
-            <button type="button" onClick={createRoom}>Start Chat</button>
+            <div className="reviewUserBtn">
+
+            <button onClick={createRoom} className="reviewUserBtn">Start Chat</button>
+            </div>
         </>
     );
 }

@@ -11,20 +11,17 @@ export default function Messages({ socket, username }) {
     , [username]);
     
 
-    useEffect(() => {
-        socket.on('messageResponse', (message) => {
-            console.log(message)
-            setMessages((messages) => [...messages, message])
-        })
+    // useEffect(() => {
+    //     socket.on('messageResponse', (message) => {
+    //         console.log(message)
+    //         setMessages((messages) => [...messages, message])
+    //     })
 
-    }, [socket])
+    // }, [socket])
 
 
     return ((
         <div>
-            <div>
-                <h1>Current Chat</h1>
-            </div>
             {messages.map((message, index) => (
                 <div key={index}>{message.user}: {message.message} - {message.date}</div>
             ))}
