@@ -13,17 +13,6 @@ export default function Review(props) {
     const [username, setUsername] = useState()
     const [reviewee, setReviewee] = useState()
 
-    // useEffect(() => {
-    //     // Fetches the reviewee users data
-    //     API.getOneUser(id).then((userData) => {
-    //         setUserObj(userData);
-    //     });
-    //     // Fetches the revieww users reviews as a revieww (reviews about the user)
-    //     API.getReviewsByReviewee(id).then((revData) => {
-    //         setReviewArr(revData)
-    //     });
-    // }, [])
-
      const userSearch  = async (event) =>  {
         event.preventDefault()
          await API.getUserByUsername(username).then((userData) => {
@@ -45,6 +34,11 @@ export default function Review(props) {
 
     // Function to post the review
     const postUserReview = () => {
+            // saftery net to stop people from reviewing themselves
+    if (userObj.id == props.userId) {
+        alert("you cannot review youself...")
+        return
+      }
         console.log(userObj)
         // Creates an object with all the necesary data for the review
         const passData = { review: newReview, rating: newRating, revieweeId: userObj.id, userId: props.userId }
@@ -69,7 +63,7 @@ export default function Review(props) {
         API.editUserBio(newAverage).then((newData) => {
         });
         // takes the user back to the homepage
-        navigate("/")
+        navigate("/profile")
     }
 
     // Hooks to handle the review content and rating change
@@ -79,6 +73,10 @@ export default function Review(props) {
     const handleRatingInput = (event) => {
         setNewRating(event.target.value);
     };
+
+    const returnRoute = e => {
+        navigate("/profile")
+    }
 
     // HTML
 
@@ -103,16 +101,16 @@ export default function Review(props) {
                                 <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
                                     Username of person who hired you
                                 </label>
-                                <div className="mt-2">
+                                <div className="mt-2 flex">
                                     <input
                                         onChange={handleUsernameInput}
                                         type="text"
                                         required
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
+                                        className="block w-4/5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
                                     />
                                     {userFound
-                                        ? <h3 className='text-green-600' >User Found</h3>
-                                        : <button className='text-orange-600' onClick={userSearch}>Search for User</button>
+                                        ? <h3 className='ml-5 flex w-1/5 justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600' >Found</h3>
+                                        : <button className='ml-5 flex w-1/5 justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600' onClick={userSearch}>Search</button>
                                     }
                                 </div>
                             </div>
@@ -172,11 +170,18 @@ export default function Review(props) {
                                 </svg>
                             </label>
                         </div>
-                        <div>
+                        <div className="mt-2 flex">
+                            <button
+                                onClick={returnRoute}
+                                type="submit"
+                                className="flex w-1/2 justify-center rounded-md bg-orange-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-600 duration-100 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-200"
+                            >
+                                Cancel
+                            </button>
                             <button
                                 onClick={postUserReview}
                                 type="submit"
-                                className="flex w-full justify-center rounded-md bg-emerald-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-600 duration-100 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-200"
+                                className="flex w-1/2 justify-center rounded-md bg-emerald-700 ml-3 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-600 duration-100 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-200"
                             >
                                 Submit
                             </button>

@@ -25,6 +25,11 @@ export default function Review(props) {
 
   // Function to post the review
   const postUserReview = () => {
+    // saftery net to stop people from reviewing themselves
+    if (id == props.userId) {
+      alert("you cannot review youself...")
+      return
+    }
     // Creates an object with all the necesary data for the review
     const passData = { review: newReview, rating: newRating, revieweeId: id, userId: props.userId }
     // Performs the fetch request from the API untils page

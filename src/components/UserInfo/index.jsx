@@ -250,7 +250,7 @@ function UserInfo(props) {
                     <ul className="list-none px-[2rem] ">
                         <li className="py-2">Username: {newUserObj.username}</li>
                         <li className="py-2">About Me: </li>
-                        <textarea onChange={handleBioInput} className="textarea text-[rgb(201,201,201)] w-full" cols="40" rows="6" defaultValue={newUserObj.biography} ></textarea>
+                        <textarea onChange={handleBioInput} className="textarea text-[rgb(201,201,201)] bg-zinc-800 w-full" cols="40" rows="6" defaultValue={newUserObj.biography} ></textarea>
                     </ul>
                 </div>
                 <div className="mx-auto">

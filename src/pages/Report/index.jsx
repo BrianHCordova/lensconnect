@@ -27,10 +27,10 @@ export default function Report(props) {
   }
 
   const postUserReport = () => {
-    let passData ={}
-    if(role === 'Photographer'){
+    let passData = {}
+    if (role === 'Photographer') {
       passData = { paid: payBool, voluntary: bonoBool, comment: newComment, hirerId: searchedUser.id, userId: props.userId }
-    }else {
+    } else {
       passData = { paid: payBool, voluntary: bonoBool, comment: newComment, hirerId: props.userId, userId: searchedUser.id }
     }
     API.postUserReport(passData).then((newData) => {
@@ -72,6 +72,9 @@ export default function Report(props) {
     }
   };
 
+  const returnRoute = e => {
+    navigate("/profile")
+}
 
   return (
     <>
@@ -91,38 +94,38 @@ export default function Report(props) {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-neutral-200 px-6 py-12 shadow sm:rounded-lg sm:px-12">
             <form className="space-y-6" action="#" method="POST">
-            <div>
+              <div>
                 <label className='text-gray-900 shadow-sm'>What was your role in the tansaction?</label>
                 <br />
                 <label className='text-gray-900 shadow-sm'>
-                  <input onChange={handleRoleChange} type="radio" name="role" value="Photographer" />
-                  Photographer
+                  <input  onChange={handleRoleChange} type="radio" name="role" value="Photographer" />
+                  &nbsp;&nbsp;Photographer
                 </label>
                 <br />
                 <label className='text-gray-900 shadow-sm'>
                   <input onChange={handleRoleChange} type="radio" name="role" value="Hirer" />
-                  Hirer
+                  &nbsp;&nbsp;Hirer
                 </label>
               </div>
               <div>
                 <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
                   {role === "Photographer"
-                  ? 'Username of person who hired you:'
-                  : ''}
+                    ? 'Username of person who hired you:'
+                    : ''}
                   {role === "Hirer"
-                  ? 'Username of person you hired:'
-                  : ''}
+                    ? 'Username of person you hired:'
+                    : ''}
                 </label>
-                <div className="mt-2">
+                <div className="mt-2 flex">
                   <input
                     onChange={handleUsernameInput}
                     type="text"
                     required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
+                    className="block w-4/5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
                   />
                   {userFound
-                    ? <h3 className='text-green-600 w-2/5 pl-1 pr-1 mt-1 pt-.5 pb-.5' >User Found</h3>
-                    : <button className='text-orange-600  pl-1 pr-1 mt-1 pt-.5 pb-.5 hover:bg-gray-300 rounded-md ' onClick={userSearch}>Search for User</button>
+                    ? <h3 className='ml-5 flex w-1/5 justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600' >Found</h3>
+                    : <button className='ml-5 flex w-1/5 justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600' onClick={userSearch}>Search</button>
                   }
                 </div>
               </div>
@@ -134,12 +137,12 @@ export default function Report(props) {
                     <br />
                     <label className='text-gray-900 shadow-sm'>
                       <input onChange={handlePayInput} type="radio" name="yesno" value="yes" />
-                      Yes
+                      &nbsp;&nbsp;Yes
                     </label>
                     <br />
                     <label className='text-gray-900 shadow-sm'>
                       <input onChange={handlePayInput} type="radio" name="yesno" value="no" />
-                      No
+                      &nbsp;&nbsp;No
                     </label>
                   </div>
                   <div>
@@ -147,47 +150,47 @@ export default function Report(props) {
                     <br />
                     <label className='text-gray-900 shadow-sm'>
                       <input onChange={handleBonoInput} type="radio" name="noyes" value='yes' />
-                      Yes
+                      &nbsp;&nbsp;Yes
                     </label>
                     <br />
                     <label className='text-gray-900 shadow-sm'>
                       <input onChange={handleBonoInput} type="radio" name="noyes" value="no" />
-                      No
+                      &nbsp;&nbsp;No
                     </label>
                   </div>
                 </>
                 : <></>
               }
               {role === "Hirer"
-              ? <>
-                <div>
-                  <label className='text-gray-900 shadow-sm'>Did you pay {searchedUser.username}?</label>
-                  <br />
-                  <label className='text-gray-900 shadow-sm'>
-                    <input onChange={handlePayInput} type="radio" name="yesno" value="yes" />
-                    Yes
-                  </label>
-                  <br />
-                  <label className='text-gray-900 shadow-sm'>
-                    <input onChange={handlePayInput} type="radio" name="yesno" value="no" />
-                    No
-                  </label>
-                </div>
-                <div>
-                  <label className='text-gray-900 shadow-sm'>Was this pro-bono work (free)</label>
-                  <br />
-                  <label className='text-gray-900 shadow-sm'>
-                    <input onChange={handleBonoInput} type="radio" name="noyes" value='yes' />
-                    Yes
-                  </label>
-                  <br />
-                  <label className='text-gray-900 shadow-sm'>
-                    <input onChange={handleBonoInput} type="radio" name="noyes" value="no" />
-                    No
-                  </label>
-                </div>
-              </>
-              :<></>
+                ? <>
+                  <div>
+                    <label className='text-gray-900 shadow-sm'>Did you pay {searchedUser.username}?</label>
+                    <br />
+                    <label className='text-gray-900 shadow-sm'>
+                      <input onChange={handlePayInput} type="radio" name="yesno" value="yes" />
+                      &nbsp;&nbsp;Yes
+                    </label>
+                    <br />
+                    <label className='text-gray-900 shadow-sm'>
+                      <input onChange={handlePayInput} type="radio" name="yesno" value="no" />
+                      &nbsp;&nbsp;No
+                    </label>
+                  </div>
+                  <div>
+                    <label className='text-gray-900 shadow-sm'>Was this pro-bono work (free)</label>
+                    <br />
+                    <label className='text-gray-900 shadow-sm'>
+                      <input onChange={handleBonoInput} type="radio" name="noyes" value='yes' />
+                      &nbsp;&nbsp;Yes
+                    </label>
+                    <br />
+                    <label className='text-gray-900 shadow-sm'>
+                      <input onChange={handleBonoInput} type="radio" name="noyes" value="no" />
+                      &nbsp;&nbsp;No
+                    </label>
+                  </div>
+                </>
+                : <></>
               }
 
               <div>
@@ -207,11 +210,18 @@ export default function Report(props) {
                 request a review?
               </label> */}
             </form>
-            <div>
+            <div className="mt-2 flex">
+            <button
+                                onClick={returnRoute}
+                                type="submit"
+                                className="flex w-1/2 justify-center rounded-md bg-orange-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-600 duration-100 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-200"
+                            >
+                                Cancel
+                            </button>
               <button
                 onClick={postUserReport}
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-emerald-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-600 duration-100 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-200"
+                className="flex w-1/2 justify-center rounded-md bg-emerald-700 ml-3 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-600 duration-100 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-200"
               >
                 Submit
               </button>
