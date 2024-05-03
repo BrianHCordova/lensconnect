@@ -19,7 +19,7 @@ const socket = io('http://localhost:3000');
 
 
 function SearchedProfile(props) {
-
+    console.log(props)
     // Use state hook to store the users data
     const navigate = useNavigate()
     const [userObj, setUserObj] = useState({});
@@ -83,7 +83,10 @@ function SearchedProfile(props) {
                 <div className="">
                     <UserReviwee reviews={reviewArr} />
                     <div className="reviewUserBtn ">
-                        <button onClick={handleReview} className="reviewUserBtn bg-zinc-800">Review {userObj.username}</button>
+                        {userObj.id == props.userId
+                        ?<></>
+                        :<button onClick={handleReview} className="reviewUserBtn bg-zinc-800">Review {userObj.username}</button>
+                        }
                     </div>
                 </div>
             </div>

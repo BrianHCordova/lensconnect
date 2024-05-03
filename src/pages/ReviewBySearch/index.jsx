@@ -13,17 +13,6 @@ export default function Review(props) {
     const [username, setUsername] = useState()
     const [reviewee, setReviewee] = useState()
 
-    // useEffect(() => {
-    //     // Fetches the reviewee users data
-    //     API.getOneUser(id).then((userData) => {
-    //         setUserObj(userData);
-    //     });
-    //     // Fetches the revieww users reviews as a revieww (reviews about the user)
-    //     API.getReviewsByReviewee(id).then((revData) => {
-    //         setReviewArr(revData)
-    //     });
-    // }, [])
-
      const userSearch  = async (event) =>  {
         event.preventDefault()
          await API.getUserByUsername(username).then((userData) => {
@@ -45,6 +34,11 @@ export default function Review(props) {
 
     // Function to post the review
     const postUserReview = () => {
+            // saftery net to stop people from reviewing themselves
+    if (userObj.id == props.userId) {
+        alert("you cannot review youself...")
+        return
+      }
         console.log(userObj)
         // Creates an object with all the necesary data for the review
         const passData = { review: newReview, rating: newRating, revieweeId: userObj.id, userId: props.userId }
