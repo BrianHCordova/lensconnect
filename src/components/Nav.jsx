@@ -63,12 +63,7 @@ const Nav = (props) => {
 
                     ) : (<></>)}
                     {props.userId ? (
-                      <Link
-                        to='/logout'
-                        className="rounded-md px-3 focus:bg-cyan-800 py-2 text-sm font-medium text-gray-300 hover:bg-cyan-600 duration-200 ease-in-out hover:text-black"
-                        >
-                        Logout
-                      </Link>
+                      <></>
                     ) : (
 
                       <Link
@@ -117,28 +112,28 @@ const Nav = (props) => {
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                            to={props.userId ? ('/profile') : ('/login')}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
                               Your Profile
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              to="/settings"
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
                               Settings
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>

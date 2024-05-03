@@ -13,7 +13,7 @@ import API from "../../utils/API"
 
 function Profile(props) {
 
-
+    const navigate = useNavigate()
     // Use state hook to store the users data
     const [userObj, setUserObj] = useState({});
     const [reviewArr, setReviewArr] = useState([]);

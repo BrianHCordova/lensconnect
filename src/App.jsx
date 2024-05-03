@@ -15,7 +15,8 @@ import ChatOne from "./pages/ChatOne";
 import Review from "./pages/Review";
 import ReviewBySearch from "./pages/ReviewBySearch";
 import Report from "./pages/Report";
-import About from "./pages/About"; 
+import About from "./pages/About";
+import Settings from "./pages/Settings";
 import API from "./utils/API";
 
 export default function App() {
@@ -122,7 +123,11 @@ export default function App() {
               path="/report"
               element={<Report userId={userId} token={token} />}
             />
-            <Route path="/about" element={<About />} /> 
+            <Route path="/about" element={<About />} />
+            <Route
+              path="/settings"
+              element={<Settings userId={userId} token={token} />}>
+            </Route>
           </Routes>
         </main>
         <Footer />

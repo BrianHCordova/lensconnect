@@ -60,7 +60,7 @@ export default function PhotographerCard(props) {
       {/* Existing card component */}
       <div className="card lg:card-side bg-zinc-900 shadow-md shadow-black duration-200 ease-in-out rounded-b-none flex flex-row">
         <figure className="profile-pic-container w-1/4">
-          <img className="h-auto" src={profilePic?.imageUrl ? profilePic.imageUrl : '/defaultProfile.png'} alt="Album" className="rounded-[1rem]" />
+          <img className="h-auto rounded-[1rem]" src={profilePic?.imageUrl ? profilePic.imageUrl : '/defaultProfile.png'} alt="Album"  />
         </figure>
         <div className="card-body">
           <h2 className="card-title text-4xl font-bold">@{props.username}</h2>
