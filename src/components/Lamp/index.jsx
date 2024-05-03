@@ -55,8 +55,7 @@ export function LampContainer({ children, className }) {
   return (
     <div
       className={cn(
-        "relative flex min-h-[150vh] flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0",
-        className
+        "relative flex min-h-[150vh] flex-col items-center justify-center overflow-hidden bg-slate-950 w-full shadow-xl shadow-black rounded-lg mb-60 z-0",
       )}
     >
       <div className="absolute top-[15rem] flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
