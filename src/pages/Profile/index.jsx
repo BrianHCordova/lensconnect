@@ -80,7 +80,7 @@ function Profile(props) {
                     <h3>Transaction Report</h3>
                     <p>Transaction Reports are a confidential report a photographer can make after performing any kind of work for another person, organized though LensConnect. Theese reports are used by our customer service and admit team to review promised transactions and photography gigs that are organized on LensConnect.</p>
                     <div className="reportBtnWrap container">
-                        <button className="bg-zinc-700" onClick={handleReport}>Create a Report</button>
+                        <button className="bg-zinc-700 rounded-md" onClick={handleReport}>Create a Report</button>
                     </div>
                 </div>
             ) : (<></>)}

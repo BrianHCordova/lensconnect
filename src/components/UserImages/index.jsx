@@ -113,7 +113,7 @@ function UserImages(props) {
                 <div className="addPhotoBtn-Container">
                     {!attach ? (
                         <div className="addPhotoBtn">
-                            {props.userId === props.profId ? <button className='bg-zinc-700' onClick={showAttach} >Add photos</button> : (<></>)}
+                            {props.userId === props.profId ? <button className='bg-zinc-700 rounded-md' onClick={showAttach} >Add photos</button> : (<></>)}
 
                         </div>
                     ) : (!file ? (

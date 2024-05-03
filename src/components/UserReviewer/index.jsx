@@ -41,7 +41,7 @@ function UserReviewer(props) {
                 </div>
             </div>
             <div className="container writeBtnWrap">
-                    <button className="writeBtn bg-zinc-700" onClick={handleChatOpen}>Write A Review</button>
+                    <button className=" bg-zinc-700 rounded-md" onClick={handleChatOpen}>Write A Review</button>
                 </div>
         </section>
 
