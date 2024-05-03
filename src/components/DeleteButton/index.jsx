@@ -7,24 +7,26 @@ import {
   DialogFooter,
   Typography,
 } from "@material-tailwind/react";
- 
+
 export default function DeleteButton({ imgId }) {
   const [open, setOpen] = React.useState(false);
- 
+
   const handleOpen = () => setOpen(!open);
 
   const handleDeleteRequest = async () => {
     await fetch(`http://localhost:3000/api/image/${imgId}`, {
       method: "DELETE"
-    }).then(res=>res.json()).then(()=> {
+    }).then(res => res.json()).then(() => {
       handleOpen()
     })
   }
- 
+
   return (
     <>
       <Button onClick={handleOpen} className="bg-red-900 mr-3">Delete</Button>
-      <Dialog open={open} handler={handleOpen} className="w-[20rem] bg-zinc-900">
+
+
+      <Dialog open={open} handler={handleOpen} className="md:w-[20rem] sm:w-[20rem] w-[80%] bg-zinc-900">
         <DialogHeader >
           <Typography variant="h5" color="blue-gray" className="p-1 mx-auto">
             Are you sure?
@@ -46,13 +48,13 @@ export default function DeleteButton({ imgId }) {
           <Typography color="red" variant="h6">
             Once deleted, it cannot be reverted.
           </Typography>
-          
+
         </DialogBody>
-        <DialogFooter className="space-x-2">
+        <DialogFooter className="space-x-2 p-3">
           <Button variant="text" color="blue-gray" onClick={handleOpen}>
             Cancel
           </Button>
-          <Button variant="gradient" onClick={handleDeleteRequest}>
+          <Button onClick={handleDeleteRequest} className="bg-red-800"> 
             Yes, Delete it
           </Button>
         </DialogFooter>

@@ -31,6 +31,10 @@
     } */
 }
 
+.userInfoCard {
+    box-shadow: 4px 4px 0px 1px #29292d;
+}
+
 .profilePicture {
     /* padding: 1rem; */
     width: fit-content;
@@ -52,7 +56,7 @@
     }
 }
 
-.bio {
+/* .bio {
     display: flex;
     flex-wrap: wrap;
     margin-top: 3rem;
@@ -66,7 +70,7 @@
     li {
         margin-bottom: 2rem;
     }
-}
+} */
 
 .editBio {
     display: inline;

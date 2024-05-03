@@ -56,10 +56,8 @@ export default function App() {
   const logout = () => {
     setToken("");
     setUserId(0);
-    localStorage.removeItem("token");
-  };
-
-  const searchedUser = 1;
+    localStorage.removeItem("token")
+  }
 
   return (
     <>
@@ -74,7 +72,7 @@ export default function App() {
             />
             <Route
               path="/profile/:id"
-              element={<SearchedProfile userId={searchedUser} id={userId} />}
+              element={<SearchedProfile userId={userId} id={userId} />}
             />
             <Route path="/search" element={<Search />} />
             <Route
