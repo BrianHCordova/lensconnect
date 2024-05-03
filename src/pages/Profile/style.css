@@ -91,6 +91,8 @@
     }
 }
 
+
+
 .userDetails {
     display: inline;
     align-items: center;
@@ -196,7 +198,8 @@
     width: 80%;
     color: black;
     border: 2px solid #698795;
-    background: transparent;
+    /* background: transparent; */
+    background: #1f2229;
 }
 
 .editInput {
