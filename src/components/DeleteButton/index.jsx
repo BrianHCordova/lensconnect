@@ -14,7 +14,7 @@ export default function DeleteButton({ imgId }) {
   const handleOpen = () => setOpen(!open);
 
   const handleDeleteRequest = async () => {
-    await fetch(`http://localhost:3000/api/image/${imgId}`, {
+    await fetch(`https://lensconnect-back.onrender.com/api/image/${imgId}`, {
       method: "DELETE"
     }).then(res => res.json()).then(() => {
       handleOpen()

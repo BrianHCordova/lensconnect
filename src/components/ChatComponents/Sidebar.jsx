@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import API from '../../utils/API'
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:3000');
+const socket = io('https://lensconnect-back.onrender.com/');
 
 function ChatRooms(props) {
   // console.log(props.userId)

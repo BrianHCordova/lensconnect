@@ -7,7 +7,7 @@ import API from '../../utils/API';
 // import CreateRoom from '../../components/ChatComponents/CreateRoom';
 
 export default function ChatOne(props) {
-    const URL_PREFIX = "http://localhost:3000"
+    const URL_PREFIX = "https://lensconnect-back.onrender.com/"
 
     const [socket, setSocket] = useState(null);
     const [user, setUser] = useState([]);
