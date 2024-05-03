@@ -81,7 +81,7 @@ function UserImages(props) {
                         {/* {image?.map((img) => <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>)} */}
                         {image.map((img) => {
                             if (img.UserId === props.userId) {
-                                return <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
+                                return <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId} imgId={img.id}/>
                             }
 
                             else {

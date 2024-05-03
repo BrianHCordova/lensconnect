@@ -44,7 +44,7 @@ function Cards({ title, image, userId, username, loggedInUser, imgId }) {
           src={image}
           />
       </Card>
-       <Dialog className="w-auto bg-zinc-900 text-white" size="xl" open={open} handler={handleOpen}>
+       <Dialog className="w-auto bg-zinc-900 text-white p-2" size="xl" open={open} handler={handleOpen}>
         <DialogHeader className="justify-between ml-2 mt-3">
           <div className="flex items-center gap-3">
             {/* <Avatar
@@ -53,7 +53,7 @@ function Cards({ title, image, userId, username, loggedInUser, imgId }) {
               alt="tania andrew"
               src=""
               /> */}
-            <div className="-mt-px flex flex-col ">
+            <div className="-mt-px flex flex-col pb-4">
               <Typography
                 color="blue-gray"
                 className="font-medium text-3xl"
