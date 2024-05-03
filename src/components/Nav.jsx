@@ -16,7 +16,7 @@ const Nav = (props) => {
   };
 
   return (
-    <Disclosure as="nav" className="bg-zinc-800 shadow-md shadow-[rgb(0,0,0,0.5)] z-10">
+    <Disclosure as="nav" className="bg-zinc-900 shadow-md shadow-black z-10">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2 "> {/* Adjusted padding here */}
@@ -115,7 +115,7 @@ const Nav = (props) => {
                             <Link
                             to={props.userId ? ('/profile') : ('/login')}
                               className={classNames(
-                                active ? 'bg-gray-100' : '',
+                                active ? 'bg-gray-300' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
@@ -128,7 +128,7 @@ const Nav = (props) => {
                             <Link
                               to="/settings"
                               className={classNames(
-                                active ? 'bg-gray-100' : '',
+                                active ? 'bg-gray-300' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
@@ -141,7 +141,7 @@ const Nav = (props) => {
                             <Link
                               to="/logout"
                               className={classNames(
-                                active ? 'bg-gray-100' : '',
+                                active ? 'bg-gray-300' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             // onClick={props.handleSubmit()}
