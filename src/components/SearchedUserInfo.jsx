@@ -1,46 +1,68 @@
 import React, { useEffect, useState } from "react";
+import API from "../utils/API";
 
 // Imports api fetch functions
 // import API from "../../utils/API"
 function SearchedUserInfo(props) {
-    console.log(props.username)
-    console.log(props.ServeLocations)
-    return (
-        <div className="container mx-auto">
+    const [profilePic, setProfilePic] = useState()
 
-        <div className="grid grid-cols-2 grid-rows-1 gap-6">
-            <div className="profilePicture col-span-1 ">
-                <img src="https://media.gq.com/photos/564276266ff00fb522b0741b/master/pass/obama-tout.jpg" height="250" width="250" alt="" />
-            </div>
-            <div className="bio col-span-1 row-span-2">
-                <ul>
-                    <li>Username:&nbsp;{props.username}</li>
-                    <li>About Me:<br /><span>{props.biography}</span></li>
-                </ul>
-            </div>
-            <div className="userDetails col-span-1 ">
-                {props.isPhotographer
-                    ? <ul>
-                        <li className="serveLocationChip" >Serves:&nbsp; {props.ServeLocations?.map((loc, i) => (
-                            <span className="chip" key={i}>{loc.location}&nbsp;</span>
-                        ))}
-                        </li>
-                        <li className="specialtyChip" >Specialties:&nbsp; {props.Specialties?.map((spec, i) => (
-                            <span className="chip" key={i}>{spec.specialty}&nbsp;</span>
-                        ))}
-                        </li>
-                        <li>Website:&nbsp;<a target="_blank" href={props.website}>{props.website}</a></li>
-                        {props.videography
-                            ? <li>Videography: Yes</li>
-                            : <li>Videography: No</li>
-                        }
-                    </ul>
-                    : <></>
+    useEffect(() => {
+        if (!props.userId) {
+            return
+        }
+        API.getSingleUserImages(props.profId).then((data) => {
+
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].isProfilePic === true) {
+                    console.log(data[i])
+                    const url = data[i].imageUrl
+                    setProfilePic(url)
+                    console.log(profilePic)
+                } else {
+
                 }
-            </div>
-        </div>
-        </div>
+            }
+        })
+    }, [props.userId])
 
+    return (
+        <>
+            <section className="bg-zinc-900 flex rounded-[15px] flex-col">
+                <div className="flex flex-row">
+
+                    <div className="profilePicture w-1/3 px-[1rem]">
+                        <img src={profilePic ? profilePic : '/defaultProfile.png'} height="200" width="200" alt="profile picture of user" />
+                    </div>
+                    <div className="flex flex-col w-2/3 pt-3">
+                        <ul className="biography flex flex-col justify-start px-[1rem]">
+                            <li className="py-3 font-bold">Username : <span className="text-xl">{props.username}</span></li>
+                            <li className="pb-2 font-bold">About Me:</li>
+                            <li>{props.biography}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="w-full">
+                    {props.isPhotographer
+                        ? <ul className="px-[1.5rem] py-[1rem]">
+                            <li className="serveLocationChip pb-[1rem]" >Serves:&nbsp; {props.ServeLocations?.map((loc, i) => (
+                                <span className="chip" key={i}>{loc.location}&nbsp;</span>
+                            ))}
+                            </li>
+                            <li className="specialtyChip pb-[1rem]" >Specialties:&nbsp; {props.Specialties?.map((spec, i) => (
+                                <span className="chip" key={i}>{spec.specialty}&nbsp;</span>
+                            ))}
+                            </li>
+                            <li className="websiteAndVideo pb-[1rem]" >Website:&nbsp;<a target="_blank" href={props.website}>{props.website}</a></li>
+                            {props.videography
+                                ? <li className="websiteAndVideo">Videography : Yes</li>
+                                : <li className="websiteAndVideo">Videography : No</li>
+                            }
+                        </ul>
+                        : <></>
+                    }
+                </div>
+            </section>
+        </>
     );
 }
 

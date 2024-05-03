@@ -13,10 +13,11 @@ import API from "../../utils/API"
 
 function Profile(props) {
 
-
+    const navigate = useNavigate()
     // Use state hook to store the users data
     const [userObj, setUserObj] = useState({});
     const [reviewArr, setReviewArr] = useState([]);
+    const [profilePic, setProfilePic] = useState()
 
 
     // API useEffect to gather users info from the API on page load
@@ -25,29 +26,30 @@ function Profile(props) {
             return
         }
         // Runs the getOneUser function from the API utils page
-        // console.log(`props`, props)
-        API.getOneUser(props.userId).then((userData) => { //props.userId is 0 untill we can make tokens work
+        API.getOneUser(props.userId).then((userData) => { 
             setUserObj(userData);
         });
         // Runs the getReviewsByReviewee function from the API utils page
         API.getReviewsByReviewee(props.userId).then((revData) => {
             setReviewArr(revData)
         });
+
+        // API.getSingleUserImages(props.userId).then((data)=> {
+        //     console.log(data)
+        //     setImages(data)
+
+        // })
     }, [props.userId]);
 
     const handleReport = () => {
         navigate("/report")
     }
-    // Chat hook
-    const navigate = useNavigate();
-    const handleChatOpen = () => {
-        navigate("/chat");
-    }
+
 
     // HTML
     return (
-        <div className="grid profile-container">
-            <div className="col-span-full">
+        <div className="container mx-auto w-1/3 profile-container justify-start">
+            <div className="col-span-full mt-[1rem] shadow-xl shadow-black rounded-2xl">
                 {/* pass the userObj into UserInfo as props when tokens work */}
                 <UserInfo
                     userId={props.userId}
@@ -58,30 +60,35 @@ function Profile(props) {
                     website={userObj.website}
                     videograpgy={userObj.videography}
                     isPhotographer={userObj.isPhotographer}
+                    profilePic={profilePic}
                 />
             </div>
             <div className="col-span-full">
-                <UserImages userId={props.userId}/>
+                <UserImages userId={props.userId} profId={props.userId} />
             </div>
-            <div className="col-span-full">
-                <UserReviwee reviews={reviewArr} />
-            </div>
-            <div className="col-span-full">
-                <UserReviwer reviews={userObj.Reviews}/>
-            </div>
-            <div className="col-span-full userInfoSection grid grid-cols-1 grid-rows-1 gap-6">
-                    <h3>Blah Blah Blah about transaction report</h3>
-                    <button onClick={handleReport}>Create a transaction Report</button>
-            </div>
-            {/* conditionally renders chat button if user is logged in */}
-            {props.userId && (
-                
-            <div className="chatBtn col-span-2">
-                <button onClick={handleChatOpen}>Start Chat!</button>
-            </div>
-    )}
-        </div>
+            {userObj.isPhotographer ? (
+                <div className=" col-span-full">
+                    <UserReviwee reviews={reviewArr} />
+                </div>
+            ) : (<></>)}
 
+            <div className={!userObj.isPhotographer? "mb-5": "col-span-full" }>
+                <UserReviwer reviews={userObj.Reviews} />
+            </div>
+            {userObj.isPhotographer ? (
+                <div className="col-span-full container mx-auto transacReport bg-zinc-900 userInfoSection">
+                    <h3>Transaction Report</h3>
+                    <p>Transaction Reports are a confidential report a photographer can make after performing any kind of work for another person, organized though LensConnect. Theese reports are used by our customer service and admit team to review promised transactions and photography gigs that are organized on LensConnect.</p>
+                    <div className="reportBtnWrap container">
+                        <button className="bg-zinc-700 rounded-md" onClick={handleReport}>Create a Report</button>
+                    </div>
+                </div>
+            ) : (<></>)}
+
+            {/* <div className="chatBtn col-span-2">
+                <button onClick={handleChatOpen}>Start Chat!</button>
+            </div> */}
+        </div >
     );
 }
 

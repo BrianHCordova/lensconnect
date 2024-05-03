@@ -2,13 +2,15 @@ import React, { useRef, useState, useEffect } from 'react';
 import './style.css'
 import { Link } from 'react-router-dom';
 import API from '../../utils/API';
-import Card from '../../pages/Browse/card';
+// import Cards from '../../pages/Browse/card';
 
 export default function PhotographerCard(props) {
   const carouselRef = useRef(null);
   const profileUrl = '/profile/' + props.userId
   const [image, setImage] = useState([])
   const [refresh, setRefresh] = useState(true)
+  const [profilePic, setProfilePic] = useState([])
+  const [exist, setExist] = useState(false)
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -30,6 +32,7 @@ export default function PhotographerCard(props) {
   };
 
   useEffect(() => {
+    console.log(props)
     if (!image) {
       return
     }
@@ -37,54 +40,70 @@ export default function PhotographerCard(props) {
       // console.log(data)
       setImage(data)
     })
-  }, [refresh])
+
+    if (props.userId) {
+      API.getSingleUserImages(props.userId).then((data) => {
+        console.log(data)
+        if(data[0]?.id!=null) {
+          setExist(true)
+        }
+        const pfp = data.filter((dat) => (dat.isProfilePic))
+
+        setProfilePic(pfp[(pfp.length - 1)])
+        console.log(profilePic)
+      })
+    }
+  }, [props.userId])
 
   return (
     <div className='featured-component'>
       {/* Existing card component */}
-      <div className="card lg:card-side bg-base-100 shadow-xl rounded-b-none">
-        <figure className="profile-pic-container">
-          <img className="h-auto" src="https://source.unsplash.com/random" alt="Album" />
+      <div className="card lg:card-side bg-zinc-900 shadow-md shadow-black duration-200 ease-in-out rounded-b-none flex lg:flex-row sm:flex-col">
+        <figure className="profile-pic-container lg:w-1/4 sm:w-3/4 md:w-3/4 self-center">
+          <img className="h-auto rounded-[1rem]" src={profilePic?.imageUrl ? profilePic.imageUrl : '/defaultProfile.png'} alt="Album"  />
         </figure>
-        <div className="card-body">
-          <h2 className="card-title text-4xl font-bold">@{props.username}</h2>
+        <div className="card-body lg:p-[1rem] sm:p-[0.3rem]">
+          <h2 className="card-title text-4xl font-bold sm:pl-[0.7rem]">@{props.username}</h2>
           <div className="flex flex-wrap">
-            <p className='text-2xl font-bold w-1/4 text-right card-header'>Rating:</p>
-            <p className="w-3/4 card-content">4</p>
+            <p className='lg:text-2xl sm:text-lg font-bold w-1/4 text-right card-header'>Rating:</p>
+            <p className="w-3/4 card-content">{(props.avgRate !== 0) ? props.avgRate : 'No ratings yet'}</p>
           </div>
           <div className="flex flex-wrap">
-            <p className='text-2xl font-bold w-1/4 text-right card-header'>About Me:</p>
+            <p className='lg:text-2xl sm:text-lg font-bold w-1/4 text-right card-header'>About Me:</p>
             <p className="w-3/4 card-content">{props.bio}</p>
           </div>
           <div className="flex flex-wrap">
-            <p className='text-2xl font-bold w-1/4 text-right card-header'>Service Location:</p>
-            <p className="w-3/4 card-content">{props.serveloc?.map((loc) => { return loc.location })}</p>
+            <p className='lg:text-2xl sm:text-lg font-bold w-1/4 text-right card-header'>Service Location:</p>
+            <p className="w-3/4 card-content">{props.serveloc?.map((loc) => { return loc.location + ', ' })}</p>
           </div>
           <div className="flex flex-wrap">
-            <p className='text-2xl font-bold w-1/4 text-right card-header'>Specialties:</p>
-            <p className="w-3/4 card-content">{props.spec?.map((sp) => { return sp.Specialty })}</p>
+            <p className='lg:text-2xl sm:text-lg font-bold w-1/4 text-right card-header'>Specialties:</p>
+            <p className="w-3/4 card-content">{props.spec?.map((sp) => { return sp.specialty + ', ' })}</p>
           </div>
           <div className="card-actions justify-end">
             <Link to={profileUrl}>
-              <button className="btn text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out">To My Page</button>
+              <button className="btn text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out">View Profile</button>
             </Link>
           </div>
         </div>
       </div>
       {/* Carousel */}
-      <div className="carousel-container relative text-center">
-        <div className="carousel rounded-b-lg" ref={carouselRef}>
+      <div className="carousel-container relative text-center bg-zinc-800 rounded-b-[1rem] shadow-md shadow-black duration-200 ease-in-out">
+        <div className="carousel " ref={carouselRef}>
           {/* Carousel items here */}
           {image.map((img) => {
             // console.log(img)
             // console.log(props.userId)
             if (img.UserId === props.userId) {
-              return <>
-                <div className="carousel-item">
-                  <img src={img.imageUrl} alt={img.image} />
-                </div>
-                {/* <Card image={img.imageUrl} title={img.image} /> */}
-              </>
+              
+              
+              return <div className="carousel-item h-full self-center" key={img.id}>
+
+                <img src={img.imageUrl} alt={img.image} />
+
+
+              </div>
+
             }
 
             else {
@@ -94,59 +113,20 @@ export default function PhotographerCard(props) {
 
           })}
 
-          {/* <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg" alt="Burger" />
-          </div>
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg" alt="Burger" />
-          </div>
-
-          <div className="carousel-item">
-            <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" alt="Burger" />
-          </div> */}
-          {/* Add more carousel items here */}
         </div>
+        {exist? (<><div className="carousel-navigation m-0-5 absolute top-[43%]">
+            <button className="ml-3 btn text-white bg-gray-900/50 hover:bg-gray-700/60 duration-200 ease-in-out mr-5 shadow-black shadow-md" onClick={scrollLeft}>{"<"}</button>
+          </div>
+          <div className="carousel-navigation m-0-5 absolute top-[43%] right-0">
+            <button className="mr-3 btn text-white bg-gray-900/50 hover:bg-gray-700/60 duration-200 ease-in-out shadow-black shadow-md" onClick={scrollRight}>{">"}</button>
+          </div></>):( <></>)}
+          
+        
         {/* Navigation buttons */}
-        <div className="carousel-navigation m-0-5">
-          <button className="btn  text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out mr-5" onClick={scrollLeft}>{"<"}</button>
-          <button className="btn  text-white bg-emerald-700 hover:bg-emerald-500 duration-200 ease-in-out" onClick={scrollRight}>{">"}</button>
-        </div>
+        {/* <div className="carousel-navigation m-0-5">
+          <button className="btn  text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out mr-5 shadow-black shadow-md" onClick={scrollLeft}>{"<"}</button>
+          <button className="btn  text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out shadow-black shadow-md" onClick={scrollRight}>{">"}</button>
+        </div> */}
       </div>
     </div>
   );

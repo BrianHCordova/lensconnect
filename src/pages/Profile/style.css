@@ -10,36 +10,102 @@
 }
 
 .userInfoSection {
+    box-shadow: 4px 4px 0px 1px #29292d;
     display: flex;
+    flex-wrap: wrap;
     margin: auto;
-    justify-content: center;
-    width: 40rem;
+    justify-content: space-between;
+    text-align: start;
     height: fit-content;
-    border: 1.5px solid rgb(201, 201, 201);
-    border-radius: 15px;
+    border-radius: 6px;
     margin-top: 1rem;
-}
+    padding: 1rem;
 
+    h3 {
+        margin-bottom: 1rem;
+        border-bottom: 2px solid white;
+    }
+
+    /* .biography{
+        width: 65%;
+    } */
+}
 .profilePicture {
-    margin: 1rem;
+    /* padding: 1rem; */
+    width: fit-content;
+    /* margin: 1rem; */
 
     img {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
         border-radius: 15px;
     }
+
+    button {
+        font-size: 75%;
+        padding: .5rem;
+        width: fit-content;
+        /* border: 1px solid white; */
+        border-radius: 6px;
+        background-color: rgb(63, 63, 70);
+    }
+
+
 }
 
-.bio {
-    margin-top: 1rem;
+/* .bio {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    margin-left: 1rem;
+    width: 50%;
+
+    ul {
+        width: 80%;
+    }
 
     li {
         margin-bottom: 2rem;
     }
+} */
+
+.editBio {
+    display: inline;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    width: 80%;
+
+    ul {
+        width: 100%;
+    }
+
+    li {
+        /* margin-left: 1rem; */
+        margin-bottom: 2rem;
+
+        textarea {
+            display: flex;
+            margin: auto;
+            margin-top: .5rem;
+        }
+    }
 }
 
+
+
 .userDetails {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 1rem;
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    ul {
+        margin: auto;
+        align-items: center;
+        width: 80%;
+        justify-content: center;
+    }
+
     li {
 
         margin-bottom: 1rem;
@@ -47,18 +113,26 @@
 }
 
 .editBtn {
-    position: relative;
-    left: 29rem;
     display: flex;
     justify-content: end;
-    margin: 1rem;
+    align-items: end;
+    /* text-align: end; */
     max-width: 9rem;
+    width: fit-content;
     button {
+        /* margin-right: 1rem; */
+        /* margin-bottom: 1rem; */
         text-align: center;
-        border: 2px solid rgb(201, 201, 201);
-        border-radius: 15px;
+        border-radius: 5px;
         width: 6rem;
         height: 2rem
+    }
+
+    button:hover {
+        transition-delay: .3s;
+        -webkit-transition: all .05s ease;
+        transition: all .05s ease;
+        border: 2px solid rgb(201, 201, 201);
     }
 }
 
@@ -66,18 +140,27 @@
     display: flex;
     justify-content: end;
     margin: 1rem;
+
     button {
         text-align: center;
         border: 2px solid rgb(201, 201, 201);
-        border-radius: 15px;
+        border-radius: 6px;
         width: 6rem;
         height: 2rem
     }
 }
 
 .reviews {
+    width: 100%;
+    margin-bottom: 4rem;
+
     h2 {
         text-align: center;
+    }
+
+    h3 {
+        margin: auto;
+        width: fit-content;
     }
 }
 
@@ -90,13 +173,33 @@
     }
 
     h6 {
-        font-size: 65%;
+        font-size: 95%;
+    }
+}
+
+.newReviewContainer {
+    margin: auto;
+    border-bottom: 5px solid #32677d;
+    width: fit-content;
+    padding-top: 1rem;
+
+    p {
+        text-align: start;
+        font-size: 125%;
+    }
+
+    h6 {
+        text-align: start;
+        font-size: 95%;
     }
 }
 
 .textarea {
+    width: 80%;
+    color: black;
     border: 2px solid #698795;
-    background: transparent;
+    /* background: transparent; */
+    background: #1f2229;
 }
 
 .editInput {
@@ -104,22 +207,24 @@
     background: transparent;
 }
 
-.instructions{
+.instructions {
     margin-bottom: .2rem;
     padding: .3rem;
     background-color: rgb(71, 104, 114);
     width: fit-content;
-    border-radius: 15px;
+    border-radius: 6px;
 }
 
 .chipWrap {
-    display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+    border: 1px solid white;
+    border-radius: 3px;
+    width: 100%;
     margin-top: 1rem;
     margin-bottom: 1rem;
     padding: .5rem;
-    border: 1.5px solid rgb(201, 201, 201);
+
+   
 }
 
 .specialtyChip {
@@ -130,6 +235,7 @@
 .serveLocationChip {
     display: flex;
     flex-wrap: wrap;
+    justify-content: start;
 }
 
 
@@ -142,7 +248,7 @@
     align-items: center;
     font-size: 85%;
     background-color: rgb(45, 98, 115);
-    border-radius: 15px;
+    border-radius: 6px;
 }
 
 .chipDelete {
@@ -152,21 +258,25 @@
     color: red;
     padding-left: .3rem;
     padding-bottom: .3rem;
+    width: fit-content;
 }
 
 .addChip {
-    margin: auto;
-    height: 1.8rem;
+    /* margin: auto; */
+    height: 1.9rem;
     font-size: 65%;
     border: 2px solid rgb(45, 98, 115);
-    border-radius: 15px;
-    input{
+    border-radius: 6px;
+    margin-top: .2rem;
+
+    input {
         background: transparent;
         height: 1.6rem;
         font-size: 125%;
         border: 1px solid transparent;
-        border-radius: 15px;
+        border-radius: 6px;
     }
+
     button {
         /* display: inline-block; */
         vertical-align: middle;
@@ -175,4 +285,199 @@
         padding-left: .3rem;
         padding-bottom: .3rem;
     }
+}
+
+.transacReport {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 1rem;
+
+    h3 {
+        width: fit-content;
+        border-bottom: 2px solid white;
+    }
+
+    p {
+        margin: 1rem;
+    }
+
+    button {
+        display: flex;
+        text-align: end;
+        align-items: end;
+        justify-content: end;
+        width: fit-content;
+        padding: .2rem;
+    }
+
+    button:hover {
+        transition-delay: .3s;
+        -webkit-transition: all .05s ease;
+        transition: all .05s ease;
+        border: 2px solid rgb(201, 201, 201);
+    }
+}
+
+.websiteAndVideo {
+    display: flex;
+    justify-content: start;
+}
+
+.userReviewSection {
+    box-shadow: 4px 4px 0px 1px #29292d;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    height: fit-content;
+    border-radius: 15px;
+    margin-top: 1rem;
+    padding: 1rem;
+
+    h3 {
+        display: flex;
+        margin: auto;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: fit-content;
+        border-bottom: 2px solid white;
+    }
+}
+
+.writeBtnWrap {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    text-align: end;
+
+    button {
+        text-align: center;
+        width: 8rem;
+        height: 2rem;
+        
+    }
+
+    button:hover {
+        transition-delay: .3s;
+        -webkit-transition: all .05s ease;
+        transition: all .05s ease;
+        border: 2px solid rgb(201, 201, 201);
+    }
+}
+
+.reportBtnWrap {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    text-align: end;
+
+    button {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 8.5rem;
+        height: 2rem;
+        margin:0;
+    }
+
+    button:hover {
+        transition-delay: .3s;
+        -webkit-transition: all .05s ease;
+        transition: all .05s ease;
+        border: 2px solid rgb(201, 201, 201);
+    }
+}
+
+.userInfoSectionRow {
+    box-shadow: 4px 4px 0px 1px #29292d;
+
+    height: fit-content;
+    border-radius: 6px;
+    margin-top: 1rem;
+
+    h3 {
+        margin-bottom: 1rem;
+        border-bottom: 2px solid white;
+    }
+}
+
+@media (max-width: 1700px) {
+    .profile-container {
+        min-width: 50%;
+    }
+}
+
+@media (max-width: 1495px) {
+    .profile-container {
+        min-width: 50%;
+    }
+}
+
+@media (max-width: 1245px) {
+    .profile-container {
+        min-width: 65%;
+    }
+}
+
+@media (max-width: 996px) {
+    .profile-container {
+        min-width: 65%;
+    }
+}
+
+@media (max-width: 906px) {
+    .profile-container {
+        min-width: 70%;
+    }
+}
+
+@media (max-width: 819px) {
+    .profile-container {
+        min-width: 75%;
+    }
+}
+
+@media (max-width: 745px) {
+    .profile-container {
+        min-width: 85%;
+    }
+}
+@media (max-width: 659px) {
+    .profile-container {
+        min-width: 80%;
+    }
+
+    .editBtn {
+        min-width: 88%;
+    }
+
+    .profilePicture {
+        padding-top: 1rem;
+        margin: auto;
+    }
+
+    .chipWrap {
+        /* font-size: 90%; */
+        min-width: 85%;
+    }
+
+    .editBtn {
+        margin-left: 2.6rem;
+    }
+
+    .bio {
+        margin-left: 2rem;
+        min-width: fit-content;
+    }
+
+    .website {
+        display: flex;
+        justify-content: start;
+    }
+
 }

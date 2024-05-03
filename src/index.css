@@ -20,15 +20,19 @@ body {
 
 body {
   /* background-image: linear-gradient(#2E4551,
-            #141515); */
-    min-height: 100vh;
-
+      #141515); */
+  background-color: #27374D;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: rgb(201, 201, 201);
+  z-index: -1
 }
 
 main {
-  background-image: linear-gradient(#2E4551,
-      #141515);
-  /* min-height: 100vh; */
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  min-height: calc(100vh - 96px - 120px)
+};
+
+.delete-button {
+  width: 20rem !important;
 }

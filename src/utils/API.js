@@ -1,5 +1,5 @@
-const URL_PREFIX = "http://localhost:3000"
-// const URL_PREFIX="https://uci-fish-back.onrender.com"
+// const URL_PREFIX = "http://localhost:3000"
+const URL_PREFIX="https://lensconnect-back.onrender.com"
 
 const API = {
     // Signup function
@@ -116,6 +116,27 @@ const API = {
         }).then(res => res.json())
     },
 
+    passwordVerification: userObj => {
+        console.log(userObj)
+        return fetch(`${URL_PREFIX}/api/users/verify/${userObj.userId}`, {
+            method: "PUT",
+            body: JSON.stringify(userObj),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+    },
+
+    newUserPassword: userObj => {
+        return fetch(`${URL_PREFIX}/api/prop/password/${userObj.userId}`, {
+            method: "PUT",
+            body: JSON.stringify(userObj),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json())
+    },
+
     getUserByUsername: username => {
         return fetch(`${URL_PREFIX}/api/users/byusername/${username}`).then(res => res.json())
     },
@@ -137,8 +158,28 @@ const API = {
             method: "GET"
         }).then(res => res.json())
     },
+    getSingleUserImages: (id) => {
+        return fetch(`${URL_PREFIX}/api/image/${id}`, {
+            method: "GET"
+        }).then(res => res.json())
+    },
     getChat: () => {
         return fetch(`${URL_PREFIX}/api/chat`, {
+            method: "GET"
+        }).then(res => res.json())
+    },
+    getChatRooms: userId => {
+        return fetch(`${URL_PREFIX}/api/chatroom/user_receiver/${userId}`, {
+            method: "GET"
+        }).then(res => res.json())
+    },
+    getMyRooms: userId => {
+        return fetch(`${URL_PREFIX}/api/chatroom/user_sender/${userId}`, {
+            method: "GET"
+        }).then(res => res.json())
+    },
+    getRoomById: roomId => {
+        return fetch(`${URL_PREFIX}/api/chatroom/${roomId}`, {
             method: "GET"
         }).then(res => res.json())
     },
@@ -147,6 +188,12 @@ const API = {
     },
     getFeatPro: () => {
         return fetch(`${URL_PREFIX}/api/searchusers/featured`).then(res=>res.json()) 
+    },
+    postProfilePic: (formData, userId) => {
+        return fetch(`${URL_PREFIX}/api/image/profilepic/${userId}`, {
+            method: "POST",
+            body: formData
+        }).then(res => res.json())
     }
 }
 

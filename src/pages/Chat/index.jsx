@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import io from 'socket.io-client'
-import Messages from '../../components/ChatComponents/Messages';
-import MessageInput from '../../components/ChatComponents/MessageInput';
-import MessageHistory from '../../components/ChatComponents/MessageHistory';
 import Sidebar from '../../components/ChatComponents/Sidebar';
 import API from '../../utils/API';
+import io from 'socket.io-client'
+
+const url = window.location.href;
+const id = url.substring(url.lastIndexOf('/') + 1);
+
+// API.getRoomById(id).then((roomData) => {
+//   console.log(roomData);
+// });
+
 
 export default function Chat(props) {
+  const URL_PREFIX = "http://localhost:3000"
 
-    const [socket, setSocket] = useState(null);
-    const [user, setUser] = useState([]);
+  const [socket, setSocket] = useState(null);
+  const [user, setUser] = useState([]);
+  const [roomData, setRoomData] = useState([]);
 
-    //hook to create a new socket connection
     useEffect(() => {
-        // Creates a new socket connection
-        const newSocket = io('http://localhost:3000');
-        setSocket(newSocket);
-        return () => newSocket.close();
-    }
-    // runs setSocket when the socket is created
-    , [setSocket]);
-
+      // Creates a new socket connection
+      const newSocket = io(URL_PREFIX);
+      setSocket(newSocket);
+      return () => newSocket.close();
+  }
+  // runs setSocket when the socket is created
+  , [setSocket]);
+    
     //hook to get the user data
     useEffect(() => {
       //if there is no user id, return
@@ -30,33 +36,38 @@ export default function Chat(props) {
       // Runs the getOneUser function from the API utils page
       API.getOneUser(props.userId).then((userData) => {
         setUser(userData);
-        console.log(userData);
+        // console.log(userData);
       });
       // runs setUser function when the user data is retrieved
-    }, [props.userId]);
-    
+    }
+    , [props.userId]);
+
+    useEffect(() => {
+      if(!id) {
+        return
+      }
+
+      API.getRoomById(id).then((roomData) => {
+        setRoomData(roomData);
+      });
+    }
+    , []);
+
+    // socket.emit('joinRoom', roomData.room_name);
+
   return (
     <div>
-      <header>
-        {user.username ? (
-          <h1>Welcome, {user.username}!</h1>
-        ) : (
-          <h1>Welcome</h1>
-        )}
-      </header>
+      {/* <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-zinc-800">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+            Chat
+          </h2>
+      </div>
+      </div> */}
       <div>
-        { socket ? (
             <div>
-                <Sidebar />
-                <MessageHistory />
-                <Messages socket={socket}/>
-                <MessageInput socket={socket} username={user} />
+                <Sidebar userId={props.userId} socket={socket}/>
             </div>
-            ) : (
-            <div>
-                <p>Not connected</p>
-            </div>
-        )}
       </div>
     </div>
   );

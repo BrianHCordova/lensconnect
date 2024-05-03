@@ -13,7 +13,6 @@ function UserReviewee(props) {
         }
         let average = 0
         for(let i = 0; i < props.reviews.length; i++) {
-            console.log('why')
             average += props.reviews[i].rating
         }
         average /= props.reviews.length
@@ -30,18 +29,20 @@ function UserReviewee(props) {
             return '★★★'
         } else if (rating <= 2.5 && rating >= 1.6) {
             return '★★'
-        } else {
+        } else if (rating < 0 && rating >= 1.6) {
             return '★'
+        } else {
+            return "No reviews yet"
         }
     };
 
     // HTML
     return (
 
-        <section className="userInfoSection" >
+        <section className="userInfoSection bg-zinc-900" >
             <div className="columns-1 reviews">
                 <h2>Reviews About Me</h2>
-                <h2>Average Rating: {generateStars(averageRating)}</h2>
+                <h3>Average Rating: {generateStars(averageRating)}</h3>
                 {props.reviews?.map((rev, i) =>
                     <div key={i} className="reviewContainer">
                         <p>{rev.review}</p>

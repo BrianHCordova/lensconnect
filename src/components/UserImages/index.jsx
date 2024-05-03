@@ -1,9 +1,15 @@
-import Card from "../../pages/Browse/card";
+import Cards from "../../pages/Browse/card";
 import API from "../../utils/API";
 import { useEffect, useState, useRef } from 'react'
 import './style.css'
-
-
+import ImagePosted from '../../components/ImagePosted'
+import {
+    Button,
+    Dialog,
+    DialogHeader,
+    DialogBody,
+    DialogFooter,
+} from "@material-tailwind/react";
 
 
 
@@ -13,6 +19,9 @@ function UserImages(props) {
     const [image, setImage] = useState([])
     const [attach, setAttach] = useState(false)
     const inputRef = useRef()
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => setOpen(!open);
 
     const showAttach = () => {
         attach === false ? (
@@ -31,7 +40,6 @@ function UserImages(props) {
         console.log(formData)
 
         API.postMutlipleImages(formData, props.userId)
-        alert('image has been posted!')
         setFile('')
         setAttach(false)
     }
@@ -47,26 +55,51 @@ function UserImages(props) {
     }
 
     useEffect(() => {
+        console.log(props)
         if (!image) {
             return
         }
-        API.getImages().then((data) => {
-            console.log(data)
-            setImage(data)
-        })
-    }, [file])
+        // API.getImages().then((data) => {
+        //     console.log(data)
+        //     setImage(data)
+        // })
+        // const userId = props.userId
+        if (!props.userId) {
+            return
+        }
+        if (props.userId !== props.profId) {
+
+            API.getSingleUserImages(props.profId).then((data) => {
+                console.log(data)
+                setImage(data)
+            })
+        } else {
+            API.getSingleUserImages(props.userId).then((data) => {
+                console.log(data)
+                setImage(data)
+            })
+        }
+
+        // console.log(props.images)
+        // setImage(props.images)
+    }, [props.userId])
 
     // HTML
     return (
-        <div className="image-section">
-            <div className=" image-container">
+        <div className="image-section ">
+            <div className=" image-container bg-zinc-900">
                 <div className="individual-image-container">
+                    {image.length === 0 ?
+                        <div className="text-center">
+                            <h3 className="text-xl">No images uploaded yet by this user</h3>
+                        </div> :
+                        <></>
+                    }
                     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 image-position">
+                        {/* {image?.map((img) => <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>)} */}
                         {image.map((img) => {
-                            console.log(img)
-                            console.log(props.userId)
-                            if (img.UserId === props.userId) {
-                                return <Card image={img.imageUrl} title={img.image} />
+                            if (img.UserId === props.userId && img.isProfilePic === false) {
+                                return <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId} imgId={img.id} />
                             }
 
                             else {
@@ -80,8 +113,8 @@ function UserImages(props) {
                 <div className="addPhotoBtn-Container">
                     {!attach ? (
                         <div className="addPhotoBtn">
+                            {props.userId === props.profId ? <button className='bg-zinc-700 rounded-md' onClick={showAttach} >Add photos</button> : (<></>)}
 
-                            <button onClick={showAttach} >Add photos</button>
                         </div>
                     ) : (!file ? (
                         <>
@@ -140,7 +173,32 @@ function UserImages(props) {
                                                 id="file-upload"
                                                 name="multipleFiles"
                                             />
-                                            <button type="submit" className="upload-files">Upload</button>
+                                            <button type="submit" className="upload-files" onClick={handleOpen}>  Upload</button>
+                                            <Dialog
+                                                open={open}
+                                                handler={handleOpen}
+                                                animate={{
+                                                    mount: { scale: 1, y: 0 },
+                                                    unmount: { scale: 0.9, y: -100 },
+                                                }}
+                                                className="bg-zinc-800 lg:w-[25rem]"
+                                            >
+                                                <DialogHeader>Your images have been posted!</DialogHeader>
+                                                <DialogBody>
+                                                    <div className="uploaded-images">
+                                                        <h1>Your list of images:</h1>
+                                                        <ul>
+
+                                                        </ul>
+
+                                                    </div>
+                                                </DialogBody>
+                                                <DialogFooter>
+                                                    <Button variant="gradient" color="green" onClick={handleOpen}>
+                                                        <span>Confirm</span>
+                                                    </Button>
+                                                </DialogFooter>
+                                            </Dialog>
                                         </form>
 
                                         <button

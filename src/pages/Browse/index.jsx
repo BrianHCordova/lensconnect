@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Card from './card';
+import Cards from './card';
 import API from '../../utils/API';
 import "./style.css"
 import { useParams } from 'react-router-dom'
@@ -59,9 +59,9 @@ function Browse(props) {
     // HTML
     return (
         <>
-            <h1>BROWSE</h1>
+            
             {/* testing route for uploading single image */}
-            <form onSubmit={postImage}>
+            {/* <form onSubmit={postImage}>
                 <input 
                     name="image" 
                     onChange={e => { 
@@ -72,15 +72,15 @@ function Browse(props) {
                     accept="image/*" 
                     multiple value={filename}/>
                 <input type="submit" value="submit" />
-            </form>
+            </form> */}
             {/* each card is imported as passed imaged and title props, these are just... placeholders */}
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4 my-[1rem]">
                 <div className="flex flex-col gap-4">
 
                     {image.map((img) => {
                         if(img.column===1) {
                             return (
-                                <Card image={img.imageUrl} title={img.image} />
+                                <Cards key={img.id} imgId={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
                             )
                         } else {}
                     })}
@@ -90,7 +90,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===2) {
                             return (
-                                <Card image={img.imageUrl} title={img.image} />
+                                <Cards key={img.id} imgId={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
                             )
                         } else {}
                     })}
@@ -100,7 +100,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===3) {
                             return (
-                                <Card image={img.imageUrl} title={img.image} />
+                                <Cards key={img.id} imgId={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
                             )
                         } else {}
                     })}
@@ -110,7 +110,7 @@ function Browse(props) {
                     {image.map((img) => {
                         if(img.column===4) {
                             return (
-                                <Card image={img.imageUrl} title={img.image} />
+                                <Cards key={img.id} imgId={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
                             )
                         } else {}
                     })}

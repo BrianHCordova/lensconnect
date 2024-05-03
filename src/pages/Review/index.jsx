@@ -11,7 +11,6 @@ export default function Review(props) {
   const [newReview, setNewReview] = useState('')
   const [newRating, setNewRating] = useState()
   const [reviewArr, setReviewArr] = useState()
-
   useEffect(() => {
     // Fetches the reviewee users data
     API.getOneUser(id).then((userData) => {
@@ -20,12 +19,17 @@ export default function Review(props) {
     // Fetches the revieww users reviews as a revieww (reviews about the user)
     API.getReviewsByReviewee(id).then((revData) => {
       setReviewArr(revData)
-  });
+    });
   }, [])
 
 
   // Function to post the review
   const postUserReview = () => {
+    // saftery net to stop people from reviewing themselves
+    if (id == props.userId) {
+      alert("you cannot review youself...")
+      return
+    }
     // Creates an object with all the necesary data for the review
     const passData = { review: newReview, rating: newRating, revieweeId: id, userId: props.userId }
     // Performs the fetch request from the API untils page
@@ -37,18 +41,18 @@ export default function Review(props) {
     // Adds the new review rating to the reviewee's average
     average += floated
     // A check to ensure we arent dividing by 0
-    if(userObj.averageRating > 0){
+    if (userObj.averageRating > 0) {
       // divide by the lenght of reviews as reviewee plus 1
       // Plus one as the data doesnt account for the review just posted in this function
       average /= reviewArr.length + 1
     }
     // Creates an object for the data passed into the edit user function
-    const newAverage = {userId: id, averageRating: average}
+    const newAverage = { userId: id, averageRating: average }
     // Performs the fetch request from the API untils page
     API.editUserBio(newAverage).then((newData) => {
     });
     // takes the user back to the homepage
-    navigate("/")
+    navigate("/profile")
   }
 
   // Hooks to handle the review content and rating change
@@ -60,6 +64,7 @@ export default function Review(props) {
   };
 
   // HTML
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-zinc-800">

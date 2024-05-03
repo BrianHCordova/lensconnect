@@ -1,19 +1,48 @@
-import { Fragment } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from "react-router-dom";
+import API from '../utils/API';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 const Nav = (props) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [profilePic, setProfilePic] = useState()
+
+  const closeMobileMenu = () => {
+    console.log("Mobile menu closed");
+    setMobileMenuOpen(false);
+  };
+
+  useEffect(() => {
+
+    if (!props.userId) {
+        return
+    }
+    API.getSingleUserImages(props.userId).then((data) => {
+
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].isProfilePic === true) {
+                console.log(data[i])
+                const url = data[i].imageUrl
+                setProfilePic(url)
+                console.log(profilePic)
+            } else {
+
+            }
+        }
+    })
+}, [props.userId])
+
   return (
-    <Disclosure as="nav" className="bg-zinc-900">
+    <Disclosure as="nav" className="bg-zinc-900 shadow-md shadow-black z-10">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2 "> {/* Adjusted padding here */}
+            <div className="flex h-20 items-center justify-between"> {/* Increased height here */}
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <img
@@ -24,51 +53,45 @@ const Nav = (props) => {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                    <Link to='/' className="rounded-md focus:bg-emerald-700 px-3 py-2 text-sm font-medium hover:bg-emerald-500 duration-200 ease-in-out text-white">
+                    <Link to='/' className="rounded-md focus:bg-cyan-800 px-3 py-2 text-sm font-medium hover:bg-cyan-600 duration-200 ease-in-out hover:text-black">
                       Home
                     </Link>
                     <Link
                       to={props.userId ? ('/profile') : ('/login')}
-                      className="rounded-md px-3 focus:bg-emerald-700 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
+                      className="rounded-md px-3 focus:bg-cyan-800 py-2 text-sm font-medium text-gray-300 hover:bg-cyan-600 duration-200 ease-in-out hover:text-black"
                     >
                       Profile
                     </Link>
 
                     <Link
                       to='/search'
-                      className="rounded-md px-3 focus:bg-emerald-700 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
+                      className="rounded-md px-3 focus:bg-cyan-800 py-2 text-sm font-medium text-gray-300 hover:bg-cyan-600 duration-200 ease-in-out hover:text-black"
                     >
                       Search
                     </Link>
                     <Link
                       to="/browse"
-                      className="rounded-md px-3 focus:bg-emerald-700 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
+                      className="rounded-md px-3 focus:bg-cyan-800 py-2 text-sm font-medium text-gray-300 hover:bg-cyan-600 duration-200 ease-in-out hover:text-black"
                     >
                       Browse
                     </Link>
                     {props.userId ? (
                       <Link
                         to="/chat"
-                        className="rounded-md px-3 focus:bg-emerald-700 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
-                      >
+                        className="rounded-md px-3 focus:bg-cyan-800 py-2 text-sm font-medium text-gray-300 hover:bg-cyan-600 duration-200 ease-in-out hover:text-black"
+                        >
                         Chat
                       </Link>
 
                     ) : (<></>)}
                     {props.userId ? (
-                      <Link
-                        to='/logout'
-                        className="rounded-md px-3 focus:bg-emerald-700 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
-                      >
-                        Logout
-                      </Link>
+                      <></>
                     ) : (
 
                       <Link
                         to='/login'
-                        className="rounded-md px-3 focus:bg-emerald-700 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 duration-200 ease-in-out hover:text-white"
-                      >
+                        className="rounded-md px-3 focus:bg-cyan-800 py-2 text-sm font-medium text-gray-300 hover:bg-cyan-600 duration-200 ease-in-out hover:text-black"
+                        >
                         Login
                       </Link>
                     )}
@@ -79,7 +102,7 @@ const Nav = (props) => {
                 <div className="flex items-center">
                   <button
                     type="button"
-                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="relative rounded-full bg-zin-800 p-1 text-gray-400 hover:text-white duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-zinc-800"
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
@@ -94,8 +117,8 @@ const Nav = (props) => {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src="https://source.unsplash.com/random"
-                          alt=""
+                          src={profilePic ? profilePic : '/defaultProfile.png'}
+                          alt="profile picture of the user"
                         />
                       </Menu.Button>
                     </div>
@@ -111,28 +134,28 @@ const Nav = (props) => {
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                            to={props.userId ? ('/profile') : ('/login')}
                               className={classNames(
-                                active ? 'bg-gray-100' : '',
+                                active ? 'bg-gray-300' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
                               Your Profile
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              to="/settings"
                               className={classNames(
-                                active ? 'bg-gray-100' : '',
+                                active ? 'bg-gray-300' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
                               Settings
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
@@ -140,7 +163,7 @@ const Nav = (props) => {
                             <Link
                               to="/logout"
                               className={classNames(
-                                active ? 'bg-gray-100' : '',
+                                active ? 'bg-gray-300' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             // onClick={props.handleSubmit()}
@@ -172,51 +195,60 @@ const Nav = (props) => {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+              <Link to='/' className="block rounded-md bg-zinc-900 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out px-3 py-2 text-base font-medium text-white" onClick={closeMobileMenu}>
+                Home
+              </Link>
+              <Link
+                to='/search'
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
+                onClick={closeMobileMenu}
               >
-                Dashboard
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                Search
+              </Link>
+              <Link
+                to="/browse"
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
+                onClick={closeMobileMenu}
               >
-                Team
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Projects
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                Calendar
-              </Disclosure.Button>
+                Browse
+              </Link>
+              {props.userId ? (
+                <Link
+                  to="/chat"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
+                  onClick={closeMobileMenu}
+                >
+                  Chat
+                </Link>
+              ) : null}
+              {props.userId ? (
+                <></>
+              ) : (
+                <Link
+                  to='/login'
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
+                  onClick={closeMobileMenu}
+                >
+                  Login
+                </Link>
+              )}
             </div>
             <div className="border-t border-gray-700 pb-3 pt-4">
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
                   <img
                     className="h-10 w-10 rounded-full"
-                    src="https://source.unsplash.com/random"
+                    src={profilePic ? profilePic : '/defaultProfile.png'}
                     alt=""
                   />
                 </div>
                 <div className="ml-3">
-                  <div className="text-base font-medium text-white">Tom Cook</div>
-                  <div className="text-sm font-medium text-gray-400">tom@example.com</div>
+                  <div className="text-base font-medium text-white"></div>
+                  <div className="text-sm font-medium text-gray-400"></div>
                 </div>
                 <button
                   type="button"
-                  className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="relative ml-auto flex-shrink-0 rounded-full bg-zinc-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
@@ -224,27 +256,27 @@ const Nav = (props) => {
                 </button>
               </div>
               <div className="mt-3 space-y-1 px-2">
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                <Link
+                  to={props.userId ? ('/profile') : ('/login')}
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
+                  onClick={closeMobileMenu}
                 >
                   Your Profile
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                </Link>
+                <Link
+                  to='/settings'
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
+                  onClick={closeMobileMenu}
                 >
                   Settings
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                </Link>
+                <Link
+                  to='/logout'
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
+                  onClick={closeMobileMenu}
                 >
                   Sign out
-                </Disclosure.Button>
+                </Link>
               </div>
             </div>
           </Disclosure.Panel>
