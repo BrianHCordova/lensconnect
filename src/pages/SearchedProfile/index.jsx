@@ -15,7 +15,7 @@ import Chat from "../Chat";
 import io from 'socket.io-client';
 import UserImages from "../../components/UserImages";
 
-const socket = io('http://localhost:3000');
+const socket = io('https://lensconnect-back.onrender.com/');
 
 
 function SearchedProfile(props) {
