@@ -80,7 +80,7 @@ function UserImages(props) {
                     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 image-position">
                         {/* {image?.map((img) => <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>)} */}
                         {image.map((img) => {
-                            if (img.UserId === props.userId) {
+                            if (img.UserId === props.userId && img.isProfilePic === false) {
                                 return <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId} imgId={img.id}/>
                             }
 
