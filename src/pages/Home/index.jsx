@@ -47,7 +47,7 @@ const ParallaxZoomComponent = (props) => {
   // Initialize lenis scroll effect on the page
   useLenis();
 
-  // Define a less aggressive scaling factor, the higher the value, the more aggressive the zoom effect
+  // Defines a less aggressive scaling factor, the higher the value, the more aggressive the zoom effect
   const scale = 1 + scrollY * 0.0003;
 
   return (
