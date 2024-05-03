@@ -1,4 +1,3 @@
-// const URL_PREFIX = "http://localhost:3000"
 const URL_PREFIX="https://lensconnect-back.onrender.com"
 
 const API = {

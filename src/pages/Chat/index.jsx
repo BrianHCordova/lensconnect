@@ -12,7 +12,7 @@ const id = url.substring(url.lastIndexOf('/') + 1);
 
 
 export default function Chat(props) {
-  const URL_PREFIX = "http://localhost:3000"
+  const URL_PREFIX = "https://lensconnect-back.onrender.com/"
 
   const [socket, setSocket] = useState(null);
   const [user, setUser] = useState([]);

@@ -28,14 +28,6 @@ function Browse(props) {
         setFilename('')
     }
 
-    // const getImages = async () => {
-    //     return await fetch(`http://localhost:3000/api/image`, {
-    //         method: "GET"
-    //     }).then((res)=> {
-    //         return res.json()
-    //     })
-    // }
-
     useEffect(() => {
         if (!image) {
             return
@@ -46,34 +38,10 @@ function Browse(props) {
         })
     }, [filename])
 
-    // const division = Math.floor(image.length/4)    8/4 = 2   division=2
-    // const firstCol = []
-    // for (let i=0; i<division; i++ ) { firstCol.push(image[i]) }
-    // const secondCol = []
-    // for (let i=division(2); i<division*2(4); i++ ) { secondCol.push(image[i])}
-    // const thirdCol = []
-    // for (let i=division*2; i<division*3; i++ ) { secondCol.push(image[i])}
 
-
-
-    // HTML
     return (
         <>
-            
-            {/* testing route for uploading single image */}
-            {/* <form onSubmit={postImage}>
-                <input 
-                    name="image" 
-                    onChange={e => { 
-                        setFile(e.target.files[0])
-                        setFilename(e.target.files[0].image)
-                    }} 
-                    type="file" 
-                    accept="image/*" 
-                    multiple value={filename}/>
-                <input type="submit" value="submit" />
-            </form> */}
-            {/* each card is imported as passed imaged and title props, these are just... placeholders */}
+
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4 my-[1rem]">
                 <div className="flex flex-col gap-4">
 
