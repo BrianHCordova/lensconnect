@@ -6,9 +6,9 @@ import io from 'socket.io-client'
 const url = window.location.href;
 const id = url.substring(url.lastIndexOf('/') + 1);
 
-API.getRoomById(id).then((roomData) => {
-  console.log(roomData);
-});
+// API.getRoomById(id).then((roomData) => {
+//   console.log(roomData);
+// });
 
 
 export default function Chat(props) {
@@ -36,13 +36,17 @@ export default function Chat(props) {
       // Runs the getOneUser function from the API utils page
       API.getOneUser(props.userId).then((userData) => {
         setUser(userData);
-        console.log(userData);
+        // console.log(userData);
       });
       // runs setUser function when the user data is retrieved
     }
     , [props.userId]);
 
     useEffect(() => {
+      if(!id) {
+        return
+      }
+
       API.getRoomById(id).then((roomData) => {
         setRoomData(roomData);
       });
@@ -53,13 +57,13 @@ export default function Chat(props) {
 
   return (
     <div>
-      <header>
-        {user.username ? (
-          <h1>Welcome, {user.username}!</h1>
-        ) : (
-          <h1>Welcome</h1>
-        )}
-      </header>
+      {/* <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-zinc-800">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+            Chat
+          </h2>
+      </div>
+      </div> */}
       <div>
             <div>
                 <Sidebar userId={props.userId} socket={socket}/>

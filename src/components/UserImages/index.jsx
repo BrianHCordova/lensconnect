@@ -43,6 +43,7 @@ function UserImages(props) {
     }
 
     useEffect(() => {
+        console.log(props)
         if (!image) {
             return
         }
@@ -54,10 +55,18 @@ function UserImages(props) {
         if (!props.userId) {
             return
         }
-        API.getSingleUserImages(props.userId).then((data) => {
-            console.log(data)
-            setImage(data)
-        })
+        if (props.userId !== props.profId) {
+
+            API.getSingleUserImages(props.profId).then((data) => {
+                console.log(data)
+                setImage(data)
+            })
+        } else {
+            API.getSingleUserImages(props.userId).then((data) => {
+                console.log(data)
+                setImage(data)
+            })
+        }
       
         // console.log(props.images)
         // setImage(props.images)
@@ -71,8 +80,8 @@ function UserImages(props) {
                     <div className="grid grid-cols-2 gap-4 md:grid-cols-3 image-position">
                         {/* {image?.map((img) => <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>)} */}
                         {image.map((img) => {
-                            if (img.UserId === props.userId) {
-                                return <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId}/>
+                            if (img.UserId === props.userId && img.isProfilePic === false) {
+                                return <Cards key={img.id} image={img.imageUrl} title={img.image} userId={img.UserId} username={img.User.username} loggedInUser={props.userId} imgId={img.id}/>
                             }
 
                             else {
@@ -86,8 +95,8 @@ function UserImages(props) {
                 <div className="addPhotoBtn-Container">
                     {!attach ? (
                         <div className="addPhotoBtn">
-
-                            <button className='bg-zinc-700' onClick={showAttach} >Add photos</button>
+                            {props.userId===props.profId? <button className='bg-zinc-700' onClick={showAttach} >Add photos</button>:(<>hello</>)}
+                            
                         </div>
                     ) : (!file ? (
                         <>
