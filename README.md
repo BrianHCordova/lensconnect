@@ -31,11 +31,19 @@ These steps are for if a user wishes to download the repo and run the applicatio
 6. Once the modules and packages are installed, the user can then run the command: ```npm run dev```, to launch the react application.
 
 ## Usage
+This User-centric platform is built primarily with the connecting clients with prosepective photographers. Because of this mantra we made the base functionallity public facing and accessable to anyone without an account, this includes: browsing featured photographers, searching for photographers via Username, location, or specialties, and browsing a catalogue of user-images.
+<p align="center">
+  <img alt="Gif of publically useable features process" src="public/READMEImages/basicfunc.gif" />
+</p>
 
-Any user wishing to access the personal features of lensConnect will need to either create and account or login.
-![Gif of login/signup process](public/READMEImages/loginandsignup.gif)
+Any user wishing to access the personal features of lensConnect, such as: writing reviews, customizing profile information, transaction reports, and uploading images, will need to either create and account or login:
+<p align="center">
+  <img alt="Gif of login/signup process" src="public/READMEImages/loginandsignup.gif" />
+</p>
 
-This User-centric platform is built primarily with the focus of photographers unique identity through customization agency.
+This User-centric platform is built primarily with the focus of photographers unique identity through customization agency. We allow every user, weather they are a client or talent, to add a profile picture, and an about-me biography. User who declare themselves as photographers are presented with more customizable profile options, such as: serviceable locations, specialties, personal webiste, and whether or not they can perform videography.
+
+The profile page also has the option for users to write reviews or a
 
 ## Credits
 
