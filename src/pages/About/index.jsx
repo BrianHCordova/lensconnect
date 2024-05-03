@@ -23,8 +23,8 @@ const people = [
     role: "Full Stack Developer",
     imageUrl: "/Andrew.jpg",
     gitHub: "https://github.com/anduhrooo",
-    linkedinUrl: "#",
-    email: "andrew@example.com",
+    linkedinUrl: "https://www.linkedin.com/in/andrewsyang1/",
+    email: "yang.andrew7@gmail.com",
   },
   {
     name: "Brian Cordova",

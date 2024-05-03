@@ -49,7 +49,7 @@ function Profile(props) {
     // HTML
     return (
         <div className="container mx-auto w-1/3 profile-container justify-start">
-            <div className="col-span-full mt-[1rem]">
+            <div className="col-span-full mt-[1rem] shadow-xl shadow-black rounded-2xl">
                 {/* pass the userObj into UserInfo as props when tokens work */}
                 <UserInfo
                     userId={props.userId}
