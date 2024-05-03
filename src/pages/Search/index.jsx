@@ -15,7 +15,7 @@ function Search() {
         const specialty = event.target.specialty.value.toLowerCase();
         //if no value is entered in the search fields, an alert will appear
         if (!servelocation && !username && !specialty) {
-            alert("Please fill in at least one field");
+            alert("Please fill out the field");
         }
     }
 
@@ -34,16 +34,16 @@ function Search() {
         <>
             <div className="search-container">
 
-                <div className="container mx-auto mb-5 w-2/3 " >
+                <div className="container mx-auto mb-5 lg:w-2/3 md:w-3/4 w-[90%]" >
 
                     <div className="text-3xl my-4">Search for photographers!</div>
                     <form className="flex flex-row search-bar-input" onSubmit={handleSubmit}>
-                        <input type="text" name="username" placeholder="Username, location, or specialties!" onChange={(e) => setSearch(e.target.value)} />
+                        <input type="text" name="username" placeholder="Username, location, or specialties!" onChange={(e) => setSearch(e.target.value)} className="lg:w-1/3 sm:w-full md: w-full" />
                         <button type="submit" className="search-button">Search</button>
                     </form>
                 </div>
 
-                <div className="container mx-auto mb-5 w-2/3">
+                <div className="container mx-auto mb-5 lg:w-2/3 md:w-3/4 w-[90%]">
                     {photographers?.filter((photographer) => {
                         const serveloc = photographer.ServeLocations.map((loc) => (loc.location) ).join(';')
                         const spec = photographer.Specialties.map((spec) => (spec.specialty) ).join(';')

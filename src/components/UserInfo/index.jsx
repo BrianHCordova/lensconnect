@@ -153,6 +153,9 @@ function UserInfo(props) {
 
     useEffect(() => {
 
+        if (!props.userId) {
+            return
+        }
         API.getSingleUserImages(props.userId).then((data) => {
 
             for (let i = 0; i < data.length; i++) {
@@ -162,7 +165,7 @@ function UserInfo(props) {
                     setProfilePic(url)
                     console.log(profilePic)
                 } else {
-                    
+
                 }
             }
         })
@@ -172,42 +175,46 @@ function UserInfo(props) {
     if (!editing) { // Will render the basic photographers userInfo
         return (
             <>
-                <section className=" userInfoSection bg-zinc-900 ">
-                    <div className="profilePicture col-span-1 px-[1rem]">
-                        <img src={profilePic ? profilePic : '/defaultProfile.png'}
-                            height="200"
-                            width="200"
-                            alt="" />
+                <section className="bg-zinc-900 flex rounded-[15px] flex-col userInfoCard ">
+                    <div className="flex flex-row">
 
+                        <div className="profilePicture w-1/3 px-[1rem]">
+                            <img src={profilePic ? profilePic : '/defaultProfile.png'}
+                                height="200"
+                                width="200"
+                                alt="profile picture of user" />
+
+                        </div>
+                        <div className="flex flex-col w-2/3 pt-3">
+                            <ul className="biography flex flex-col justify-start px-[1rem]">
+                                <li className="py-3 font-bold">Username : <span className="text-xl">{newUserObj.username}</span></li>
+                                <li className="pb-2 font-bold">About Me :</li>
+                                <li>{newUserObj.biography} asdf askldjfla sdfa sakdjflkasd fa sadlkfj alskdj flasjkdf laksdjf laksjdf lkasdfjl </li>
+                                {/* <button onClick={()=> handleLoad()}>Refresh</button> */}
+                            </ul>
+                        </div>
                     </div>
-                    <div className="bio ">
-                        <ul className="biography">
-                            <li>Username:&nbsp;{newUserObj.username}</li>
-                            <li>About Me:<br /><span>{newUserObj.biography}</span></li>
-                            {/* <button onClick={()=> handleLoad()}>Refresh</button> */}
-                        </ul>
-                    </div>
-                    <div className="userDetails py-[1.5rem] px-[0.5rem]">
+                    <div className="w-full">
                         {newUserObj.isPhotographer
-                            ? <ul>
-                                <li className="serveLocationChip" >Serves:&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
+                            ? <ul className="px-[1.5rem] py-[1rem]">
+                                <li className="serveLocationChip pb-[1rem] font-bold" >Serves :&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
                                     <span className="chip" key={i}>{loc.location}&nbsp;</span>
                                 ))}
                                 </li>
-                                <li className="specialtyChip" >Specialties:&nbsp; {newUserObj.Specialties?.map((spec, i) => (
+                                <li className="specialtyChip pb-[1rem] font-bold" >Specialties :&nbsp; {newUserObj.Specialties?.map((spec, i) => (
                                     <span className="chip" key={i}>{spec.specialty}&nbsp;</span>
                                 ))}
                                 </li>
-                                <li className="websiteAndVideo" >Website:&nbsp;<a target="_blank" href={props.website}>{newUserObj.website}</a></li>
+                                <li className="websiteAndVideo pb-[1rem] font-bold" >Website :&nbsp;<a target="_blank" href={props.website}>{newUserObj.website}</a></li>
                                 {newUserObj.videography
-                                    ? <li className="websiteAndVideo">Videography: Yes</li>
-                                    : <li className="websiteAndVideo">Videography: No</li>
+                                    ? <li className="websiteAndVideo font-bold">Videography : Yes</li>
+                                    : <li className="websiteAndVideo font-bold">Videography : No</li>
                                 }
                             </ul>
                             : <></>
                         }
                     </div>
-                    <div className="editBtn container duration-200">
+                    <div className="editBtn container duration-200 p-[1rem]">
                         <button className=" bg-zinc-700" onClick={toggelEditing} >Edit</button>
                     </div>
                 </section>

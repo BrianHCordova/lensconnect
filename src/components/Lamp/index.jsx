@@ -44,6 +44,7 @@ export default function Lamp(props) {
           userId={featPro[0]?.id}
           serveloc={featPro[0]?.ServeLocations}
           spec={featPro[0]?.Specialties}
+          className="h-[10rem]"
         />
       </div>
     </LampContainer>
@@ -54,7 +55,7 @@ export function LampContainer({ children, className }) {
   return (
     <div
       className={cn(
-        "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0",
+        "relative flex min-h-[150vh] flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0",
         className
       )}
     >
