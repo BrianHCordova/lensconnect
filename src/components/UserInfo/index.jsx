@@ -85,7 +85,7 @@ function UserInfo(props) {
 
     // Functionality that handles the addition of a location
     // Set the useState for the new location
-    
+
     // Function that collects the vale the user writes in the input
     const handleLocInput = (event) => {
         setNewLoc(event.target.value);
@@ -253,7 +253,7 @@ function UserInfo(props) {
                     <ul className="list-none px-[2rem] ">
                         <li className="py-2">Username: {newUserObj.username}</li>
                         <li className="py-2">About Me: </li>
-                        <textarea onChange={handleBioInput} className="textarea text-[rgb(201,201,201)] w-full" cols="40" rows="6" value={newUserObj.biography} ></textarea>
+                        <textarea onChange={handleBioInput} className="textarea text-[rgb(201,201,201)] w-full" cols="40" rows="6" defaultValue={newUserObj.biography} ></textarea>
                     </ul>
                 </div>
                 <div className="mx-auto">
@@ -263,7 +263,8 @@ function UserInfo(props) {
                     }
                     {isPhotographer
                         ? <ul className="px-[2rem]">
-                            <div className="chipWrap rounded-md"> <div className="instructions"><span className="text-green-600 pl-2">+</span> to add, or <span className="text-red-600">x</span> to remove a location</div>
+                            <div className="chipWrap rounded-md"> 
+                                <div className="instructions mx-auto pr-4"><span className="text-green-600 pl-2">+</span> to add, or <span className="text-red-600">x</span> to remove a location</div>
                                 <li className="serveLocationChip" >&nbsp; {newUserObj.ServeLocations?.map((loc, i) => (
                                     <span className="chip" key={i}>{loc.location}&nbsp;<button onClick={delUserLoc} id={loc.id} className="chipDelete pt-1">X</button>&nbsp;</span>
                                 ))}
@@ -273,7 +274,7 @@ function UserInfo(props) {
                                 </li>
                             </div>
                             <div className="chipWrap rounded-md">
-                                <div className="instructions"><span className="text-green-600 pl-2">+</span> to add, or <span className="text-red-600">x</span> to remove a specialty</div>
+                                <div className="instructions mx-auto pr-4"><span className="text-green-600 pl-2">+</span> to add, or <span className="text-red-600">x</span> to remove a specialty</div>
                                 <li className="specialtyChip" >&nbsp; {newUserObj.Specialties?.map((spec, i) => (
                                     <span className="chip" key={i}>{spec.specialty}&nbsp;<button onClick={delUserSpec} id={spec.id} className="chipDelete pt-1">X</button>&nbsp;</span>
                                 ))}
