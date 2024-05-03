@@ -1,7 +1,8 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from "react-router-dom";
+import API from '../utils/API';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -9,11 +10,32 @@ function classNames(...classes) {
 
 const Nav = (props) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [profilePic, setProfilePic] = useState()
 
   const closeMobileMenu = () => {
     console.log("Mobile menu closed");
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+
+    if (!props.userId) {
+        return
+    }
+    API.getSingleUserImages(props.userId).then((data) => {
+
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].isProfilePic === true) {
+                console.log(data[i])
+                const url = data[i].imageUrl
+                setProfilePic(url)
+                console.log(profilePic)
+            } else {
+
+            }
+        }
+    })
+}, [props.userId])
 
   return (
     <Disclosure as="nav" className="bg-zinc-900 shadow-md shadow-black z-10">
@@ -95,7 +117,7 @@ const Nav = (props) => {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src="/defaultProfile.png"
+                          src={profilePic ? profilePic : '/defaultProfile.png'}
                           alt="profile picture of the user"
                         />
                       </Menu.Button>
@@ -177,14 +199,6 @@ const Nav = (props) => {
                 Home
               </Link>
               <Link
-                to={props.userId ? ('/profile') : ('/login')}
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
-                onClick={closeMobileMenu}
-              >
-                Profile
-              </Link>
-
-              <Link
                 to='/search'
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
                 onClick={closeMobileMenu}
@@ -208,13 +222,7 @@ const Nav = (props) => {
                 </Link>
               ) : null}
               {props.userId ? (
-                <Link
-                  to='/logout'
-                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
-                  onClick={closeMobileMenu}
-                >
-                  Logout
-                </Link>
+                <></>
               ) : (
                 <Link
                   to='/login'
@@ -230,7 +238,7 @@ const Nav = (props) => {
                 <div className="flex-shrink-0">
                   <img
                     className="h-10 w-10 rounded-full"
-                    src="https://source.unsplash.com/random"
+                    src={profilePic ? profilePic : '/defaultProfile.png'}
                     alt=""
                   />
                 </div>
@@ -249,7 +257,7 @@ const Nav = (props) => {
               </div>
               <div className="mt-3 space-y-1 px-2">
                 <Link
-                  to='/profile'
+                  to={props.userId ? ('/profile') : ('/login')}
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
                   onClick={closeMobileMenu}
                 >
