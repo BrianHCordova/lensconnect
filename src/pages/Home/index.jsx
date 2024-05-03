@@ -60,7 +60,7 @@ const ParallaxZoomComponent = (props) => {
           opacity: 1 - scrollY * 0.001, // Adjust the opacity value to control the fade effect, the higher the value, the faster the fade
         }}
       >
-        <img src="/main.png" alt="Main" style={{ width: "100vw" }} />
+        <img src="/landingMain.png" alt="Main" style={{ width: "100vw" }} />
       </motion.div>
 
       <Welcome />
@@ -94,6 +94,7 @@ const ParallaxZoomComponent = (props) => {
               userId={photographer.id}
               serveloc={photographer.ServeLocations}
               spec={photographer.Specialties}
+              avgRate={photographer.averageRating}
             />
           ;
         })}

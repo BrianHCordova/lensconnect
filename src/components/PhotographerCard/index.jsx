@@ -58,26 +58,26 @@ export default function PhotographerCard(props) {
   return (
     <div className='featured-component'>
       {/* Existing card component */}
-      <div className="card lg:card-side bg-zinc-900 shadow-md shadow-black duration-200 ease-in-out rounded-b-none flex flex-row">
-        <figure className="profile-pic-container w-1/4">
+      <div className="card lg:card-side bg-zinc-900 shadow-md shadow-black duration-200 ease-in-out rounded-b-none flex lg:flex-row sm:flex-col">
+        <figure className="profile-pic-container lg:w-1/4 sm:w-3/4 md:w-3/4 self-center">
           <img className="h-auto rounded-[1rem]" src={profilePic?.imageUrl ? profilePic.imageUrl : '/defaultProfile.png'} alt="Album"  />
         </figure>
-        <div className="card-body">
-          <h2 className="card-title text-4xl font-bold">@{props.username}</h2>
+        <div className="card-body lg:p-[1rem] sm:p-[0.3rem]">
+          <h2 className="card-title text-4xl font-bold sm:pl-[0.7rem]">@{props.username}</h2>
           <div className="flex flex-wrap">
-            <p className='text-2xl font-bold w-1/4 text-right card-header'>Rating:</p>
+            <p className='lg:text-2xl sm:text-lg font-bold w-1/4 text-right card-header'>Rating:</p>
             <p className="w-3/4 card-content">{(props.avgRate !== 0) ? props.avgRate : 'No ratings yet'}</p>
           </div>
           <div className="flex flex-wrap">
-            <p className='text-2xl font-bold w-1/4 text-right card-header'>About Me:</p>
+            <p className='lg:text-2xl sm:text-lg font-bold w-1/4 text-right card-header'>About Me:</p>
             <p className="w-3/4 card-content">{props.bio}</p>
           </div>
           <div className="flex flex-wrap">
-            <p className='text-2xl font-bold w-1/4 text-right card-header'>Service Location:</p>
+            <p className='lg:text-2xl sm:text-lg font-bold w-1/4 text-right card-header'>Service Location:</p>
             <p className="w-3/4 card-content">{props.serveloc?.map((loc) => { return loc.location + ', ' })}</p>
           </div>
           <div className="flex flex-wrap">
-            <p className='text-2xl font-bold w-1/4 text-right card-header'>Specialties:</p>
+            <p className='lg:text-2xl sm:text-lg font-bold w-1/4 text-right card-header'>Specialties:</p>
             <p className="w-3/4 card-content">{props.spec?.map((sp) => { return sp.specialty + ', ' })}</p>
           </div>
           <div className="card-actions justify-end">

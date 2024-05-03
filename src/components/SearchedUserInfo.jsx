@@ -37,7 +37,7 @@ function SearchedUserInfo(props) {
                         <ul className="biography flex flex-col justify-start px-[1rem]">
                             <li className="py-3 font-bold">Username : <span className="text-xl">{props.username}</span></li>
                             <li className="pb-2 font-bold">About Me:</li>
-                            <li>{props.biography}lorem  lkasdjflaksdjlfkjasdlfkja alskdjfl asdlkfj laksjdflasj dlkfja s aslkdjf lkasj d</li>
+                            <li>{props.biography}</li>
                         </ul>
                     </div>
                 </div>
