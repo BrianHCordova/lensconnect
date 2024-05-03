@@ -13,7 +13,6 @@ function UserReviewee(props) {
         }
         let average = 0
         for(let i = 0; i < props.reviews.length; i++) {
-            console.log('why')
             average += props.reviews[i].rating
         }
         average /= props.reviews.length

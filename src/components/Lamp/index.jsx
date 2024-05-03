@@ -35,7 +35,7 @@ export default function Lamp(props) {
 
       </motion.h1>
       <div className="text-4xl text-center">Featured Photographer</div>
-      <div className="h-[10rem] w-[80%] ">
+      <div className="h-[20rem] w-[80vw] ">
 
         <PhotographerCard
           key={featPro[0]?.id}
@@ -44,7 +44,7 @@ export default function Lamp(props) {
           userId={featPro[0]?.id}
           serveloc={featPro[0]?.ServeLocations}
           spec={featPro[0]?.Specialties}
-          className="h-[10rem]"
+          avgRate={featPro[0]?.averageRating}
         />
       </div>
     </LampContainer>
