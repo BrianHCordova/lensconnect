@@ -14,6 +14,8 @@ function UserInfo(props) {
     const [profilePic, setProfilePic] = useState()
     const [images, setImages] = useState()
     const inputRef = useRef()
+    const [newLoc, setNewLoc] = useState("")
+    const [newSpec, setNewSpec] = useState("")
 
     // Function to refresh the user data to load fresh after each chip is deleted
     const refreshUserData = () => {
@@ -55,7 +57,6 @@ function UserInfo(props) {
 
     // Functionality that handles the addition of a specialty
     // Set the useState for the new specialty
-    const [newSpec, setNewSpec] = useState("")
     // Function that collects the vale the user writes in the input
     const handleSpecInput = (event) => {
         setNewSpec(event.target.value);
@@ -68,6 +69,7 @@ function UserInfo(props) {
         });
         refreshUserData()
         refreshUserData()
+        setNewSpec('')
     };
     // Functionality that handles the deletion of a specialty
     const delUserSpec = (e) => {
@@ -83,7 +85,7 @@ function UserInfo(props) {
 
     // Functionality that handles the addition of a location
     // Set the useState for the new location
-    const [newLoc, setNewLoc] = useState("")
+    
     // Function that collects the vale the user writes in the input
     const handleLocInput = (event) => {
         setNewLoc(event.target.value);
@@ -96,6 +98,7 @@ function UserInfo(props) {
         });
         refreshUserData()
         refreshUserData()
+        setNewLoc('')
     };
     // Functionality that handles the deletion of a specialty
     const delUserLoc = (e) => {
@@ -189,8 +192,7 @@ function UserInfo(props) {
                             <ul className="biography flex flex-col justify-start px-[1rem]">
                                 <li className="py-3 font-bold">Username : <span className="text-xl">{newUserObj.username}</span></li>
                                 <li className="pb-2 font-bold">About Me :</li>
-                                <li>{newUserObj.biography} asdf askldjfla sdfa sakdjflkasd fa sadlkfj alskdj flasjkdf laksdjf laksjdf lkasdfjl </li>
-                                {/* <button onClick={()=> handleLoad()}>Refresh</button> */}
+                                <li>{newUserObj.biography}</li>
                             </ul>
                         </div>
                     </div>
@@ -225,7 +227,7 @@ function UserInfo(props) {
             <section className="userInfoSectionRow bg-zinc-900">
                 <div className="profilePicture  col-span-1 row-span-1 pl-[2rem] pt-[1rem] mb-[1rem]">
                     <img src={profilePic ? profilePic : '/defaultProfile.png'} height="200" width="200" alt="" />
-                    <form>
+                    <form className="text-center">
 
                         <input
                             type="file"
