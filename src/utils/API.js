@@ -1,5 +1,5 @@
-const URL_PREFIX = "http://localhost:3000"
-// const URL_PREFIX="https://uci-fish-back.onrender.com"
+// const URL_PREFIX = "http://localhost:3000"
+const URL_PREFIX="https://lensconnect-back.onrender.com"
 
 const API = {
     // Signup function

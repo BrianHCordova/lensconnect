@@ -16,6 +16,7 @@ function UserInfo(props) {
     const inputRef = useRef()
     const [newLoc, setNewLoc] = useState("")
     const [newSpec, setNewSpec] = useState("")
+    const [rerender, setRerender] = useState(true)
 
     // Function to refresh the user data to load fresh after each chip is deleted
     const refreshUserData = () => {
@@ -66,9 +67,8 @@ function UserInfo(props) {
         // Create an object that includes the logged in userId and the new spec
         const passData = { specialty: newSpec, userId: props.userId }
         API.editUserSpec(passData).then((newData) => {
+            refreshUserData()
         });
-        refreshUserData()
-        refreshUserData()
         setNewSpec('')
     };
     // Functionality that handles the deletion of a specialty
@@ -77,9 +77,8 @@ function UserInfo(props) {
         // Create an object that includes the logged in userId and the spec
         const passData = { specId: specId, userId: props.userId }
         API.deleteUserSpec(passData).then((newData) => {
+            refreshUserData()
         });
-        refreshUserData()
-        refreshUserData()
     };
 
 
@@ -95,9 +94,8 @@ function UserInfo(props) {
         // Create an object that includes the logged in userId and the new location
         const passData = { location: newLoc, userId: props.userId }
         API.editUserLoc(passData).then((newData) => {
+            refreshUserData()
         });
-        refreshUserData()
-        refreshUserData()
         setNewLoc('')
     };
     // Functionality that handles the deletion of a specialty
@@ -106,9 +104,8 @@ function UserInfo(props) {
         // Create an object that includes the logged in userId and the location
         const passData = { locId: locId, userId: props.userId }
         API.deleteUserLoc(passData).then((newData) => {
+            refreshUserData()
         });
-        refreshUserData()
-        refreshUserData()
     };
 
 
@@ -127,9 +124,8 @@ function UserInfo(props) {
         }
         // Runs the fetch request from the API utils page
         API.editUserBio(passData).then((newData) => {
+            refreshUserData()
         });
-        refreshUserData()
-        refreshUserData()
     };
 
     const handleWebsiteInput = (event) => {
@@ -150,8 +146,9 @@ function UserInfo(props) {
         const formData = new FormData();
         formData.append("image", file)
 
-        API.postProfilePic(formData, props.userId)
+        await API.postProfilePic(formData, props.userId)
         setFile('')
+        setRerender(!rerender)
     }
 
     useEffect(() => {
@@ -172,7 +169,7 @@ function UserInfo(props) {
                 }
             }
         })
-    }, [props.userId])
+    }, [props.userId, rerender])
 
     // HTML
     if (!editing) { // Will render the basic photographers userInfo
