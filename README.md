@@ -42,6 +42,9 @@ Any user wishing to access the personal features of lensConnect, such as: writin
 </p>
 
 This User-centric platform is built primarily with the focus of photographers unique identity through customization agency. We allow every user, weather they are a client or talent, to add a profile picture, and an about-me biography. User who declare themselves as photographers are presented with more customizable profile options, such as: serviceable locations, specialties, personal webiste, and whether or not they can perform videography.
+<p align="center">
+  <img alt="Gif of profile customization" src="public/READMEImages/loginandsignup.gif" />
+</p>
 
 The profile page also has the option for users to write reviews or a
 
