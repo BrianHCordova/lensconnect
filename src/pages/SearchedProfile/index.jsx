@@ -63,10 +63,11 @@ function SearchedProfile(props) {
     return (
         <>
             <div className="container mx-auto w-1/3 profile-container justify-start">
-                <div className="">
+                <div className="mt-[1rem]">
                     {/* pass the userObj into UserInfo as props when tokens work */}
                     <SearchedUserInfo
                         userId={props.userId}
+                        profId={id}
                         username={userObj.username}
                         biography={userObj.biography}
                         Specialties={userObj.Specialties}

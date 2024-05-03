@@ -10,6 +10,7 @@ export default function PhotographerCard(props) {
   const [image, setImage] = useState([])
   const [refresh, setRefresh] = useState(true)
   const [profilePic, setProfilePic] = useState([])
+  const [exist, setExist] = useState(false)
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -40,14 +41,17 @@ export default function PhotographerCard(props) {
       setImage(data)
     })
 
-    if (props.userId){
-    API.getSingleUserImages(props.userId).then((data)=> {
-      console.log(data)
-      const pfp = data.filter((dat)=>(dat.isProfilePic))
-      
-      setProfilePic(pfp[(pfp.length-1)])
-      console.log(profilePic)
-    })
+    if (props.userId) {
+      API.getSingleUserImages(props.userId).then((data) => {
+        console.log(data)
+        if(data[0]?.id!=null) {
+          setExist(true)
+        }
+        const pfp = data.filter((dat) => (dat.isProfilePic))
+
+        setProfilePic(pfp[(pfp.length - 1)])
+        console.log(profilePic)
+      })
     }
   }, [props.userId])
 
@@ -56,13 +60,13 @@ export default function PhotographerCard(props) {
       {/* Existing card component */}
       <div className="card lg:card-side bg-zinc-900 shadow-md shadow-black duration-200 ease-in-out rounded-b-none flex flex-row">
         <figure className="profile-pic-container w-1/4">
-          <img className="h-auto" src={profilePic?.imageUrl? profilePic.imageUrl: '/defaultProfile.png'} alt="Album" />
+          <img className="h-auto" src={profilePic?.imageUrl ? profilePic.imageUrl : '/defaultProfile.png'} alt="Album" className="rounded-[1rem]" />
         </figure>
         <div className="card-body">
           <h2 className="card-title text-4xl font-bold">@{props.username}</h2>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>Rating:</p>
-            <p className="w-3/4 card-content">{(props.avgRate!==0)? props.avgRate: 'No ratings yet'}</p>
+            <p className="w-3/4 card-content">{(props.avgRate !== 0) ? props.avgRate : 'No ratings yet'}</p>
           </div>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>About Me:</p>
@@ -74,7 +78,7 @@ export default function PhotographerCard(props) {
           </div>
           <div className="flex flex-wrap">
             <p className='text-2xl font-bold w-1/4 text-right card-header'>Specialties:</p>
-            <p className="w-3/4 card-content">{props.spec?.map((sp) => { return sp.specialty + ', '})}</p>
+            <p className="w-3/4 card-content">{props.spec?.map((sp) => { return sp.specialty + ', ' })}</p>
           </div>
           <div className="card-actions justify-end">
             <Link to={profileUrl}>
@@ -84,17 +88,22 @@ export default function PhotographerCard(props) {
         </div>
       </div>
       {/* Carousel */}
-      <div className="carousel-container relative text-center">
-        <div className="carousel rounded-b-lg" ref={carouselRef}>
+      <div className="carousel-container relative text-center bg-zinc-800 rounded-b-[1rem] shadow-md shadow-black duration-200 ease-in-out">
+        <div className="carousel " ref={carouselRef}>
           {/* Carousel items here */}
           {image.map((img) => {
             // console.log(img)
             // console.log(props.userId)
             if (img.UserId === props.userId) {
-              return <div className="carousel-item" key={img.id}>
-                  <img src={img.imageUrl} alt={img.image} />
-                </div>
               
+              
+              return <div className="carousel-item h-full self-center" key={img.id}>
+
+                <img src={img.imageUrl} alt={img.image} />
+
+
+              </div>
+
             }
 
             else {
@@ -103,13 +112,21 @@ export default function PhotographerCard(props) {
 
 
           })}
-          
+
         </div>
+        {exist? (<><div className="carousel-navigation m-0-5 absolute top-[43%]">
+            <button className="ml-3 btn text-white bg-gray-900/50 hover:bg-gray-700/60 duration-200 ease-in-out mr-5 shadow-black shadow-md" onClick={scrollLeft}>{"<"}</button>
+          </div>
+          <div className="carousel-navigation m-0-5 absolute top-[43%] right-0">
+            <button className="mr-3 btn text-white bg-gray-900/50 hover:bg-gray-700/60 duration-200 ease-in-out shadow-black shadow-md" onClick={scrollRight}>{">"}</button>
+          </div></>):( <></>)}
+          
+        
         {/* Navigation buttons */}
-        <div className="carousel-navigation m-0-5">
+        {/* <div className="carousel-navigation m-0-5">
           <button className="btn  text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out mr-5 shadow-black shadow-md" onClick={scrollLeft}>{"<"}</button>
           <button className="btn  text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out shadow-black shadow-md" onClick={scrollRight}>{">"}</button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

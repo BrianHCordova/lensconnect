@@ -31,6 +31,10 @@
     } */
 }
 
+.userInfoCard {
+    box-shadow: 4px 4px 0px 1px #29292d;
+}
+
 .profilePicture {
     /* padding: 1rem; */
     width: fit-content;

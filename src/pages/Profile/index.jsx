@@ -26,8 +26,7 @@ function Profile(props) {
             return
         }
         // Runs the getOneUser function from the API utils page
-        // console.log(`props`, props)
-        API.getOneUser(props.userId).then((userData) => { //props.userId is 0 untill we can make tokens work
+        API.getOneUser(props.userId).then((userData) => { 
             setUserObj(userData);
         });
         // Runs the getReviewsByReviewee function from the API utils page
@@ -50,7 +49,7 @@ function Profile(props) {
     // HTML
     return (
         <div className="container mx-auto w-1/3 profile-container justify-start">
-            <div className="col-span-full">
+            <div className="col-span-full mt-[1rem]">
                 {/* pass the userObj into UserInfo as props when tokens work */}
                 <UserInfo
                     userId={props.userId}
@@ -65,7 +64,7 @@ function Profile(props) {
                 />
             </div>
             <div className="col-span-full">
-                <UserImages userId={props.userId} />
+                <UserImages userId={props.userId} profId={props.userId} />
             </div>
             {userObj.isPhotographer ? (
                 <div className=" col-span-full">
