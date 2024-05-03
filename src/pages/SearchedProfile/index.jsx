@@ -56,7 +56,7 @@ function SearchedProfile(props) {
         e.preventDefault();
         //create a room with the string of logged in userid and searched user id
         socket.emit('joinRoom', createString(), props.id, id);
-        window.location.href = `/chat/${createString()}`;
+        window.location.href = `/chat`;
     }
 
     // HTML
@@ -87,7 +87,10 @@ function SearchedProfile(props) {
                     </div>
                 </div>
             </div>
-            <button type="button" onClick={createRoom}>Start Chat</button>
+            <div className="reviewUserBtn">
+
+            <button onClick={createRoom} className="reviewUserBtn">Start Chat</button>
+            </div>
         </>
     );
 }
