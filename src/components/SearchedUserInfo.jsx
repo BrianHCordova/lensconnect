@@ -27,7 +27,7 @@ function SearchedUserInfo(props) {
 
     return (
         <>
-            <section className="bg-zinc-900 flex rounded-[15px] flex-col">
+            <section className="bg-zinc-900 flex rounded-[15px] flex-col shadow-lg shadow-black/60">
                 <div className="flex flex-row">
 
                     <div className="profilePicture w-1/3 px-[1rem]">

@@ -26,7 +26,7 @@ function UserReviewer(props) {
     // HTML
     return (
 
-        <section className="userReviewSection bg-zinc-900" >
+        <section className="userReviewSection bg-zinc-900 shadow-black/60 shadow-lg" >
             <div className=" reviews ">
                 <h3>Reviews I've Written</h3>
                 <div className='flex flex-col'>

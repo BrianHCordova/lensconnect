@@ -6,17 +6,19 @@ const id = url.substring(url.lastIndexOf('/') + 1);
 
 function MessageHistory() {
     const [roomData, setRoomData] = useState([]);
+    const [rerender, setRerender] = useState(true)
 
     useEffect(() => {
         API.getRoomById(id).then((roomData) => {
             setRoomData(roomData);
         });
+        setInterval(()=> {setRerender(!rerender)}, 3000)
     }
-    , []);
+    , [rerender]);
 
 return (
     <>
-    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]" style={{ height: '30rem', overflowY: 'scroll'}}>
 
         {roomData.Chats && roomData.Chats.map((message, index) => (
             <div key={index}>
