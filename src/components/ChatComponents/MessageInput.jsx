@@ -13,7 +13,7 @@ const NewMessage = ({ socket, username }) => {
         setRoomData(roomData);
       });
     }
-    , []);
+    , [value]);
 
     const message = {
       ID: username.id,
@@ -27,7 +27,7 @@ const NewMessage = ({ socket, username }) => {
       e.preventDefault();
       socket.emit('message', message);
       setValue('');
-      window.location.reload();
+      // window.location.reload();
     };
     
     return (
@@ -42,8 +42,9 @@ const NewMessage = ({ socket, username }) => {
                 setValue(e.currentTarget.value);
               }}
               style={{ color: 'black' }}
+              className='rounded-lg w-3/4 p-[0.6rem]'
               />
-          <button type="submit" className="btn text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out">Send</button>
+          <button type="submit" className="w-1/5 ml-5 btn text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out">Send</button>
         </form>
     </div>
 

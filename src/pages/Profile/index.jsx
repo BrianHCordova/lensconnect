@@ -49,7 +49,7 @@ function Profile(props) {
     // HTML
     return (
         <div className="container mx-auto w-1/3 profile-container justify-start">
-            <div className="col-span-full mt-[1rem] shadow-xl shadow-black rounded-2xl">
+            <div className="col-span-full mt-[1rem] shadow-lg shadow-black/60 rounded-2xl">
                 {/* pass the userObj into UserInfo as props when tokens work */}
                 <UserInfo
                     userId={props.userId}
@@ -76,7 +76,7 @@ function Profile(props) {
                 <UserReviwer reviews={userObj.Reviews} />
             </div>
             {userObj.isPhotographer ? (
-                <div className="col-span-full container mx-auto transacReport bg-zinc-900 userInfoSection">
+                <div className="col-span-full container mx-auto transacReport bg-zinc-900 userInfoSection shadow-black/60 shadow-lg">
                     <h3>Transaction Report</h3>
                     <p>Transaction Reports are a confidential report a photographer can make after performing any kind of work for another person, organized though LensConnect. Theese reports are used by our customer service and admit team to review promised transactions and photography gigs that are organized on LensConnect.</p>
                     <div className="reportBtnWrap container">

@@ -87,7 +87,7 @@ function UserImages(props) {
     // HTML
     return (
         <div className="image-section ">
-            <div className=" image-container bg-zinc-900">
+            <div className=" image-container bg-zinc-900 shadow-lg shadow-black/60">
                 <div className="individual-image-container">
                     {image.length === 0 ?
                         <div className="text-center">

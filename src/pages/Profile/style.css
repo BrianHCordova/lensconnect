@@ -10,14 +10,14 @@
 }
 
 .userInfoSection {
-    box-shadow: 4px 4px 0px 1px #29292d;
+    /* box-shadow: 4px 4px 0px 1px #29292d; */
     display: flex;
     flex-wrap: wrap;
     margin: auto;
     justify-content: space-between;
     text-align: start;
     height: fit-content;
-    border-radius: 6px;
+    border-radius: 15px;
     margin-top: 1rem;
     padding: 1rem;
 
@@ -327,7 +327,7 @@
 }
 
 .userReviewSection {
-    box-shadow: 4px 4px 0px 1px #29292d;
+    /* box-shadow: 4px 4px 0px 1px #29292d; */
     display: flex;
     flex-wrap: wrap;
     margin: auto;
@@ -394,7 +394,7 @@
 }
 
 .userInfoSectionRow {
-    box-shadow: 4px 4px 0px 1px #29292d;
+    /* box-shadow: 4px 4px 0px 1px #29292d; */
 
     height: fit-content;
     border-radius: 6px;
