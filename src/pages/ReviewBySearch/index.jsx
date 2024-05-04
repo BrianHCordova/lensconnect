@@ -99,7 +99,7 @@ export default function Review(props) {
                         <form className="space-y-6" action="#" method="POST">
                             <div>
                                 <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
-                                    Username of person who hired you
+                                    Username of person you want to review:
                                 </label>
                                 <div className="mt-2 flex">
                                     <input
