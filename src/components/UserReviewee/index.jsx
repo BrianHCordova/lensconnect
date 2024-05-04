@@ -39,7 +39,7 @@ function UserReviewee(props) {
     // HTML
     return (
 
-        <section className="userInfoSection bg-zinc-900" >
+        <section className="userInfoSection bg-zinc-900 shadow-lg shadow-black/60" >
             <div className="columns-1 reviews">
                 <h2>Reviews About Me</h2>
                 <h3>Average Rating: {generateStars(averageRating)}</h3>

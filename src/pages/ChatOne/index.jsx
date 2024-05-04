@@ -48,14 +48,15 @@ export default function ChatOne(props) {
 
     <div>
       <div >
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-              <div className="bg-zinc-900 px-6 py-12 shadow-md shadow-black sm:rounded-lg sm:px-12">
+            <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-[480px]">
+              <div className="mb-6 bg-zinc-900 px-6 py-6 shadow-md shadow-black sm:rounded-lg sm:px-6">
                 <div className="my-2">
                   <button className="btn text-white bg-cyan-800 hover:bg-cyan-500 duration-200 ease-in-out" onClick={backbtn}>Back to Chats</button>
                 </div>
                 <div className="my-8">
                   <h1 className='card-title text-3xl font-bold'>@{queryString}</h1>
                 </div>
+
                 <MessageHistory />
                 {/* <Messages socket={socket} username={user}/> */}
                 <MessageInput socket={socket} username={user} />
