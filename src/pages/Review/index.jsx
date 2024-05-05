@@ -11,6 +11,7 @@ export default function Review(props) {
   const [newReview, setNewReview] = useState('')
   const [newRating, setNewRating] = useState()
   const [reviewArr, setReviewArr] = useState()
+
   useEffect(() => {
     // Fetches the reviewee users data
     API.getOneUser(id).then((userData) => {
@@ -37,22 +38,35 @@ export default function Review(props) {
     });
     // creates an average and a converts the new review rating to a float
     let average = userObj.averageRating
-    let floated = parseFloat(newRating)
+
+    let ratingTotalAmount = 0
+      for (const review of reviewArr) {
+        ratingTotalAmount += review.rating
+      }
+
+      console.log(ratingTotalAmount)
+      console.log(newRating)
+
     // Adds the new review rating to the reviewee's average
-    average += floated
+    let newTotal = ratingTotalAmount + parseInt(newRating)
+    console.log(newTotal)
+    console.log('=====================')
+    newTotal /= reviewArr.length + 1
+    console.log(newTotal)
+    let newAvg = parseFloat(newTotal).toFixed(1)
+    
     // A check to ensure we arent dividing by 0
     if (userObj.averageRating > 0) {
       // divide by the lenght of reviews as reviewee plus 1
       // Plus one as the data doesnt account for the review just posted in this function
-      average /= reviewArr.length + 1
     }
     // Creates an object for the data passed into the edit user function
-    const newAverage = { userId: id, averageRating: average }
+    const newAverage = { userId: id, averageRating: newAvg }
     // Performs the fetch request from the API untils page
     API.editUserBio(newAverage).then((newData) => {
     });
     // takes the user back to the homepage
-    navigate("/profile")
+    navigate(`/profile/${id}`)
   }
 
   // Hooks to handle the review content and rating change
