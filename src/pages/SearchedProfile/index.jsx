@@ -28,15 +28,15 @@ function SearchedProfile(props) {
 
     // API useEffect to gather users info from the API on page load
     useEffect(() => {
-        // Runs the getOneUser function from the API utils page
-        API.getOneUser(id).then((userData) => {
+        async function fetchData() {
+            const userData = await API.getOneUser(id)
+            const revData = await API.getReviewsByReviewee(id)
             setUserObj(userData);
-            console.log(userObj)
-        });
-        // Runs the getReviewsByReviewee function from the API utils page
-        API.getReviewsByReviewee(id).then((revData) => {
             setReviewArr(revData)
-        });
+        }
+
+        fetchData()
+
     }, [props.userId]);
 
     const handleReview = () => {
@@ -84,16 +84,25 @@ function SearchedProfile(props) {
                     <UserReviwee reviews={reviewArr} />
                     <div className="reviewUserBtn ">
                         {userObj.id == props.userId
-                        ?<></>
-                        :<button onClick={handleReview} className="reviewUserBtn bg-zinc-800">Review {userObj.username}</button>
+                            ? <></>
+                            : <button onClick={handleReview} className="reviewUserBtn bg-zinc-800">Review {userObj.username}</button>
                         }
                     </div>
                 </div>
             </div>
-            <div className="reviewUserBtn">
+            {props.userId ? (
+                <div className="flex flex-row justify-center h-[4rem]">
+                    <button onClick={createRoom} className="bg-zinc-800 rounded-lg p-2 mb-3 px-3 hover:border-2 border-[rgb(201,201,201)] h-[2.7rem]">Start Chat</button>
+                </div>
+                )
+                : 
+                (
+                <div className="flex flex-row justify-center h-[4rem]">
+                    <button onClick={()=> (navigate('/login'))} className="bg-zinc-800 rounded-lg p-2 mb-3 px-3 hover:border-2 border-[rgb(201,201,201)] h-[2.7rem]">Login to Start Chat</button>
+                </div>
+                )
+            }
 
-            <button onClick={createRoom} className="reviewUserBtn">Start Chat</button>
-            </div>
         </>
     );
 }

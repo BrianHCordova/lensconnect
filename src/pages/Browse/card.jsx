@@ -107,20 +107,20 @@ function Cards({ title, image, userId, username, loggedInUser, imgId }) {
           <div className="flex items-center gap-16 p-3">
             <div>
               <Typography variant="small" color="gray" className="font-normal">
-                Views
+                Tags
               </Typography>
               <Typography color="blue-gray" className="font-medium">
-                44,082,044
+                To be determined
               </Typography>
             </div>
-            <div>
+            {/* <div>
               <Typography variant="small" color="gray" className="font-normal">
                 Downloads
               </Typography>
               <Typography color="blue-gray" className="font-medium">
                 553,031
               </Typography>
-            </div>
+            </div> */}
           </div>
           {loggedInUser === userId ? <DeleteButton imgId={imgId}/>: ''}
         </DialogFooter>

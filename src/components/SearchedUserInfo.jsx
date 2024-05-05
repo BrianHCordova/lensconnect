@@ -7,7 +7,7 @@ function SearchedUserInfo(props) {
     const [profilePic, setProfilePic] = useState()
 
     useEffect(() => {
-        if (!props.userId) {
+        if (!props.userId && !props.profId) {
             return
         }
         API.getSingleUserImages(props.profId).then((data) => {
@@ -23,7 +23,7 @@ function SearchedUserInfo(props) {
                 }
             }
         })
-    }, [props.userId])
+    }, [props.userId, profilePic])
 
     return (
         <>
