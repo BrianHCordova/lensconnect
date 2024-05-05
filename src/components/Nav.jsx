@@ -26,10 +26,10 @@ const Nav = (props) => {
 
         for (let i = 0; i < data.length; i++) {
             if (data[i].isProfilePic === true) {
-                console.log(data[i])
+                // console.log(data[i])
                 const url = data[i].imageUrl
                 setProfilePic(url)
-                console.log(profilePic)
+                // console.log(profilePic)
             } else {
 
             }
@@ -117,7 +117,7 @@ const Nav = (props) => {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src={profilePic ? profilePic : '/defaultProfile.png'}
+                          src={(profilePic && props.userId) ? profilePic : '/defaultProfile.png'}
                           alt="profile picture of the user"
                         />
                       </Menu.Button>
@@ -166,7 +166,7 @@ const Nav = (props) => {
                                 active ? 'bg-gray-300' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
-                            // onClick={props.handleSubmit()}
+                            // onClick={setProfilePic('')}
                             >
                               Sign out
                             </Link>
@@ -238,7 +238,7 @@ const Nav = (props) => {
                 <div className="flex-shrink-0">
                   <img
                     className="h-10 w-10 rounded-full"
-                    src={profilePic ? profilePic : '/defaultProfile.png'}
+                    src={(profilePic && props.userId) ? profilePic : '/defaultProfile.png'}
                     alt=""
                   />
                 </div>
@@ -273,7 +273,7 @@ const Nav = (props) => {
                 <Link
                   to='/logout'
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:text-black hover:bg-cyan-600 duration-100 ease-in-out"
-                  onClick={closeMobileMenu}
+                  onClick={() => {setProfilePic(''); closeMobileMenu()}}
                 >
                   Sign out
                 </Link>
